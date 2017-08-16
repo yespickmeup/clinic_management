@@ -5,12 +5,14 @@
  */
 package cms.patients;
 
+import cms.clinics.Clinics;
 import cms.patients.Patients.to_patients;
 import cms.users.MyUser;
 import cms.util.Alert;
 import cms.util.DateType;
 import cms.util.Dlg_confirm_action;
 import cms.util.Dlg_confirm_delete;
+import cms.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -18,10 +20,12 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -385,6 +389,16 @@ public class Dlg_patients extends javax.swing.JDialog {
         jLabel4.setText("Clinic:");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("First Name:");
@@ -891,6 +905,14 @@ public class Dlg_patients extends javax.swing.JDialog {
         ret_patients();
     }//GEN-LAST:event_jTextField19ActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        init_clinic();
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_clinic();
+    }//GEN-LAST:event_jTextField2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -969,6 +991,7 @@ public class Dlg_patients extends javax.swing.JDialog {
     private void myInit() {
         init_key();
         init_tbl_patients(tbl_patients);
+        init_clinics();
         ret_patients();
     }
 
@@ -1388,7 +1411,43 @@ public class Dlg_patients extends javax.swing.JDialog {
         }
     }
 //</editor-fold> 
-    
-    
-    
+
+    List<Clinics.to_clinics> clinic_list = new ArrayList();
+
+    private void init_clinics() {
+        String where = " order by clinic asc";
+        clinic_list = Clinics.ret_data(where);
+
+        if (!clinic_list.isEmpty()) {
+            Clinics.to_clinics clinic = (Clinics.to_clinics) clinic_list.get(0);
+            Field.Search cl = (Field.Search) jTextField1;
+            cl.setText(clinic.clinic);
+            cl.setId("" + clinic.id);
+        }
+    }
+
+    private void init_clinic() {
+
+        Object[][] obj = new Object[clinic_list.size()][1];
+        int i = 0;
+        for (Clinics.to_clinics to : clinic_list) {
+            obj[i][0] = to.clinic;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {jTextField2.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(jTextField2, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Clinics.to_clinics clinic = (Clinics.to_clinics) clinic_list.get(data.selected_row);
+                Field.Search cl = (Field.Search) jTextField2;
+                cl.setText(clinic.clinic);
+                cl.setId("" + clinic.id);
+            }
+        });
+    }
+
 }

@@ -335,6 +335,32 @@ id int auto_increment primary key
 ,is_uploaded int
 );
 
+drop table if exists out_patient_department_receipt_items;
+create table out_patient_department_receipt_items(
+id int auto_increment primary key
+,opd_no varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,doctor varchar(255)
+,doctor_id varchar(255)
+,patient varchar(255)
+,patient_id varchar(255)
+,opd_date date
+,opd_time varchar(255)
+,opd_type varchar(255)
+,receipt_no varchar(255)
+,receipt_date date
+,particular varchar(255)
+,particular_id varchar(255)
+,amount double
+,discount double
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
 
 
 drop table if exists inventory;
@@ -364,6 +390,43 @@ id int auto_increment primary key
 ,brand_id varchar(255)
 ,model varchar(255)
 ,model_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists doctor_daily_schedules;
+create table doctor_daily_schedules(
+id int auto_increment primary key
+,day varchar(255)
+,time varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,doctor varchar(255)
+,doctor_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists doctor_none_working_days;
+create table doctor_none_working_days(
+id int auto_increment primary key
+,date varchar(255)
+,am int
+,pm int
+,time_interval varchar(255)
+,remarks varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,doctor varchar(255)
+,doctor_id varchar(255)
 ,created_by varchar(255)
 ,updated_by varchar(255)
 ,created_at datetime
