@@ -5,13 +5,17 @@
  */
 package cms.doctors;
 
+import cms.util.CheckBox;
 import cms.util.DateType;
+import cms.util.TableCheckBoxRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -230,6 +234,17 @@ public class Dlg_doctor_none_working_new extends javax.swing.JDialog {
         jCheckBox2.setText("PM");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setFocusable(false);
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Remarks:");
@@ -330,6 +345,14 @@ public class Dlg_doctor_none_working_new extends javax.swing.JDialog {
         ok();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        init_time_interval();
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_time_interval();
+    }//GEN-LAST:event_jTextField2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -388,6 +411,61 @@ public class Dlg_doctor_none_working_new extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
+
+    private void init_time_interval() {
+        String slot = "07:00am,07:30am,08:00am,08:30am,09:00am,09:30am,10:00am,10:30am,11:00am,11:30am,12:00pm,12:30pm,01:00pm,01:30pm,02:00pm,02:30pm,03:00pm,03:30pm,04:00pm,04:30pm,05:00pm,05:30pm,06:00pm,06:30pm,07:00pm,07:30pm";
+        String time_slots = System.getProperty("time_slots", slot);
+        String[] time_slot = time_slots.split(",");
+        Object[][] obj = new Object[time_slot.length][2];
+        int i = 0;
+        String[] stmt = jTextField2.getText().split(",");
+        for (String to : time_slot) {
+            int exist = 0;
+            for (String s : stmt) {
+                if (s.equalsIgnoreCase(to)) {
+                    exist = 1;
+                }
+            }
+            if (exist == 1) {
+                obj[i][0] = true;
+            } else {
+                obj[i][0] = false;
+            }
+            obj[i][1] = " " + to;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {30, jTextField2.getWidth()};
+        String[] col_names = {"", "Name"};
+        TableCheckBoxRenderer tr = new TableCheckBoxRenderer();
+        TableCheckBoxRenderer.setPopup(jTextField2, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableCheckBoxRenderer.Callback() {
+            @Override
+            public void ok(TableCheckBoxRenderer.OutputData data) {
+                String to = time_slot[data.selected_row];
+                Field.Combo field = (Field.Combo) jTextField2;
+                field.setText(to);
+
+                String values = "";
+                List<CheckBox.list> datas = data.output;
+                int i = 0;
+                for (CheckBox.list l : datas) {
+                    if (l.selected == true) {
+
+                        if (i == 0) {
+                            values = l.stmt;
+                        } else {
+                            values = values + "," + l.stmt;
+                        }
+                        i++;
+                    }
+
+                }
+                jTextField2.setText(values);
+            }
+        });
+    }
 
     private void ok() {
         String date = DateType.sf.format(jDateChooser1.getDate());

@@ -5,15 +5,20 @@
  */
 package cms.opd;
 
+import cms.doctors.Dlg_doctors;
+import cms.doctors.Doctor_daily_schedules;
 import cms.doctors.Doctors;
 import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.users.MyUser;
+import cms.util.DateType;
 import cms.util.TableRenderer;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +30,6 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.util.DateType;
 
 /**
  *
@@ -712,6 +716,11 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel26.setText("Visit Time:");
 
         jTextField22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField22MouseClicked(evt);
+            }
+        });
         jTextField22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField22ActionPerformed(evt);
@@ -770,7 +779,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addComponent(jTextField24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1462,13 +1471,13 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane9.setViewportView(jTable3);
@@ -1487,7 +1496,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reports", jPanel3);
@@ -1552,7 +1561,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField20ActionPerformed
 
     private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
-        // TODO add your handling code here:
+        init_time_schedules();
     }//GEN-LAST:event_jTextField22ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
@@ -1676,8 +1685,12 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        dlg_doctors();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField22MouseClicked
+        init_time_schedules();
+    }//GEN-LAST:event_jTextField22MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1820,6 +1833,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
+        init_date_schedule();
     }
 
     public void do_pass() {
@@ -2001,11 +2015,76 @@ public class Dlg_opd extends javax.swing.JDialog {
             public void ok(TableRenderer.OutputData data) {
                 Doctors.to_doctors to = doctor_list.get(data.selected_row);
                 Field.Combo doc = (Field.Combo) jTextField24;
-
                 doc.setText(to.designation + " " + to.fname + " " + to.mi + " " + to.lname);
-                doc.setId(to.clinic_id);
+                doc.setId(""+to.id);
+                ret_time_schedules();
+            }
+        });
+    }
+
+    private void dlg_doctors() {
+        Window p = (Window) this;
+        Dlg_doctors nd = Dlg_doctors.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_doctors.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_doctors.OutputData data) {
+                closeDialog.ok();
 
             }
         });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    List<String> doctor_time_schedules = new ArrayList();
+
+    private void init_date_schedule() {
+        jDateChooser1.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                ret_time_schedules();
+            }
+        });
+    }
+
+    private void ret_time_schedules() {
+        doctor_time_schedules.clear();
+        Field.Combo doc = (Field.Combo) jTextField24;
+        String day = DateType.day.format(jDateChooser1.getDate());
+        String where = " where doctor_id='" + doc.getId() + "' and day='" + day + "' ";
+       
+        List<Doctor_daily_schedules.to_doctor_daily_schedules> schedules = Doctor_daily_schedules.ret_data3(where);
+        
+        for (Doctor_daily_schedules.to_doctor_daily_schedules sched : schedules) {
+            if (sched.id != 0) {
+                doctor_time_schedules.add(sched.time);
+            }
+
+        }
+
+    }
+
+    private void init_time_schedules() {
+
+        Object[][] obj = new Object[doctor_time_schedules.size()][1];
+        int i = 0;
+        for (String to : doctor_time_schedules) {
+            obj[i][0] = " " + to;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {jTextField22.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(jTextField22, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                String time = (String) doctor_time_schedules.get(data.selected_row);
+                jTextField22.setText(time);
+            }
+        });
+
     }
 }

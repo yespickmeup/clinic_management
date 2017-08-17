@@ -13,6 +13,7 @@ import cms.departments.Dlg_departments;
 import cms.designations.Designations;
 import cms.designations.Dlg_designations;
 import cms.doctors.Doctor_daily_schedules.to_doctor_daily_schedules;
+import cms.doctors.Doctor_none_working_days.to_doctor_none_working_days;
 import cms.doctors.Doctors.to_doctors;
 import cms.users.MyUser;
 import cms.util.Alert;
@@ -269,7 +270,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
         tbl_doctor_daily_schedules = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_doctor_none_working_days = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
@@ -277,6 +278,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
         jCheckBox2 = new javax.swing.JCheckBox();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jButton4 = new Button.Default();
+        jButton5 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -705,7 +707,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "None Working Days", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_doctor_none_working_days.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -716,7 +718,12 @@ public class Dlg_doctors extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        tbl_doctor_none_working_days.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_doctor_none_working_daysMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tbl_doctor_none_working_days);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Year:");
@@ -738,6 +745,13 @@ public class Dlg_doctors extends javax.swing.JDialog {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Search");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -763,6 +777,8 @@ public class Dlg_doctors extends javax.swing.JDialog {
                                 .addComponent(jCheckBox2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -784,7 +800,9 @@ public class Dlg_doctors extends javax.swing.JDialog {
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jCheckBox2))
                             .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -823,7 +841,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1214, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
@@ -907,8 +925,16 @@ public class Dlg_doctors extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_doctor_daily_schedulesMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       new_doctor_none_working_days();
+        new_doctor_none_working_days();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ret_doctor_none_working_days();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tbl_doctor_none_working_daysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_doctor_none_working_daysMouseClicked
+        select_doctor_none_working_days();
+    }//GEN-LAST:event_tbl_doctor_none_working_daysMouseClicked
 
     /**
      * @param args the command line arguments
@@ -919,6 +945,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
@@ -955,7 +982,6 @@ public class Dlg_doctors extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -976,6 +1002,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField9;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JTable tbl_doctor_daily_schedules;
+    private javax.swing.JTable tbl_doctor_none_working_days;
     private javax.swing.JTable tbl_doctors;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
@@ -987,6 +1014,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
 
         init_tbl_doctors(tbl_doctors);
         init_tbl_doctor_daily_schedules(tbl_doctor_daily_schedules);
+        init_tbl_doctor_none_working_days(tbl_doctor_none_working_days);
         ret_doctors();
         jTextField2.grabFocus();
     }
@@ -1404,6 +1432,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
 
             jTextField15.setText(doctor.contact_no);
             jTextField16.setText(doctor.email_address);
+
         }
         if (col == 6) {
             Window p = (Window) this;
@@ -1632,12 +1661,12 @@ public class Dlg_doctors extends javax.swing.JDialog {
                 case 0:
                     return " " + tt.time;
                 case 1:
-                    if(tt.id==0){
+                    if (tt.id == 0) {
                         return false;
-                    }else{
+                    } else {
                         return true;
                     }
-                   
+
                 case 2:
                     return tt.clinic;
                 case 3:
@@ -1687,7 +1716,7 @@ public class Dlg_doctors extends javax.swing.JDialog {
             if (to.id == 0) {
                 int row2 = tbl_doctors.getSelectedRow();
                 Doctors.to_doctors doc = (Doctors.to_doctors) tbl_doctors_ALM.get(row2);
-                int id =to.id;
+                int id = to.id;
                 String time = to.time;
                 String clinic = doc.clinic;
                 String clinic_id = doc.clinic_id;
@@ -1703,28 +1732,246 @@ public class Dlg_doctors extends javax.swing.JDialog {
                 to_doctor_daily_schedules to2 = new to_doctor_daily_schedules(id, day, time, clinic, clinic_id, doctor, doctor_id, created_by, updated_by, created_at, updated_at, status, is_uploaded, is_selected);
                 Doctor_daily_schedules.add_data(to2);
                 ret_daily_schedules();
-            }else{
-               
+            } else {
+
                 Doctor_daily_schedules.delete_data(to);
                 ret_daily_schedules();
             }
         }
 
     }
-    private void new_doctor_none_working_days(){
+
+//</editor-fold> 
+    //<editor-fold defaultstate="collapsed" desc=" doctor_none_working_days "> 
+    public static ArrayListModel tbl_doctor_none_working_days_ALM;
+    public static Tbldoctor_none_working_daysModel tbl_doctor_none_working_days_M;
+
+    public static void init_tbl_doctor_none_working_days(JTable tbl_doctor_none_working_days) {
+        tbl_doctor_none_working_days_ALM = new ArrayListModel();
+        tbl_doctor_none_working_days_M = new Tbldoctor_none_working_daysModel(tbl_doctor_none_working_days_ALM);
+        tbl_doctor_none_working_days.setModel(tbl_doctor_none_working_days_M);
+        tbl_doctor_none_working_days.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_doctor_none_working_days.setRowHeight(25);
+        int[] tbl_widths_doctor_none_working_days = {80, 30, 30, 100, 100, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_doctor_none_working_days.length; i < n; i++) {
+            if (i == 4) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_doctor_none_working_days, i, tbl_widths_doctor_none_working_days[i]);
+        }
+        Dimension d = tbl_doctor_none_working_days.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_doctor_none_working_days.getTableHeader().setPreferredSize(d);
+        tbl_doctor_none_working_days.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_doctor_none_working_days.setRowHeight(25);
+        tbl_doctor_none_working_days.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_doctor_none_working_days.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
+        tbl_doctor_none_working_days.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+    }
+
+    public static void loadData_doctor_none_working_days(List<to_doctor_none_working_days> acc) {
+        tbl_doctor_none_working_days_ALM.clear();
+        tbl_doctor_none_working_days_ALM.addAll(acc);
+    }
+
+    public static class Tbldoctor_none_working_daysModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Date", "AM", "PM", "Interval", "Remarks", "", "", "", "doctor", "doctor_id", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
+        };
+
+        public Tbldoctor_none_working_daysModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1 || col == 2) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_doctor_none_working_days tt = (to_doctor_none_working_days) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + DateType.convert_slash_datetime2(tt.date);
+                case 1:
+                    if (tt.am == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                case 2:
+                    if (tt.pm == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                case 3:
+                    return " " + tt.time_interval;
+                case 4:
+                    return " " + tt.remarks;
+                case 5:
+                    return "/cms/icons/new-file.png";
+                case 6:
+                    return "/cms/icons/remove11.png";
+                case 7:
+                    return tt.clinic_id;
+                case 8:
+                    return tt.doctor;
+                case 9:
+                    return tt.doctor_id;
+                case 10:
+                    return tt.created_by;
+                case 11:
+                    return tt.updated_by;
+                case 12:
+                    return tt.created_at;
+                case 13:
+                    return tt.updated_at;
+                case 14:
+                    return tt.status;
+                default:
+                    return tt.is_uploaded;
+            }
+        }
+    }
+
+    private void ret_doctor_none_working_days() {
+        String where = " where remarks like '%" + "" + "%' ";
+        int row = tbl_doctors.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        Doctors.to_doctors doc = (Doctors.to_doctors) tbl_doctors_ALM.get(row);
+        int year = jYearChooser1.getYear();
+        int m = jMonthChooser1.getMonth() + 1;
+        String month = "" + m;
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+
+        if (!jCheckBox2.isSelected() && !jCheckBox1.isSelected()) {
+            where = where + " and MONTH(date)='" + month + "' ";
+        }
+
+        if (!jCheckBox1.isSelected()) {
+            where = where + " and YEAR(date)='" + year + "' ";
+        }
+        where = where + " and doctor_id='" + doc.id + "' order by id asc ";
+        List<Doctor_none_working_days.to_doctor_none_working_days> datas = Doctor_none_working_days.ret_data(where);
+        loadData_doctor_none_working_days(datas);
+    }
+
+    private void new_doctor_none_working_days() {
         Window p = (Window) this;
         Dlg_doctor_none_working_new nd = Dlg_doctor_none_working_new.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_doctor_none_working_new.Callback() {
-            
+
             @Override
             public void ok(CloseDialog closeDialog, Dlg_doctor_none_working_new.OutputData data) {
                 closeDialog.ok();
-                
+                int row2 = tbl_doctors.getSelectedRow();
+                Doctors.to_doctors doc = (Doctors.to_doctors) tbl_doctors_ALM.get(row2);
+                int id = 0;
+                String date = data.date;
+                int am = data.am;
+                int pm = data.pm;
+                String time_interval = data.interval;
+                String remarks = data.remarks;
+                String clinic = doc.clinic;
+                String clinic_id = doc.clinic_id;
+                String doctor = doc.designation + " " + doc.fname + " " + doc.mi + " " + doc.lname;
+                String doctor_id = "" + doc.id;
+                String created_by = MyUser.getUser_id();
+                String updated_by = MyUser.getUser_id();
+                String created_at = DateType.now();
+                String updated_at = DateType.now();
+                int status = 0;
+                int is_uploaded = 0;
+                Doctor_none_working_days.to_doctor_none_working_days days = new Doctor_none_working_days.to_doctor_none_working_days(id, date, am, pm, time_interval, remarks, clinic, clinic_id, doctor, doctor_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                Doctor_none_working_days.add_data(days);
+                ret_doctor_none_working_days();
+                Alert.set(1, "");
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
+    }
+
+    private void select_doctor_none_working_days() {
+        int row = tbl_doctor_none_working_days.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final Doctor_none_working_days.to_doctor_none_working_days work = (Doctor_none_working_days.to_doctor_none_working_days) tbl_doctor_none_working_days_ALM.get(row);
+        int col = tbl_doctor_none_working_days.getSelectedColumn();
+        if (col == 5) {
+            Window p = (Window) this;
+            Dlg_doctor_none_working_new nd = Dlg_doctor_none_working_new.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(work);
+            nd.setCallback(new Dlg_doctor_none_working_new.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_doctor_none_working_new.OutputData data) {
+                    closeDialog.ok();
+                    int id = work.id;
+                    String date = data.date;
+                    int am = data.am;
+                    int pm = data.pm;
+                    String time_interval = data.interval;
+                    String remarks = data.remarks;
+                    String clinic = work.clinic;
+                    String clinic_id = work.clinic_id;
+                    String doctor = work.doctor;
+                    String doctor_id = work.doctor_id;
+                    String created_by = work.created_by;
+                    String updated_by = MyUser.getUser_id();
+                    String created_at = work.created_at;
+                    String updated_at = DateType.now();
+                    int status = work.status;
+                    int is_uploaded = work.is_uploaded;
+                    Doctor_none_working_days.to_doctor_none_working_days days = new Doctor_none_working_days.to_doctor_none_working_days(id, date, am, pm, time_interval, remarks, clinic, clinic_id, doctor, doctor_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                    Doctor_none_working_days.update_data(days);
+                    ret_doctor_none_working_days();
+                    Alert.set(2, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+        if (col == 6) {
+            Window p = (Window) this;
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                    closeDialog.ok();
+                    Doctor_none_working_days.delete_data(work);
+                    ret_doctor_none_working_days();
+                    Alert.set(3, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
     }
 //</editor-fold> 
 
