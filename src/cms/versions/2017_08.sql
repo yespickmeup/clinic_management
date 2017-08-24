@@ -370,6 +370,38 @@ id int auto_increment primary key
 ,generic_name  varchar(255)
 ,description varchar(255)
 ,uom varchar(255)
+,type_of_use  varchar(255)
+,product_qty double
+,cost double
+,selling_price double
+,reorder_level double
+,category  varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,classification_id varchar(255)
+,sub_classification varchar(255)
+,sub_classification_id varchar(255)
+,brand varchar(255)
+,brand_id varchar(255)
+,model varchar(255)
+,model_id varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists inventory_prescriptions;
+create table inventory_prescriptions(
+id int auto_increment primary key
+,item_code  varchar(255)
+,generic_name  varchar(255)
+,description varchar(255)
+,uom varchar(255)
 ,dosage varchar(255)
 ,days int
 ,dosage_qty double
@@ -390,6 +422,8 @@ id int auto_increment primary key
 ,brand_id varchar(255)
 ,model varchar(255)
 ,model_id varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
 ,created_by varchar(255)
 ,updated_by varchar(255)
 ,created_at datetime
@@ -427,6 +461,100 @@ id int auto_increment primary key
 ,clinic_id varchar(255)
 ,doctor varchar(255)
 ,doctor_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists appointments;
+create table appointments(
+id int auto_increment primary key
+,clinic varchar(255)
+,clinic_id varchar(255)
+,doctor varchar(255)
+,doctor_id varchar(255)
+,patient_id varchar(255)
+,patient_fname varchar(255)
+,patient_mi varchar(255)
+,patient_lname varchar(255)
+,patient_sname varchar(255)
+,patient_bday date
+,patient_gender varchar(255)
+,patient_blood_type varchar(255)
+,appointment_date date
+,appointment_time varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists inventory_categories;
+create table inventory_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists inventory_classifications;
+create table inventory_classifications(
+id int auto_increment primary key
+,classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists inventory_sub_classifications;
+create table inventory_sub_classifications(
+id int auto_increment primary key
+,sub_classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists inventory_brands;
+create table inventory_brands(
+id int auto_increment primary key
+,brand varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+drop table if exists inventory_models;
+create table inventory_models(
+id int auto_increment primary key
+,model varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
 ,created_by varchar(255)
 ,updated_by varchar(255)
 ,created_at datetime

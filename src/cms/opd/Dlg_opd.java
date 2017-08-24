@@ -8,6 +8,7 @@ package cms.opd;
 import cms.doctors.Dlg_doctors;
 import cms.doctors.Doctor_daily_schedules;
 import cms.doctors.Doctors;
+import cms.inventory.Dlg_inventory;
 import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.users.MyUser;
@@ -306,6 +307,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField37 = new Field.Search();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new Button.Default();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -1169,6 +1171,13 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         jLabel2.setText("0");
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/cms.icons.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1178,23 +1187,27 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField37))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1692,6 +1705,10 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_time_schedules();
     }//GEN-LAST:event_jTextField22MouseClicked
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        dlg_inventory();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1705,6 +1722,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -2016,7 +2034,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 Doctors.to_doctors to = doctor_list.get(data.selected_row);
                 Field.Combo doc = (Field.Combo) jTextField24;
                 doc.setText(to.designation + " " + to.fname + " " + to.mi + " " + to.lname);
-                doc.setId(""+to.id);
+                doc.setId("" + to.id);
                 ret_time_schedules();
             }
         });
@@ -2053,9 +2071,9 @@ public class Dlg_opd extends javax.swing.JDialog {
         Field.Combo doc = (Field.Combo) jTextField24;
         String day = DateType.day.format(jDateChooser1.getDate());
         String where = " where doctor_id='" + doc.getId() + "' and day='" + day + "' ";
-       
+
         List<Doctor_daily_schedules.to_doctor_daily_schedules> schedules = Doctor_daily_schedules.ret_data3(where);
-        
+
         for (Doctor_daily_schedules.to_doctor_daily_schedules sched : schedules) {
             if (sched.id != 0) {
                 doctor_time_schedules.add(sched.time);
@@ -2085,6 +2103,23 @@ public class Dlg_opd extends javax.swing.JDialog {
                 jTextField22.setText(time);
             }
         });
-
     }
+
+    private void dlg_inventory() {
+        Window p = (Window) this;
+        Dlg_inventory nd = Dlg_inventory.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_inventory.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_inventory.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    
 }
