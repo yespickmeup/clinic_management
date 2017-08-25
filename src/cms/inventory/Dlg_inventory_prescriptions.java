@@ -5,6 +5,7 @@
  */
 package cms.inventory;
 
+
 import cms.inventory.Inventory_prescriptions.to_inventory_prescriptions;
 import cms.users.MyUser;
 import cms.util.Alert;
@@ -577,7 +578,7 @@ public class Dlg_inventory_prescriptions extends javax.swing.JDialog {
         jTextField2.setText(to.item_code);
         jTextField3.setText(to.description);
         jTextField4.setText(to.generic_name);
-        ret_inventory_prescriptions();;
+        ret_inventory_prescriptions();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">

@@ -272,9 +272,10 @@ id int auto_increment primary key
 ,generic_name  varchar(255)
 ,description varchar(255)
 ,uom varchar(255)
+,qty double
 ,dosage varchar(255)
+,dosage_qty double
 ,days int
-,total int
 ,dosage_remarks varchar(255)
 ,remarks varchar(255)
 ,cost double

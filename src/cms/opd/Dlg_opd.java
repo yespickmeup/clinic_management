@@ -9,11 +9,17 @@ import cms.doctors.Dlg_doctors;
 import cms.doctors.Doctor_daily_schedules;
 import cms.doctors.Doctors;
 import cms.inventory.Dlg_inventory;
+import cms.inventory.Inventory;
+import cms.inventory.Inventory_prescriptions;
+import cms.opd.Out_patient_department_prescriptions.to_out_patient_department_prescriptions;
 import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.users.MyUser;
 import cms.util.DateType;
 import cms.util.TableRenderer;
+import com.jgoodies.binding.adapter.AbstractTableAdapter;
+import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -25,12 +31,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -302,7 +314,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextArea6 = new javax.swing.JTextArea();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_out_patient_department_prescriptions = new javax.swing.JTable();
         jLabel48 = new javax.swing.JLabel();
         jTextField37 = new Field.Search();
         jLabel1 = new javax.swing.JLabel();
@@ -1144,7 +1156,7 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_out_patient_department_prescriptions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -1155,12 +1167,17 @@ public class Dlg_opd extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        jScrollPane7.setViewportView(tbl_out_patient_department_prescriptions);
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel48.setText("Medicine:");
 
         jTextField37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField37.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField37MouseClicked(evt);
+            }
+        });
         jTextField37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField37ActionPerformed(evt);
@@ -1650,7 +1667,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField37ActionPerformed
-        // TODO add your handling code here:
+        init_inventory(jTextField37);
     }//GEN-LAST:event_jTextField37ActionPerformed
 
     private void jTextField38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField38ActionPerformed
@@ -1708,6 +1725,10 @@ public class Dlg_opd extends javax.swing.JDialog {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         dlg_inventory();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTextField37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField37MouseClicked
+        init_inventory(jTextField37);
+    }//GEN-LAST:event_jTextField37MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1804,7 +1825,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
@@ -1848,10 +1868,12 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tbl_out_patient_department_prescriptions;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
         init_date_schedule();
+        init_tbl_out_patient_department_prescriptions(tbl_out_patient_department_prescriptions);
     }
 
     public void do_pass() {
@@ -2121,5 +2143,308 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    
+    //<editor-fold defaultstate="collapsed" desc=" out_patient_department_prescriptions "> 
+    public static ArrayListModel tbl_out_patient_department_prescriptions_ALM;
+    public static Tblout_patient_department_prescriptionsModel tbl_out_patient_department_prescriptions_M;
+
+    public static void init_tbl_out_patient_department_prescriptions(JTable tbl_out_patient_department_prescriptions) {
+        tbl_out_patient_department_prescriptions_ALM = new ArrayListModel();
+        tbl_out_patient_department_prescriptions_M = new Tblout_patient_department_prescriptionsModel(tbl_out_patient_department_prescriptions_ALM);
+        tbl_out_patient_department_prescriptions.setModel(tbl_out_patient_department_prescriptions_M);
+        tbl_out_patient_department_prescriptions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_out_patient_department_prescriptions.setRowHeight(25);
+        int[] tbl_widths_out_patient_department_prescriptions = {50, 70, 100, 50, 60, 60, 80, 80, 80, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_out_patient_department_prescriptions.length; i < n; i++) {
+            if (i == 2) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_out_patient_department_prescriptions, i, tbl_widths_out_patient_department_prescriptions[i]);
+        }
+        Dimension d = tbl_out_patient_department_prescriptions.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_out_patient_department_prescriptions.getTableHeader().setPreferredSize(d);
+        tbl_out_patient_department_prescriptions.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_out_patient_department_prescriptions.setRowHeight(25);
+        tbl_out_patient_department_prescriptions.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_out_patient_department_prescriptions.getColumnModel().getColumn(10).setCellRenderer(new ImageRenderer());
+        tbl_out_patient_department_prescriptions.getColumnModel().getColumn(11).setCellRenderer(new ImageRenderer());
+        TableWidthUtilities.setColumnRightRenderer(tbl_out_patient_department_prescriptions, 8);
+        TableWidthUtilities.setColumnRightRenderer(tbl_out_patient_department_prescriptions, 9);
+    }
+
+    public static void loadData_out_patient_department_prescriptions(List<to_out_patient_department_prescriptions> acc) {
+        tbl_out_patient_department_prescriptions_ALM.clear();
+        tbl_out_patient_department_prescriptions_ALM.addAll(acc);
+    }
+
+    public static class Tblout_patient_department_prescriptionsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Qty", "Item Code", "Description", "Uom", "Dosage", "Day/s", "Dosage Qty", "Total Qty", "Price", "Amount", "", "", "generic_name", "description", "uom", "dosage", "days", "total", "dosage_remarks", "remarks", "cost", "selling_price", "discount_amount", "type_of_use", "category", "category_id", "classification", "classification_id", "sub_classification", "sub_classification_id", "brand", "brand_id", "model", "model_id", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
+        };
+
+        public Tblout_patient_department_prescriptionsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_out_patient_department_prescriptions tt = (to_out_patient_department_prescriptions) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + FitIn.fmt_woc(tt.qty);
+                case 1:
+                    return " " + tt.item_code;
+                case 2:
+                    return " " + tt.description;
+                case 3:
+                    return " " + tt.uom;
+                case 4:
+                    return " " + tt.dosage;
+                case 5:
+                    return " " + tt.days;
+                case 6:
+                    return " " + FitIn.fmt_woc(tt.dosage_qty);
+                case 7:
+                    return " " + FitIn.fmt_woc(tt.dosage_qty * tt.qty);
+                case 8:
+                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
+                case 9:
+                    return FitIn.fmt_wc_0(tt.selling_price * (tt.dosage_qty * tt.qty)) + " ";
+                case 10:
+                    return "/cms/icons/new-file.png";
+                case 11:
+                    return "/cms/icons/remove11.png";
+                case 12:
+                    return tt.generic_name;
+                case 13:
+                    return tt.description;
+                case 14:
+                    return tt.uom;
+                case 15:
+                    return tt.dosage;
+                case 16:
+                    return tt.days;
+                case 17:
+                    return tt.days;
+                case 18:
+                    return tt.dosage_remarks;
+                case 19:
+                    return tt.remarks;
+                case 20:
+                    return tt.cost;
+                case 21:
+                    return tt.selling_price;
+                case 22:
+                    return tt.discount_amount;
+                case 23:
+                    return tt.type_of_use;
+                case 24:
+                    return tt.category;
+                case 25:
+                    return tt.category_id;
+                case 26:
+                    return tt.classification;
+                case 27:
+                    return tt.classification_id;
+                case 28:
+                    return tt.sub_classification;
+                case 29:
+                    return tt.sub_classification_id;
+                case 30:
+                    return tt.brand;
+                case 31:
+                    return tt.brand_id;
+                case 32:
+                    return tt.model;
+                case 33:
+                    return tt.model_id;
+                case 34:
+                    return tt.created_by;
+                case 35:
+                    return tt.updated_by;
+                case 36:
+                    return tt.created_at;
+                case 37:
+                    return tt.updated_at;
+                case 38:
+                    return tt.status;
+                default:
+                    return tt.is_uploaded;
+            }
+        }
+    }
+
+    private void init_inventory(final JTextField tf) {
+        String search = jTextField37.getText();
+        String where = " where item_code='" + search + "' "
+                + " or description like '%" + search + "%' "
+                + " or generic_name like '%" + search + "%' "
+                + " order by description asc ";
+        List<Inventory.to_inventory> inventory_list = Inventory.ret_data(where);
+        Object[][] obj = new Object[inventory_list.size()][4];
+        int i = 0;
+        for (Inventory.to_inventory to : inventory_list) {
+            obj[i][0] = " " + FitIn.fmt_wc_0(to.product_qty);
+            obj[i][1] = " " + to.item_code;
+            obj[i][2] = " " + to.description;
+            obj[i][3] = " " + FitIn.fmt_wc_0(to.selling_price);
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {50, 80, tf.getWidth() - 210, 80};
+        String[] col_names = {"Qty", "Item Code", "Description", "Price"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Inventory.to_inventory to = inventory_list.get(data.selected_row);
+                new_opd_prescription(to);
+            }
+        });
+    }
+
+    private void new_opd_prescription(Inventory.to_inventory to) {
+        String where = " where item_code='" + to.item_code + "' and clinic_id='" + to.clinic_id + "' ";
+        List<Inventory_prescriptions.to_inventory_prescriptions> prescriptions = Inventory_prescriptions.ret_data(where);
+        if (prescriptions.isEmpty()) {
+            Window p = (Window) this;
+            Dlg_opd_prescription_qty nd = Dlg_opd_prescription_qty.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new Dlg_opd_prescription_qty.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_opd_prescription_qty.OutputData data) {
+                    closeDialog.ok();
+                    Field.Combo doc = (Field.Combo) jTextField24;
+                    Field.Input pa = (Field.Input) jTextField4;
+                    int id = 0;
+                    String opd_no = "";
+                    String clinic = MyUser.getClinic();
+                    String clinic_id = MyUser.getClinic_id();
+                    String doctor = doc.getText();
+                    String doctor_id = doc.getId();
+                    String patient = pa.getText();
+                    String patient_id = pa.getId();
+                    String opd_date = DateType.sf.format(jDateChooser1.getDate());
+                    String opd_time = jTextField22.getText();
+                    String opd_type = jTextField23.getText();
+                    String item_code = to.item_code;
+                    String generic_name = to.generic_name;
+                    String description = to.description;
+                    String uom = to.uom;
+                    double qty = data.qty;
+                    String dosage = data.dosage;
+                    double dosage_qty = data.dosage_qty;
+                    int days = data.days;
+                    String dosage_remarks = data.dosage_remarks;
+                    String remarks = data.remarks;
+                    double cost = to.cost;
+                    double selling_price = to.selling_price;
+                    double discount_amount = 0;
+                    String type_of_use = to.type_of_use;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_classification = to.sub_classification;
+                    String sub_classification_id = to.sub_classification_id;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    String created_by = "";
+                    String updated_by = "";
+                    String created_at = "";
+                    String updated_at = "";
+                    int status = 0;
+                    int is_uploaded = 0;
+                    to_out_patient_department_prescriptions opd_prescription = new to_out_patient_department_prescriptions(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, item_code, generic_name, description, uom, qty, dosage, dosage_qty, days, dosage_remarks, remarks, cost, selling_price, discount_amount, type_of_use, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                    tbl_out_patient_department_prescriptions_ALM.add(opd_prescription);
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        } else {
+            Window p = (Window) this;
+            Dlg_opd_prescription nd = Dlg_opd_prescription.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to);
+            nd.setCallback(new Dlg_opd_prescription.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_opd_prescription.OutputData data) {
+                    closeDialog.ok();
+                    Field.Combo doc = (Field.Combo) jTextField24;
+                    Field.Input pa = (Field.Input) jTextField4;
+                    Inventory_prescriptions.to_inventory_prescriptions prescription = data.pres;
+                    int id = 0;
+                    String opd_no = "";
+                    String clinic = MyUser.getClinic();
+                    String clinic_id = MyUser.getClinic_id();
+                    String doctor = doc.getText();
+                    String doctor_id = doc.getId();
+                    String patient = pa.getText();
+                    String patient_id = pa.getId();
+                    String opd_date = DateType.sf.format(jDateChooser1.getDate());
+                    String opd_time = jTextField22.getText();
+                    String opd_type = jTextField23.getText();
+                    String item_code = prescription.item_code;
+                    String generic_name = prescription.generic_name;
+                    String description = prescription.description;
+                    String uom = prescription.uom;
+                    double qty = data.qty;
+                    String dosage = data.dosage;
+                    double dosage_qty = data.dosage_qty;
+                    int days = data.days;
+                    String dosage_remarks = data.dosage_remarks;
+                    String remarks = data.remarks;
+                    double cost = prescription.cost;
+                    double selling_price = prescription.selling_price;
+                    double discount_amount = 0;
+                    String type_of_use = prescription.type_of_use;
+                    String category = prescription.category;
+                    String category_id = prescription.category_id;
+                    String classification = prescription.classification;
+                    String classification_id = prescription.classification_id;
+                    String sub_classification = prescription.sub_classification;
+                    String sub_classification_id = prescription.sub_classification_id;
+                    String brand = prescription.brand;
+                    String brand_id = prescription.brand_id;
+                    String model = prescription.model;
+                    String model_id = prescription.model_id;
+                    String created_by = "";
+                    String updated_by = "";
+                    String created_at = "";
+                    String updated_at = "";
+                    int status = 0;
+                    int is_uploaded = 0;
+                    to_out_patient_department_prescriptions opd_prescription = new to_out_patient_department_prescriptions(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, item_code, generic_name, description, uom, qty, dosage, dosage_qty, days, dosage_remarks, remarks, cost, selling_price, discount_amount, type_of_use, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                    tbl_out_patient_department_prescriptions_ALM.add(opd_prescription);
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+    }
+//</editor-fold> 
+
 }

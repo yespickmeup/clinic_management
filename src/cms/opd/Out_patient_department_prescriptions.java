@@ -39,9 +39,10 @@ public class Out_patient_department_prescriptions {
         public final String generic_name;
         public final String description;
         public final String uom;
+        public final double qty;
         public final String dosage;
+        public final double dosage_qty;
         public final int days;
-        public final int total;
         public final String dosage_remarks;
         public final String remarks;
         public final double cost;
@@ -65,7 +66,7 @@ public class Out_patient_department_prescriptions {
         public final int status;
         public final int is_uploaded;
 
-        public to_out_patient_department_prescriptions(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String item_code, String generic_name, String description, String uom, String dosage, int days, int total, String dosage_remarks, String remarks, double cost, double selling_price, double discount_amount, String type_of_use, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
+        public to_out_patient_department_prescriptions(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String item_code, String generic_name, String description, String uom, double qty, String dosage, double dosage_qty, int days, String dosage_remarks, String remarks, double cost, double selling_price, double discount_amount, String type_of_use, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
             this.id = id;
             this.opd_no = opd_no;
             this.clinic = clinic;
@@ -81,9 +82,10 @@ public class Out_patient_department_prescriptions {
             this.generic_name = generic_name;
             this.description = description;
             this.uom = uom;
+            this.qty = qty;
             this.dosage = dosage;
+            this.dosage_qty = dosage_qty;
             this.days = days;
-            this.total = total;
             this.dosage_remarks = dosage_remarks;
             this.remarks = remarks;
             this.cost = cost;
@@ -127,9 +129,10 @@ public class Out_patient_department_prescriptions {
                     + ",generic_name"
                     + ",description"
                     + ",uom"
+                    + ",qty"
                     + ",dosage"
+                    + ",dosage_qty"
                     + ",days"
-                    + ",total"
                     + ",dosage_remarks"
                     + ",remarks"
                     + ",cost"
@@ -167,9 +170,10 @@ public class Out_patient_department_prescriptions {
                     + ",:generic_name"
                     + ",:description"
                     + ",:uom"
+                    + ",:qty"
                     + ",:dosage"
+                    + ",:dosage_qty"
                     + ",:days"
-                    + ",:total"
                     + ",:dosage_remarks"
                     + ",:remarks"
                     + ",:cost"
@@ -209,9 +213,10 @@ public class Out_patient_department_prescriptions {
                     .setString("generic_name", to_out_patient_department_prescriptions.generic_name)
                     .setString("description", to_out_patient_department_prescriptions.description)
                     .setString("uom", to_out_patient_department_prescriptions.uom)
+                    .setNumber("qty", to_out_patient_department_prescriptions.qty)
                     .setString("dosage", to_out_patient_department_prescriptions.dosage)
+                    .setNumber("dosage_qty", to_out_patient_department_prescriptions.dosage_qty)
                     .setNumber("days", to_out_patient_department_prescriptions.days)
-                    .setNumber("total", to_out_patient_department_prescriptions.total)
                     .setString("dosage_remarks", to_out_patient_department_prescriptions.dosage_remarks)
                     .setString("remarks", to_out_patient_department_prescriptions.remarks)
                     .setNumber("cost", to_out_patient_department_prescriptions.cost)
@@ -264,9 +269,10 @@ public class Out_patient_department_prescriptions {
                     + ",generic_name= :generic_name "
                     + ",description= :description "
                     + ",uom= :uom "
+                    + ",qty= :qty "
                     + ",dosage= :dosage "
+                    + ",dosage_qty= :dosage_qty "
                     + ",days= :days "
-                    + ",total= :total "
                     + ",dosage_remarks= :dosage_remarks "
                     + ",remarks= :remarks "
                     + ",cost= :cost "
@@ -307,9 +313,10 @@ public class Out_patient_department_prescriptions {
                     .setString("generic_name", to_out_patient_department_prescriptions.generic_name)
                     .setString("description", to_out_patient_department_prescriptions.description)
                     .setString("uom", to_out_patient_department_prescriptions.uom)
+                    .setNumber("qty", to_out_patient_department_prescriptions.qty)
                     .setString("dosage", to_out_patient_department_prescriptions.dosage)
+                    .setNumber("dosage_qty", to_out_patient_department_prescriptions.dosage_qty)
                     .setNumber("days", to_out_patient_department_prescriptions.days)
-                    .setNumber("total", to_out_patient_department_prescriptions.total)
                     .setString("dosage_remarks", to_out_patient_department_prescriptions.dosage_remarks)
                     .setString("remarks", to_out_patient_department_prescriptions.remarks)
                     .setNumber("cost", to_out_patient_department_prescriptions.cost)
@@ -382,9 +389,10 @@ public class Out_patient_department_prescriptions {
                     + ",generic_name"
                     + ",description"
                     + ",uom"
+                    + ",qty"
                     + ",dosage"
+                    + ",dosage_qty"
                     + ",days"
-                    + ",total"
                     + ",dosage_remarks"
                     + ",remarks"
                     + ",cost"
@@ -428,33 +436,34 @@ public class Out_patient_department_prescriptions {
                 String generic_name = rs.getString(13);
                 String description = rs.getString(14);
                 String uom = rs.getString(15);
-                String dosage = rs.getString(16);
-                int days = rs.getInt(17);
-                int total = rs.getInt(18);
-                String dosage_remarks = rs.getString(19);
-                String remarks = rs.getString(20);
-                double cost = rs.getDouble(21);
-                double selling_price = rs.getDouble(22);
-                double discount_amount = rs.getDouble(23);
-                String type_of_use = rs.getString(24);
-                String category = rs.getString(25);
-                String category_id = rs.getString(26);
-                String classification = rs.getString(27);
-                String classification_id = rs.getString(28);
-                String sub_classification = rs.getString(29);
-                String sub_classification_id = rs.getString(30);
-                String brand = rs.getString(31);
-                String brand_id = rs.getString(32);
-                String model = rs.getString(33);
-                String model_id = rs.getString(34);
-                String created_by = rs.getString(35);
-                String updated_by = rs.getString(36);
-                String created_at = rs.getString(37);
-                String updated_at = rs.getString(38);
-                int status = rs.getInt(39);
-                int is_uploaded = rs.getInt(40);
+                double qty = rs.getDouble(16);
+                String dosage = rs.getString(17);
+                double dosage_qty = rs.getDouble(18);
+                int days = rs.getInt(19);
+                String dosage_remarks = rs.getString(20);
+                String remarks = rs.getString(21);
+                double cost = rs.getDouble(22);
+                double selling_price = rs.getDouble(23);
+                double discount_amount = rs.getDouble(24);
+                String type_of_use = rs.getString(25);
+                String category = rs.getString(26);
+                String category_id = rs.getString(27);
+                String classification = rs.getString(28);
+                String classification_id = rs.getString(29);
+                String sub_classification = rs.getString(30);
+                String sub_classification_id = rs.getString(31);
+                String brand = rs.getString(32);
+                String brand_id = rs.getString(33);
+                String model = rs.getString(34);
+                String model_id = rs.getString(35);
+                String created_by = rs.getString(36);
+                String updated_by = rs.getString(37);
+                String created_at = rs.getString(38);
+                String updated_at = rs.getString(39);
+                int status = rs.getInt(40);
+                int is_uploaded = rs.getInt(41);
 
-                to_out_patient_department_prescriptions to = new to_out_patient_department_prescriptions(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, item_code, generic_name, description, uom, dosage, days, total, dosage_remarks, remarks, cost, selling_price, discount_amount, type_of_use, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                to_out_patient_department_prescriptions to = new to_out_patient_department_prescriptions(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, item_code, generic_name, description, uom, qty, dosage, dosage_qty, days, dosage_remarks, remarks, cost, selling_price, discount_amount, type_of_use, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, created_by, updated_by, created_at, updated_at, status, is_uploaded);
                 datas.add(to);
             }
             return datas;
