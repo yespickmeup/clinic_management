@@ -550,10 +550,26 @@ id int auto_increment primary key
 ,status int
 ,is_uploaded int
 );
+
 drop table if exists inventory_models;
 create table inventory_models(
 id int auto_increment primary key
 ,model varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists receipt_particulars;
+create table receipt_particulars(
+id int auto_increment primary key
+,particular varchar(255)
+,charge double
 ,clinic varchar(255)
 ,clinic_id varchar(255)
 ,created_by varchar(255)

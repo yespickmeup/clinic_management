@@ -39,12 +39,12 @@ public class Out_patient_department_prescriptions {
         public final String generic_name;
         public final String description;
         public final String uom;
-        public final double qty;
-        public final String dosage;
-        public final double dosage_qty;
-        public final int days;
-        public final String dosage_remarks;
-        public final String remarks;
+        public  double qty;
+        public  String dosage;
+        public  double dosage_qty;
+        public  int days;
+        public  String dosage_remarks;
+        public  String remarks;
         public final double cost;
         public final double selling_price;
         public final double discount_amount;
@@ -109,6 +109,55 @@ public class Out_patient_department_prescriptions {
             this.status = status;
             this.is_uploaded = is_uploaded;
         }
+
+        public double getQty() {
+            return qty;
+        }
+
+        public void setQty(double qty) {
+            this.qty = qty;
+        }
+
+        public String getDosage() {
+            return dosage;
+        }
+
+        public void setDosage(String dosage) {
+            this.dosage = dosage;
+        }
+
+        public double getDosage_qty() {
+            return dosage_qty;
+        }
+
+        public void setDosage_qty(double dosage_qty) {
+            this.dosage_qty = dosage_qty;
+        }
+
+        public int getDays() {
+            return days;
+        }
+
+        public void setDays(int days) {
+            this.days = days;
+        }
+
+        public String getDosage_remarks() {
+            return dosage_remarks;
+        }
+
+        public void setDosage_remarks(String dosage_remarks) {
+            this.dosage_remarks = dosage_remarks;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+        
     }
 
     public static void add_data(to_out_patient_department_prescriptions to_out_patient_department_prescriptions) {
@@ -339,6 +388,39 @@ public class Out_patient_department_prescriptions {
                     .setString("updated_at", to_out_patient_department_prescriptions.updated_at)
                     .setNumber("status", to_out_patient_department_prescriptions.status)
                     .setNumber("is_uploaded", to_out_patient_department_prescriptions.is_uploaded)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Out_patient_department_prescriptions.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_data2(to_out_patient_department_prescriptions to_out_patient_department_prescriptions, double qty, String dosage, double dosage_qty,
+            int days, String dosage_remarks, String remarks) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update out_patient_department_prescriptions set "
+                    + "qty= :qty "
+                    + ",dosage= :dosage "
+                    + ",dosage_qty= :dosage_qty "
+                    + ",days= :days "
+                    + ",dosage_remarks= :dosage_remarks "
+                    + ",remarks= :remarks "
+                    + " where id='" + to_out_patient_department_prescriptions.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("qty", qty)
+                    .setString("dosage", dosage)
+                    .setNumber("dosage_qty", dosage_qty)
+                    .setNumber("days", days)
+                    .setString("dosage_remarks", dosage_remarks)
+                    .setString("remarks", remarks)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);

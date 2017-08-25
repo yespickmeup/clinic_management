@@ -190,6 +190,7 @@ public class Inventory {
     public static void update_data(to_inventory to_inventory) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update inventory set "
                     + "item_code= :item_code "
                     + ",generic_name= :generic_name "
@@ -252,7 +253,73 @@ public class Inventory {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+            
+             String s2 = "update inventory_prescriptions set "
+                 
+                    + " generic_name= :generic_name "
+                    + ",description= :description "
+                    + ",uom= :uom "
+                    + ",type_of_use= :type_of_use "
+                    + ",product_qty= :product_qty "
+                    + ",cost= :cost "
+                    + ",selling_price= :selling_price "
+                    + ",reorder_level= :reorder_level "
+                    + ",category= :category "
+                    + ",category_id= :category_id "
+                    + ",classification= :classification "
+                    + ",classification_id= :classification_id "
+                    + ",sub_classification= :sub_classification "
+                    + ",sub_classification_id= :sub_classification_id "
+                    + ",brand= :brand "
+                    + ",brand_id= :brand_id "
+                    + ",model= :model "
+                    + ",model_id= :model_id "
+                    + ",clinic= :clinic "
+                    + ",clinic_id= :clinic_id "
+                    + ",created_by= :created_by "
+                    + ",updated_by= :updated_by "
+                    + ",created_at= :created_at "
+                    + ",updated_at= :updated_at "
+                    + ",status= :status "
+                    + ",is_uploaded= :is_uploaded "
+                    + " where item_code='" + to_inventory.item_code + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    
+                    .setString("generic_name", to_inventory.generic_name)
+                    .setString("description", to_inventory.description)
+                    .setString("uom", to_inventory.uom)
+                    .setString("type_of_use", to_inventory.type_of_use)
+                    .setNumber("product_qty", to_inventory.product_qty)
+                    .setNumber("cost", to_inventory.cost)
+                    .setNumber("selling_price", to_inventory.selling_price)
+                    .setNumber("reorder_level", to_inventory.reorder_level)
+                    .setString("category", to_inventory.category)
+                    .setString("category_id", to_inventory.category_id)
+                    .setString("classification", to_inventory.classification)
+                    .setString("classification_id", to_inventory.classification_id)
+                    .setString("sub_classification", to_inventory.sub_classification)
+                    .setString("sub_classification_id", to_inventory.sub_classification_id)
+                    .setString("brand", to_inventory.brand)
+                    .setString("brand_id", to_inventory.brand_id)
+                    .setString("model", to_inventory.model)
+                    .setString("model_id", to_inventory.model_id)
+                    .setString("clinic", to_inventory.clinic)
+                    .setString("clinic_id", to_inventory.clinic_id)
+                    .setString("created_by", to_inventory.created_by)
+                    .setString("updated_by", to_inventory.updated_by)
+                    .setString("created_at", to_inventory.created_at)
+                    .setString("updated_at", to_inventory.updated_at)
+                    .setNumber("status", to_inventory.status)
+                    .setNumber("is_uploaded", to_inventory.is_uploaded)
+                    .ok();
+            stmt.addBatch(s2);
+            
+            stmt.executeBatch();
+            conn.commit();
+            
             Lg.s(Inventory.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);

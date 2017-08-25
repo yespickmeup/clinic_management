@@ -6,6 +6,7 @@
 package cms.opd;
 
 import cms.inventory.Inventory_prescriptions;
+import cms.opd.Out_patient_department_prescriptions.to_out_patient_department_prescriptions;
 import cms.util.Alert;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -441,6 +442,15 @@ public class Dlg_opd_prescription_qty extends javax.swing.JDialog {
     }
 
     public void do_pass_with_pres(Inventory_prescriptions.to_inventory_prescriptions to) {
+        jTextField5.setText(to.dosage);
+        jTextField6.setText("" + to.days);
+        jTextField7.setText("" + FitIn.fmt_wc_0(to.dosage_qty));
+        jTextField8.setText("" + to.dosage_remarks);
+        jTextField9.setText("" + to.remarks);
+    }
+
+    public void do_pass_edit(to_out_patient_department_prescriptions to) {
+        jTextField2.setText(FitIn.fmt_wc_0(to.qty));
         jTextField5.setText(to.dosage);
         jTextField6.setText("" + to.days);
         jTextField7.setText("" + FitIn.fmt_wc_0(to.dosage_qty));

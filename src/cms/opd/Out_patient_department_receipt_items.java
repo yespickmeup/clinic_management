@@ -39,8 +39,8 @@ public class Out_patient_department_receipt_items {
         public final String receipt_date;
         public final String particular;
         public final String particular_id;
-        public final double amount;
-        public final double discount;
+        public  double amount;
+        public  double discount;
         public final String created_by;
         public final String updated_by;
         public final String created_at;
@@ -73,6 +73,23 @@ public class Out_patient_department_receipt_items {
             this.status = status;
             this.is_uploaded = is_uploaded;
         }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+        
+        public double getDiscount() {
+            return discount;
+        }
+
+        public void setDiscount(double discount) {
+            this.discount = discount;
+        }
+        
     }
 
     public static void add_data(to_out_patient_department_receipt_items to_out_patient_department_receipt_items) {
