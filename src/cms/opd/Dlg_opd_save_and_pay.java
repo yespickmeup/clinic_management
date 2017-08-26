@@ -5,10 +5,12 @@
  */
 package cms.opd;
 
+import cms.util.Alert;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
@@ -40,6 +42,13 @@ public class Dlg_opd_save_and_pay extends javax.swing.JDialog {
     }
 
     public static class OutputData {
+
+        public final int is_payed;
+
+        public OutputData(int is_payed) {
+            this.is_payed = is_payed;
+        }
+
     }
 //</editor-fold>
 
@@ -287,11 +296,11 @@ public class Dlg_opd_save_and_pay extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        ok();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -315,9 +324,11 @@ public class Dlg_opd_save_and_pay extends javax.swing.JDialog {
     private void myInit() {
         init_key();
     }
+    double change = 0;
 
-    public void do_pass() {
-
+    public void do_pass(double ch) {
+        change = ch;
+        jTextField7.setText(FitIn.fmt_wc_0(change));
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -341,10 +352,24 @@ public class Dlg_opd_save_and_pay extends javax.swing.JDialog {
     private void select_payment() {
         if (jCheckBox1.isSelected()) {
 
-            jTextField7.setText("0.00");
+            jTextField7.setText(FitIn.fmt_wc_0(change));
         } else {
 
             jTextField7.setText("");
+        }
+    }
+
+    private void ok() {
+        int is_payed = 0;
+        if (jCheckBox1.isSelected()) {
+            is_payed = 1;
+            if (change < 0) {
+                Alert.set(0, "Insufficient amount!");
+                return;
+            }
+        }
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData(is_payed));
         }
     }
 }

@@ -37,6 +37,7 @@ public class Out_patient_department_receipt_items {
         public final String opd_type;
         public final String receipt_no;
         public final String receipt_date;
+        public final String reference_no;
         public final String particular;
         public final String particular_id;
         public  double amount;
@@ -48,7 +49,7 @@ public class Out_patient_department_receipt_items {
         public final int status;
         public final int is_uploaded;
 
-        public to_out_patient_department_receipt_items(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String receipt_no, String receipt_date, String particular, String particular_id, double amount, double discount, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
+        public to_out_patient_department_receipt_items(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String receipt_no, String receipt_date,String reference_no, String particular, String particular_id, double amount, double discount, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
             this.id = id;
             this.opd_no = opd_no;
             this.clinic = clinic;
@@ -62,6 +63,7 @@ public class Out_patient_department_receipt_items {
             this.opd_type = opd_type;
             this.receipt_no = receipt_no;
             this.receipt_date = receipt_date;
+            this.reference_no=reference_no;
             this.particular = particular;
             this.particular_id = particular_id;
             this.amount = amount;
@@ -108,6 +110,7 @@ public class Out_patient_department_receipt_items {
                     + ",opd_type"
                     + ",receipt_no"
                     + ",receipt_date"
+                    + ",reference_no"
                     + ",particular"
                     + ",particular_id"
                     + ",amount"
@@ -131,6 +134,7 @@ public class Out_patient_department_receipt_items {
                     + ",:opd_type"
                     + ",:receipt_no"
                     + ",:receipt_date"
+                    + ",:reference_no"
                     + ",:particular"
                     + ",:particular_id"
                     + ",:amount"
@@ -156,6 +160,7 @@ public class Out_patient_department_receipt_items {
                     .setString("opd_type", to_out_patient_department_receipt_items.opd_type)
                     .setString("receipt_no", to_out_patient_department_receipt_items.receipt_no)
                     .setString("receipt_date", to_out_patient_department_receipt_items.receipt_date)
+                    .setString("reference_no",to_out_patient_department_receipt_items.reference_no)
                     .setString("particular", to_out_patient_department_receipt_items.particular)
                     .setString("particular_id", to_out_patient_department_receipt_items.particular_id)
                     .setNumber("amount", to_out_patient_department_receipt_items.amount)
@@ -224,6 +229,7 @@ public class Out_patient_department_receipt_items {
                     + ",updated_at"
                     + ",status"
                     + ",is_uploaded"
+                    + ",reference_no"
                     + " from out_patient_department_receipt_items"
                     + " " + where;
 
@@ -253,8 +259,8 @@ public class Out_patient_department_receipt_items {
                 String updated_at = rs.getString(21);
                 int status = rs.getInt(22);
                 int is_uploaded = rs.getInt(23);
-
-                to_out_patient_department_receipt_items to = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                String reference_no=rs.getString(24);
+                to_out_patient_department_receipt_items to = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date,reference_no, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
                 datas.add(to);
             }
             return datas;

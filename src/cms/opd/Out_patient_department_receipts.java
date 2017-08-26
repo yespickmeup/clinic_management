@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -37,6 +38,7 @@ public class Out_patient_department_receipts {
         public final String opd_type;
         public final String receipt_no;
         public final String receipt_date;
+        public final String reference_no;
         public final double amount_due;
         public final double discount;
         public final double cash;
@@ -57,7 +59,7 @@ public class Out_patient_department_receipts {
         public final int status;
         public final int is_uploaded;
 
-        public to_out_patient_department_receipts(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String receipt_no, String receipt_date, double amount_due, double discount, double cash, String check_bank, String check_no, String check_holder, double check_amount, String check_date, String credit_card_type, String credit_card_holder, String credit_card_app_code, double credit_card_rate, double credit_card_amount, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
+        public to_out_patient_department_receipts(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, String receipt_no, String receipt_date,String reference_no, double amount_due, double discount, double cash, String check_bank, String check_no, String check_holder, double check_amount, String check_date, String credit_card_type, String credit_card_holder, String credit_card_app_code, double credit_card_rate, double credit_card_amount, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
             this.id = id;
             this.opd_no = opd_no;
             this.clinic = clinic;
@@ -71,6 +73,7 @@ public class Out_patient_department_receipts {
             this.opd_type = opd_type;
             this.receipt_no = receipt_no;
             this.receipt_date = receipt_date;
+            this.reference_no=reference_no;
             this.amount_due = amount_due;
             this.discount = discount;
             this.cash = cash;
@@ -109,6 +112,7 @@ public class Out_patient_department_receipts {
                     + ",opd_type"
                     + ",receipt_no"
                     + ",receipt_date"
+                    + ",reference_no"
                     + ",amount_due"
                     + ",discount"
                     + ",cash"
@@ -141,6 +145,7 @@ public class Out_patient_department_receipts {
                     + ",:opd_type"
                     + ",:receipt_no"
                     + ",:receipt_date"
+                    + ",:reference_no"
                     + ",:amount_due"
                     + ",:discount"
                     + ",:cash"
@@ -175,6 +180,7 @@ public class Out_patient_department_receipts {
                     .setString("opd_type", to_out_patient_department_receipts.opd_type)
                     .setString("receipt_no", to_out_patient_department_receipts.receipt_no)
                     .setString("receipt_date", to_out_patient_department_receipts.receipt_date)
+                    .setString("reference_no",to_out_patient_department_receipts.reference_no)
                     .setNumber("amount_due", to_out_patient_department_receipts.amount_due)
                     .setNumber("discount", to_out_patient_department_receipts.discount)
                     .setNumber("cash", to_out_patient_department_receipts.cash)
@@ -222,6 +228,7 @@ public class Out_patient_department_receipts {
                     + ",opd_type= :opd_type "
                     + ",receipt_no= :receipt_no "
                     + ",receipt_date= :receipt_date "
+                    + ",reference_no= :reference_no"
                     + ",amount_due= :amount_due "
                     + ",discount= :discount "
                     + ",cash= :cash "
@@ -257,6 +264,7 @@ public class Out_patient_department_receipts {
                     .setString("opd_type", to_out_patient_department_receipts.opd_type)
                     .setString("receipt_no", to_out_patient_department_receipts.receipt_no)
                     .setString("receipt_date", to_out_patient_department_receipts.receipt_date)
+                    .setString("reference_no",to_out_patient_department_receipts.reference_no)
                     .setNumber("amount_due", to_out_patient_department_receipts.amount_due)
                     .setNumber("discount", to_out_patient_department_receipts.discount)
                     .setNumber("cash", to_out_patient_department_receipts.cash)
@@ -343,6 +351,7 @@ public class Out_patient_department_receipts {
                     + ",updated_at"
                     + ",status"
                     + ",is_uploaded"
+                    + ",reference_no"
                     + " from out_patient_department_receipts"
                     + " " + where;
 
@@ -381,8 +390,8 @@ public class Out_patient_department_receipts {
                 String updated_at = rs.getString(30);
                 int status = rs.getInt(31);
                 int is_uploaded = rs.getInt(32);
-
-                to_out_patient_department_receipts to = new to_out_patient_department_receipts(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, amount_due, discount, cash, check_bank, check_no, check_holder, check_amount, check_date, credit_card_type, credit_card_holder, credit_card_app_code, credit_card_rate, credit_card_amount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                String reference_no=rs.getString(33);
+                to_out_patient_department_receipts to = new to_out_patient_department_receipts(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date,reference_no, amount_due, discount, cash, check_bank, check_no, check_holder, check_amount, check_date, credit_card_type, credit_card_holder, credit_card_app_code, credit_card_rate, credit_card_amount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
                 datas.add(to);
             }
             return datas;
@@ -393,4 +402,31 @@ public class Out_patient_department_receipts {
         }
     }
 
+    public static String increment_id(String clinic_id) {
+        String id = "000000000000";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from out_patient_department_receipts where clinic_id='"+clinic_id+"' ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select receipt_no from out_patient_department_receipts where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

@@ -315,6 +315,7 @@ id int auto_increment primary key
 ,opd_type varchar(255)
 ,receipt_no varchar(255)
 ,receipt_date date
+,reference_no varchar(255)
 ,amount_due double
 ,discount double
 ,cash double
@@ -351,6 +352,7 @@ id int auto_increment primary key
 ,opd_type varchar(255)
 ,receipt_no varchar(255)
 ,receipt_date date
+,reference_no varchar(255)
 ,particular varchar(255)
 ,particular_id varchar(255)
 ,amount double

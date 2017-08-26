@@ -261,7 +261,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField9 = new Field.Input();
         jLabel16 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField19 = new Field.Search();
+        tf_search_patient = new Field.Search();
         jButton1 = new Button.Default();
         jTextField6 = new Field.Input();
         jPanel4 = new javax.swing.JPanel();
@@ -372,6 +372,11 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel5.setBackground(new java.awt.Color(239, 238, 238));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Clinic:");
@@ -412,6 +417,11 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField7.setFocusable(false);
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Gender:");
@@ -543,15 +553,15 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Patient:");
 
-        jTextField19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField19.addMouseListener(new java.awt.event.MouseAdapter() {
+        tf_search_patient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_search_patient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField19MouseClicked(evt);
+                tf_search_patientMouseClicked(evt);
             }
         });
-        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+        tf_search_patient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField19ActionPerformed(evt);
+                tf_search_patientActionPerformed(evt);
             }
         });
 
@@ -624,7 +634,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField19)
+                        .addComponent(tf_search_patient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -671,7 +681,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addGap(1, 1, 1))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tf_search_patient, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -731,6 +741,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel24.setText("Visit No.:");
 
         jTextField20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField20.setText("1");
         jTextField20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField20ActionPerformed(evt);
@@ -759,6 +770,12 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel27.setText("Type:");
 
         jTextField23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField23.setText("New");
+        jTextField23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField23MouseClicked(evt);
+            }
+        });
         jTextField23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField23ActionPerformed(evt);
@@ -874,6 +891,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
 
         jTextField27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField27.setFocusable(false);
         jTextField27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField27ActionPerformed(evt);
@@ -1000,7 +1018,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField34)
                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1556,7 +1574,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel40.setText("Followup Date:");
 
-        jDateChooser2.setDate(new Date());
         jDateChooser2.setFocusable(false);
         jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -1638,9 +1655,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1759,7 +1774,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField9ActionPerformed
 
     private void jTextField23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField23ActionPerformed
-        // TODO add your handling code here:
+        init_opd_type();
     }//GEN-LAST:event_jTextField23ActionPerformed
 
     private void jTextField24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField24ActionPerformed
@@ -1854,13 +1869,13 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_receipt_particular();
     }//GEN-LAST:event_jTextField43ActionPerformed
 
-    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+    private void tf_search_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_search_patientActionPerformed
         init_patients();
-    }//GEN-LAST:event_jTextField19ActionPerformed
+    }//GEN-LAST:event_tf_search_patientActionPerformed
 
-    private void jTextField19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField19MouseClicked
+    private void tf_search_patientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_search_patientMouseClicked
         init_patients();
-    }//GEN-LAST:event_jTextField19MouseClicked
+    }//GEN-LAST:event_tf_search_patientMouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -1929,6 +1944,18 @@ public class Dlg_opd extends javax.swing.JDialog {
     private void jTextField45KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField45KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField45KeyReleased
+
+    private void jTextField23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField23MouseClicked
+        init_opd_type();
+    }//GEN-LAST:event_jTextField23MouseClicked
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -2041,7 +2068,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField22;
@@ -2077,6 +2103,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JTable tbl_out_patient_department_prescriptions;
     private javax.swing.JTable tbl_out_patient_department_receipt_items;
+    private javax.swing.JTextField tf_search_patient;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
@@ -2116,14 +2143,30 @@ public class Dlg_opd extends javax.swing.JDialog {
             Field.Input pat = (Field.Input) jTextField4;
             int id = 0;
             String opd_no = "";
-            String clinic = cl.getText();
-            String clinic_id = cl.getId();
-            String doctor = doc.getText();
-            String doctor_id = doc.getId();
+            String clinic = MyUser.getClinic();
+            String clinic_id = MyUser.getClinic_id();
+
             String patient = pat.getText();
             String patient_id = pat.getId();
+            if (patient_id == null || patient_id.isEmpty()) {
+                Alert.set(0, "Select patient from the list");
+                tf_search_patient.grabFocus();
+                return;
+            }
+            String doctor = doc.getText();
+            String doctor_id = doc.getId();
+            if (doctor_id == null || doctor_id.isEmpty()) {
+                Alert.set(0, "Select doctor from the list");
+                jTextField24.grabFocus();
+                return;
+            }
             String opd_date = DateType.sf.format(jDateChooser1.getDate());
             String opd_time = jTextField22.getText();
+            if (opd_time == null || opd_time.isEmpty()) {
+                Alert.set(0, "Select time schedule from the list");
+                jTextField22.grabFocus();
+                return;
+            }
             String opd_type = jTextField23.getText();
             double patient_height = FitIn.toDouble(jTextField25.getText());
             double patient_weight = FitIn.toDouble(jTextField26.getText());
@@ -2142,7 +2185,12 @@ public class Dlg_opd extends javax.swing.JDialog {
             String provisional_diagnosis = jTextArea4.getText();
             String remarks = jTextArea6.getText();
             int followup_days = FitIn.toInt(jTextField35.getText());
-            String followup_date = DateType.sf.format(jDateChooser2.getDate());
+            String followup_date = null;
+            try {
+                followup_date = DateType.sf.format(jDateChooser2.getDate());
+            } catch (Exception e) {
+                followup_date = null;
+            }
             String referred_to = jTextField36.getText();
             String created_by = MyUser.getUser_id();
             String updated_by = MyUser.getUser_id();
@@ -2150,16 +2198,42 @@ public class Dlg_opd extends javax.swing.JDialog {
             String updated_at = DateType.now();
             int status = 0;
             int is_uploaded = 0;
+            Out_patient_departments.to_out_patient_departments opd = new Out_patient_departments.to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+            List<Out_patient_department_prescriptions.to_out_patient_department_prescriptions> prescriptions = tbl_out_patient_department_prescriptions_ALM;
+            List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> charges = tbl_out_patient_department_receipt_items_ALM;
+            //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            String receipt_no = Out_patient_department_receipts.increment_id(clinic_id);
+            String receipt_date = DateType.sf.format(new Date());
+            String reference_no = jTextField45.getText();
+            double amount_due = FitIn.toDouble(jTextField38.getText());
+            double discount = FitIn.toDouble(jTextField39.getText());
+            double cash = amount_due - discount;
+            String check_bank = "";
+            String check_no = "";
+            String check_holder = "";
+            double check_amount = 0;
+            String check_date = null;
+            String credit_card_type = "";
+            String credit_card_holder = "";
+            String credit_card_app_code = "";
+            double credit_card_rate = 0;
+            double credit_card_amount = 0;
+            //</editor-fold>
+            Out_patient_department_receipts.to_out_patient_department_receipts receipt = new Out_patient_department_receipts.to_out_patient_department_receipts(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, reference_no, amount_due, discount, cash, check_bank, check_no, check_holder, check_amount, check_date, credit_card_type, credit_card_holder, credit_card_app_code, credit_card_rate, credit_card_amount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+
             Window p = (Window) this;
             Dlg_opd_save_and_pay nd = Dlg_opd_save_and_pay.create(p, true);
             nd.setTitle("");
-
+            double change = FitIn.toDouble(jTextField42.getText());
+            nd.do_pass(change);
             nd.setCallback(new Dlg_opd_save_and_pay.Callback() {
 
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_opd_save_and_pay.OutputData data) {
                     closeDialog.ok();
-
+                    Out_patient_departments.add_data(opd, prescriptions, charges, receipt,data.is_payed);
+                    new_opd();
+                    Alert.set(1, "");
                 }
             });
             nd.setLocationRelativeTo(this);
@@ -2169,10 +2243,70 @@ public class Dlg_opd extends javax.swing.JDialog {
         }
     }
 
+    private void new_opd() {
+        //<editor-fold defaultstate="collapsed" desc=" clear fields ">
+
+        Field.Input cl = (Field.Input) jTextField2;
+        Field.Input pa = (Field.Input) jTextField4;
+        Field.Combo doc = (Field.Combo) jTextField24;
+        cl.setText("");
+        cl.setId("");
+        pa.setText("");
+        pa.setId("");
+        jTextField5.setText("");
+        jTextField3.setText("");
+        jTextField9.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField10.setText("");
+        jTextField14.setText("");
+        jTextField17.setText("");
+        jCheckBox2.setSelected(true);
+        jCheckBox5.setSelected(true);
+        jCheckBox8.setSelected(true);
+
+        jTextField22.setText("");
+        jTextField23.setText("New");
+        jTextField20.setText("1");
+
+        jTextField25.setText("");
+        jTextField26.setText("");
+        jTextField27.setText("");
+        jTextField28.setText("");
+        jTextField29.setText("");
+        jTextField30.setText("");
+        jTextField31.setText("");
+        jTextField32.setText("");
+        jTextField33.setText("");
+        jTextField34.setText("");
+        jTextArea1.setText("");
+        jTextArea3.setText("");
+        jTextArea5.setText("");
+        jTextArea2.setText("");
+        jTextArea4.setText("");
+        jTextArea6.setText("");
+        jTextField35.setText("");
+        jTextField36.setText("");
+        jDateChooser2.setDate(null);
+        tbl_out_patient_department_prescriptions_ALM.clear();
+        tbl_out_patient_department_receipt_items_ALM.clear();
+        init_receipt_item_inventory_charge();
+        compute_receipt_item_charges();
+        compute_change();
+        jTable3.clearSelection();
+        jTextField44.setText("");
+        jTextField45.setText("");
+        jTextField39.setText("");
+        jTextField41.setText("");
+        jTabbedPane2.setSelectedIndex(0);
+        tf_search_patient.grabFocus();
+        //</editor-fold>
+    }
     List<Patients.to_patients> patient_list = new ArrayList();
 
     private void init_patients() {
-        String search = jTextField19.getText();
+        String search = tf_search_patient.getText();
         patient_list.clear();
         String where = " where concat(lname,space(1),fname) like '%" + search + "%' "
                 + " or concat(fname,space(1),lname) like '%" + search + "%' "
@@ -2185,10 +2319,10 @@ public class Dlg_opd extends javax.swing.JDialog {
             i++;
         }
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {jTextField19.getWidth()};
+        int[] tbl_widths_customers = {tf_search_patient.getWidth()};
         String[] col_names = {"NAME"};
         TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(jTextField19, obj, labels, tbl_widths_customers, col_names);
+        TableRenderer.setPopup(tf_search_patient, obj, labels, tbl_widths_customers, col_names);
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
@@ -2368,6 +2502,54 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
     }
 
+    private void init_opd_type() {
+        List<String> types = new ArrayList();
+        types.add("New");
+        types.add("Regular");
+        Object[][] obj = new Object[types.size()][1];
+        int i = 0;
+        for (String to : types) {
+            obj[i][0] = " " + to;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {jTextField23.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(jTextField23, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                String time = (String) types.get(data.selected_row);
+                jTextField23.setText(time);
+            }
+        });
+    }
+
+    private void init_gender() {
+        List<String> types = new ArrayList();
+        types.add("Male");
+        types.add("Female");
+        Object[][] obj = new Object[types.size()][1];
+        int i = 0;
+        for (String to : types) {
+            obj[i][0] = " " + to;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {jTextField7.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(jTextField7, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                String time = (String) types.get(data.selected_row);
+                jTextField7.setText(time);
+            }
+        });
+    }
+
     private void dlg_inventory() {
         Window p = (Window) this;
         Dlg_inventory nd = Dlg_inventory.create(p, true);
@@ -2384,6 +2566,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+    
     //<editor-fold defaultstate="collapsed" desc=" out_patient_department_prescriptions "> 
     public static ArrayListModel tbl_out_patient_department_prescriptions_ALM;
     public static Tblout_patient_department_prescriptionsModel tbl_out_patient_department_prescriptions_M;
@@ -2749,7 +2932,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         }
     }
 //</editor-fold> 
-
     //<editor-fold defaultstate="collapsed" desc=" out_patient_department_receipt_items "> 
     public static ArrayListModel tbl_out_patient_department_receipt_items_ALM;
     public static Tblout_patient_department_receipt_itemsModel tbl_out_patient_department_receipt_items_M;
@@ -2939,6 +3121,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 String opd_type = "";
                 String receipt_no = "";
                 String receipt_date = "";
+                String reference_no = "";
                 String particular = to.particular;
                 String particular_id = "" + to.id;
                 double amount = to.charge;
@@ -2949,7 +3132,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 String updated_at = "";
                 int status = 0;
                 int is_uploaded = 0;
-                to_out_patient_department_receipt_items charge = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                to_out_patient_department_receipt_items charge = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, reference_no, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
                 tbl_out_patient_department_receipt_items_ALM.add(charge);
                 compute_receipt_item_charges();
             }
@@ -2973,6 +3156,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         String opd_type = "";
         String receipt_no = "";
         String receipt_date = "";
+        String reference_no = "";
         String particular = "Item/s";
         String particular_id = "0";
         double amount = 0;
@@ -2983,7 +3167,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         String updated_at = "";
         int status = 0;
         int is_uploaded = 0;
-        to_out_patient_department_receipt_items charge = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+        to_out_patient_department_receipt_items charge = new to_out_patient_department_receipt_items(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, receipt_no, receipt_date, reference_no, particular, particular_id, amount, discount, created_by, updated_by, created_at, updated_at, status, is_uploaded);
         tbl_out_patient_department_receipt_items_ALM.add(charge);
     }
 

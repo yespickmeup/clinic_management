@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -101,9 +102,17 @@ public class Out_patient_departments {
         }
     }
 
-    public static void add_data(to_out_patient_departments to_out_patient_departments) {
+    public static void add_data(to_out_patient_departments to_out_patient_departments,
+            List<Out_patient_department_prescriptions.to_out_patient_department_prescriptions> prescriptions,
+            List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> charges,
+            Out_patient_department_receipts.to_out_patient_department_receipts receipt,
+             int is_payed) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            String opd_no = increment_id(to_out_patient_departments.clinic_id);
+            String receipt_no = Out_patient_department_receipts.increment_id(to_out_patient_departments.clinic_id);
             String s0 = "insert into out_patient_departments("
                     + "opd_no"
                     + ",clinic"
@@ -179,7 +188,7 @@ public class Out_patient_departments {
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("opd_no", to_out_patient_departments.opd_no)
+                    .setString("opd_no", opd_no)
                     .setString("clinic", to_out_patient_departments.clinic)
                     .setString("clinic_id", to_out_patient_departments.clinic_id)
                     .setString("doctor", to_out_patient_departments.doctor)
@@ -217,7 +226,327 @@ public class Out_patient_departments {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            //<editor-fold defaultstate="collapsed" desc=" prescriptions ">
+            for (Out_patient_department_prescriptions.to_out_patient_department_prescriptions prescription : prescriptions) {
+                String s2 = "insert into out_patient_department_prescriptions("
+                        + "opd_no"
+                        + ",clinic"
+                        + ",clinic_id"
+                        + ",doctor"
+                        + ",doctor_id"
+                        + ",patient"
+                        + ",patient_id"
+                        + ",opd_date"
+                        + ",opd_time"
+                        + ",opd_type"
+                        + ",item_code"
+                        + ",generic_name"
+                        + ",description"
+                        + ",uom"
+                        + ",qty"
+                        + ",dosage"
+                        + ",dosage_qty"
+                        + ",days"
+                        + ",dosage_remarks"
+                        + ",remarks"
+                        + ",cost"
+                        + ",selling_price"
+                        + ",discount_amount"
+                        + ",type_of_use"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",created_by"
+                        + ",updated_by"
+                        + ",created_at"
+                        + ",updated_at"
+                        + ",status"
+                        + ",is_uploaded"
+                        + ")values("
+                        + ":opd_no"
+                        + ",:clinic"
+                        + ",:clinic_id"
+                        + ",:doctor"
+                        + ",:doctor_id"
+                        + ",:patient"
+                        + ",:patient_id"
+                        + ",:opd_date"
+                        + ",:opd_time"
+                        + ",:opd_type"
+                        + ",:item_code"
+                        + ",:generic_name"
+                        + ",:description"
+                        + ",:uom"
+                        + ",:qty"
+                        + ",:dosage"
+                        + ",:dosage_qty"
+                        + ",:days"
+                        + ",:dosage_remarks"
+                        + ",:remarks"
+                        + ",:cost"
+                        + ",:selling_price"
+                        + ",:discount_amount"
+                        + ",:type_of_use"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:created_by"
+                        + ",:updated_by"
+                        + ",:created_at"
+                        + ",:updated_at"
+                        + ",:status"
+                        + ",:is_uploaded"
+                        + ")";
+
+                s2 = SqlStringUtil.parse(s2)
+                        .setString("opd_no", opd_no)
+                        .setString("clinic", to_out_patient_departments.clinic)
+                        .setString("clinic_id", to_out_patient_departments.clinic_id)
+                        .setString("doctor", to_out_patient_departments.doctor)
+                        .setString("doctor_id", to_out_patient_departments.doctor_id)
+                        .setString("patient", to_out_patient_departments.patient)
+                        .setString("patient_id", to_out_patient_departments.patient_id)
+                        .setString("opd_date", to_out_patient_departments.opd_date)
+                        .setString("opd_time", to_out_patient_departments.opd_time)
+                        .setString("opd_type", to_out_patient_departments.opd_type)
+                        .setString("item_code", prescription.item_code)
+                        .setString("generic_name", prescription.generic_name)
+                        .setString("description", prescription.description)
+                        .setString("uom", prescription.uom)
+                        .setNumber("qty", prescription.qty)
+                        .setString("dosage", prescription.dosage)
+                        .setNumber("dosage_qty", prescription.dosage_qty)
+                        .setNumber("days", prescription.days)
+                        .setString("dosage_remarks", prescription.dosage_remarks)
+                        .setString("remarks", prescription.remarks)
+                        .setNumber("cost", prescription.cost)
+                        .setNumber("selling_price", prescription.selling_price)
+                        .setNumber("discount_amount", prescription.discount_amount)
+                        .setString("type_of_use", prescription.type_of_use)
+                        .setString("category", prescription.category)
+                        .setString("category_id", prescription.category_id)
+                        .setString("classification", prescription.classification)
+                        .setString("classification_id", prescription.classification_id)
+                        .setString("sub_classification", prescription.sub_classification)
+                        .setString("sub_classification_id", prescription.sub_classification_id)
+                        .setString("brand", prescription.brand)
+                        .setString("brand_id", prescription.brand_id)
+                        .setString("model", prescription.model)
+                        .setString("model_id", prescription.model_id)
+                        .setString("created_by", to_out_patient_departments.created_by)
+                        .setString("updated_by", to_out_patient_departments.updated_by)
+                        .setString("created_at", to_out_patient_departments.created_at)
+                        .setString("updated_at", to_out_patient_departments.updated_at)
+                        .setNumber("status", to_out_patient_departments.status)
+                        .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                        .ok();
+                stmt.addBatch(s2);
+            }
+            //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            String s3 = "insert into out_patient_department_receipts("
+                    + "opd_no"
+                    + ",clinic"
+                    + ",clinic_id"
+                    + ",doctor"
+                    + ",doctor_id"
+                    + ",patient"
+                    + ",patient_id"
+                    + ",opd_date"
+                    + ",opd_time"
+                    + ",opd_type"
+                    + ",receipt_no"
+                    + ",receipt_date"
+                    + ",reference_no"
+                    + ",amount_due"
+                    + ",discount"
+                    + ",cash"
+                    + ",check_bank"
+                    + ",check_no"
+                    + ",check_holder"
+                    + ",check_amount"
+                    + ",check_date"
+                    + ",credit_card_type"
+                    + ",credit_card_holder"
+                    + ",credit_card_app_code"
+                    + ",credit_card_rate"
+                    + ",credit_card_amount"
+                    + ",created_by"
+                    + ",updated_by"
+                    + ",created_at"
+                    + ",updated_at"
+                    + ",status"
+                    + ",is_uploaded"
+                    + ")values("
+                    + ":opd_no"
+                    + ",:clinic"
+                    + ",:clinic_id"
+                    + ",:doctor"
+                    + ",:doctor_id"
+                    + ",:patient"
+                    + ",:patient_id"
+                    + ",:opd_date"
+                    + ",:opd_time"
+                    + ",:opd_type"
+                    + ",:receipt_no"
+                    + ",:receipt_date"
+                    + ",:reference_no"
+                    + ",:amount_due"
+                    + ",:discount"
+                    + ",:cash"
+                    + ",:check_bank"
+                    + ",:check_no"
+                    + ",:check_holder"
+                    + ",:check_amount"
+                    + ",:check_date"
+                    + ",:credit_card_type"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_app_code"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_amount"
+                    + ",:created_by"
+                    + ",:updated_by"
+                    + ",:created_at"
+                    + ",:updated_at"
+                    + ",:status"
+                    + ",:is_uploaded"
+                    + ")";
+
+            s3 = SqlStringUtil.parse(s3)
+                    .setString("opd_no", opd_no)
+                    .setString("clinic", to_out_patient_departments.clinic)
+                    .setString("clinic_id", to_out_patient_departments.clinic_id)
+                    .setString("doctor", to_out_patient_departments.doctor)
+                    .setString("doctor_id", to_out_patient_departments.doctor_id)
+                    .setString("patient", to_out_patient_departments.patient)
+                    .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("opd_date", to_out_patient_departments.opd_date)
+                    .setString("opd_time", to_out_patient_departments.opd_time)
+                    .setString("opd_type", to_out_patient_departments.opd_type)
+                    .setString("receipt_no", receipt_no)
+                    .setString("receipt_date", receipt.receipt_date)
+                    .setString("reference_no", receipt.reference_no)
+                    .setNumber("amount_due", receipt.amount_due)
+                    .setNumber("discount", receipt.discount)
+                    .setNumber("cash", receipt.cash)
+                    .setString("check_bank", receipt.check_bank)
+                    .setString("check_no", receipt.check_no)
+                    .setString("check_holder", receipt.check_holder)
+                    .setNumber("check_amount", receipt.check_amount)
+                    .setString("check_date", receipt.check_date)
+                    .setString("credit_card_type", receipt.credit_card_type)
+                    .setString("credit_card_holder", receipt.credit_card_holder)
+                    .setString("credit_card_app_code", receipt.credit_card_app_code)
+                    .setNumber("credit_card_rate", receipt.credit_card_rate)
+                    .setNumber("credit_card_amount", receipt.credit_card_amount)
+                    .setString("created_by", to_out_patient_departments.created_by)
+                    .setString("updated_by", to_out_patient_departments.updated_by)
+                    .setString("created_at", to_out_patient_departments.created_at)
+                    .setString("updated_at", to_out_patient_departments.updated_at)
+                    .setNumber("status", is_payed)
+                    .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                    .ok();
+            stmt.addBatch(s3);
+            //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc=" charges ">
+            for (Out_patient_department_receipt_items.to_out_patient_department_receipt_items charge : charges) {
+                String s4 = "insert into out_patient_department_receipt_items("
+                        + "opd_no"
+                        + ",clinic"
+                        + ",clinic_id"
+                        + ",doctor"
+                        + ",doctor_id"
+                        + ",patient"
+                        + ",patient_id"
+                        + ",opd_date"
+                        + ",opd_time"
+                        + ",opd_type"
+                        + ",receipt_no"
+                        + ",receipt_date"
+                        + ",reference_no"
+                        + ",particular"
+                        + ",particular_id"
+                        + ",amount"
+                        + ",discount"
+                        + ",created_by"
+                        + ",updated_by"
+                        + ",created_at"
+                        + ",updated_at"
+                        + ",status"
+                        + ",is_uploaded"
+                        + ")values("
+                        + ":opd_no"
+                        + ",:clinic"
+                        + ",:clinic_id"
+                        + ",:doctor"
+                        + ",:doctor_id"
+                        + ",:patient"
+                        + ",:patient_id"
+                        + ",:opd_date"
+                        + ",:opd_time"
+                        + ",:opd_type"
+                        + ",:receipt_no"
+                        + ",:receipt_date"
+                        + ",:reference_no"
+                        + ",:particular"
+                        + ",:particular_id"
+                        + ",:amount"
+                        + ",:discount"
+                        + ",:created_by"
+                        + ",:updated_by"
+                        + ",:created_at"
+                        + ",:updated_at"
+                        + ",:status"
+                        + ",:is_uploaded"
+                        + ")";
+
+                s4 = SqlStringUtil.parse(s4)
+                        .setString("opd_no", opd_no)
+                        .setString("clinic", to_out_patient_departments.clinic)
+                        .setString("clinic_id", to_out_patient_departments.clinic_id)
+                        .setString("doctor", to_out_patient_departments.doctor)
+                        .setString("doctor_id", to_out_patient_departments.doctor_id)
+                        .setString("patient", to_out_patient_departments.patient)
+                        .setString("patient_id", to_out_patient_departments.patient_id)
+                        .setString("opd_date", to_out_patient_departments.opd_date)
+                        .setString("opd_time", to_out_patient_departments.opd_time)
+                        .setString("opd_type", to_out_patient_departments.opd_type)
+                        .setString("receipt_no", receipt_no)
+                        .setString("receipt_date", receipt.receipt_date)
+                        .setString("reference_no", receipt.reference_no)
+                        .setString("particular", charge.particular)
+                        .setString("particular_id", charge.particular_id)
+                        .setNumber("amount", charge.amount)
+                        .setNumber("discount", charge.discount)
+                        .setString("created_by", to_out_patient_departments.created_by)
+                        .setString("updated_by", to_out_patient_departments.updated_by)
+                        .setString("created_at", to_out_patient_departments.created_at)
+                        .setString("updated_at", to_out_patient_departments.updated_at)
+                        .setNumber("status", is_payed)
+                        .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                        .ok();
+                stmt.addBatch(s4);
+            }
+            //</editor-fold>
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Out_patient_departments.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -429,6 +758,31 @@ public class Out_patient_departments {
         }
     }
 
-    
-
+    public static String increment_id(String clinic_id) {
+        String id = "0000000";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from out_patient_departments where clinic_id='" + clinic_id + "' ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select opd_no from out_patient_departments where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "0000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }
