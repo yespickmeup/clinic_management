@@ -499,7 +499,7 @@ public class Out_patient_department_prescriptions {
                     + ",is_uploaded"
                     + " from out_patient_department_prescriptions"
                     + " " + where;
-
+          
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

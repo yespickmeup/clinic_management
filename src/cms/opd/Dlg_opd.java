@@ -14,6 +14,7 @@ import cms.inventory.Inventory;
 import cms.inventory.Inventory_prescriptions;
 import cms.opd.Out_patient_department_prescriptions.to_out_patient_department_prescriptions;
 import cms.opd.Out_patient_department_receipt_items.to_out_patient_department_receipt_items;
+import cms.opd.Out_patient_departments.to_out_patient_departments;
 import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.receipts.Dlg_receipt_particulars;
@@ -32,10 +33,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -231,40 +234,9 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField2 = new Field.Input();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new Field.Input();
-        jTextField3 = new Field.Input();
-        jTextField5 = new Field.Input();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new Field.Combo();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new Field.Combo();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField10 = new Field.Input();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField14 = new Field.Combo();
-        jLabel23 = new javax.swing.JLabel();
-        jTextField17 = new Field.Combo();
-        jLabel144 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jLabel146 = new javax.swing.JLabel();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jLabel148 = new javax.swing.JLabel();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jTextField9 = new Field.Input();
-        jLabel16 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         tf_search_patient = new Field.Search();
         jButton1 = new Button.Default();
-        jTextField6 = new Field.Input();
         jPanel4 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jTextField20 = new Field.Input();
@@ -343,6 +315,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField44 = new Field.Input();
         jLabel56 = new javax.swing.JLabel();
         jTextField45 = new Field.Input();
+        jButton9 = new Button.Success();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -350,6 +323,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel54 = new javax.swing.JLabel();
         jTextField43 = new Field.Input();
         jButton7 = new Button.Default();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jTextField35 = new Field.Input();
@@ -362,7 +337,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbl_out_patient_departments = new javax.swing.JTable();
         jLabel57 = new javax.swing.JLabel();
         jCheckBox10 = new javax.swing.JCheckBox();
         jLabel59 = new javax.swing.JLabel();
@@ -379,6 +354,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         jCheckBox14 = new javax.swing.JCheckBox();
         jCheckBox15 = new javax.swing.JCheckBox();
         jButton8 = new Button.Default();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -408,7 +385,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("First Name:");
+        jLabel6.setText("Name:");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField4.setFocusable(false);
@@ -418,158 +395,8 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setFocusable(false);
-
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setFocusable(false);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Last Name:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Middle Name:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Birth Date:");
-
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setFocusable(false);
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Gender:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Blood Type:");
-
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setFocusable(false);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Address:");
-
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField10.setFocusable(false);
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("Allergies:");
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel21.setText("[Medicine]");
-
-        jTextField14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField14.setFocusable(false);
-        jTextField14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField14MouseClicked(evt);
-            }
-        });
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
-            }
-        });
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("[Others]");
-
-        jTextField17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField17.setFocusable(false);
-        jTextField17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField17MouseClicked(evt);
-            }
-        });
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
-            }
-        });
-
-        jLabel144.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel144.setText("Smoking:");
-
-        buttonGroup1.add(jCheckBox1);
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setText("Yes");
-        jCheckBox1.setFocusable(false);
-        jCheckBox1.setOpaque(false);
-
-        buttonGroup1.add(jCheckBox2);
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox2.setSelected(true);
-        jCheckBox2.setText("No");
-        jCheckBox2.setFocusable(false);
-        jCheckBox2.setOpaque(false);
-
-        buttonGroup1.add(jCheckBox3);
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox3.setText("Quit");
-        jCheckBox3.setFocusable(false);
-        jCheckBox3.setOpaque(false);
-
-        jLabel146.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel146.setText("Alcohol:");
-
-        buttonGroup2.add(jCheckBox4);
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox4.setText("Yes");
-        jCheckBox4.setFocusable(false);
-        jCheckBox4.setOpaque(false);
-
-        buttonGroup2.add(jCheckBox5);
-        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox5.setSelected(true);
-        jCheckBox5.setText("No");
-        jCheckBox5.setFocusable(false);
-        jCheckBox5.setOpaque(false);
-
-        buttonGroup2.add(jCheckBox6);
-        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox6.setText("Quit");
-        jCheckBox6.setFocusable(false);
-        jCheckBox6.setOpaque(false);
-
-        buttonGroup3.add(jCheckBox8);
-        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setSelected(true);
-        jCheckBox8.setText("No");
-        jCheckBox8.setFocusable(false);
-        jCheckBox8.setOpaque(false);
-
-        buttonGroup3.add(jCheckBox7);
-        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Yes");
-        jCheckBox7.setFocusable(false);
-        jCheckBox7.setOpaque(false);
-
-        jLabel148.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel148.setText("Elicit drugs:");
-
-        buttonGroup3.add(jCheckBox9);
-        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox9.setText("Quit");
-        jCheckBox9.setFocusable(false);
-        jCheckBox9.setOpaque(false);
-
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField9.setFocusable(false);
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Suffix:");
-
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel22.setText("Patient:");
+        jLabel22.setText("Search Patient:");
 
         tf_search_patient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_search_patient.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -590,103 +417,27 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setFocusable(false);
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField14)
-                            .addComponent(jTextField17)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel144, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel146, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox6)
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel148, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox9)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tf_search_patient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addGap(88, 88, 88)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jTextField3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField8))))
+                        .addComponent(jTextField2)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -703,56 +454,10 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(jLabel144, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox3))
-                    .addComponent(jLabel146, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel148, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -842,7 +547,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField24)
+                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1151,12 +856,12 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1176,7 +881,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1190,15 +895,15 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1281,7 +986,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -1400,6 +1105,13 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
+        jButton9.setText("Save");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -1436,13 +1148,15 @@ public class Dlg_opd extends javax.swing.JDialog {
                                         .addComponent(jTextField40, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                                         .addComponent(jTextField41))))
                             .addGap(19, 19, 19)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1475,6 +1189,8 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1522,6 +1238,10 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setText("Total no. of rows:");
+
+        jLabel7.setText("0");
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -1535,7 +1255,12 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField43)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -1548,7 +1273,11 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
                 .addContainerGap())
         );
 
@@ -1571,8 +1300,8 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane3)
+                        .addGap(2, 2, 2))
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1660,7 +1389,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(5, 5, 5))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1679,15 +1408,15 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("OPD", jPanel2);
@@ -1697,7 +1426,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_out_patient_departments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -1708,7 +1437,12 @@ public class Dlg_opd extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane9.setViewportView(jTable3);
+        tbl_out_patient_departments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_out_patient_departmentsMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tbl_out_patient_departments);
 
         jLabel57.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel57.setText("Date from:");
@@ -1766,6 +1500,7 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         buttonGroup4.add(jCheckBox13);
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox13.setSelected(true);
         jCheckBox13.setText("All");
 
         buttonGroup4.add(jCheckBox14);
@@ -1774,7 +1509,6 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         buttonGroup4.add(jCheckBox15);
         jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox15.setSelected(true);
         jCheckBox15.setText("Unpaid");
 
         jButton8.setText("Search");
@@ -1783,6 +1517,10 @@ public class Dlg_opd extends javax.swing.JDialog {
                 jButton8ActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Total no. of rows:");
+
+        jLabel11.setText("0");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1824,9 +1562,13 @@ public class Dlg_opd extends javax.swing.JDialog {
                                 .addComponent(jCheckBox14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox15)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 35, Short.MAX_VALUE)))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -1845,7 +1587,6 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jCheckBox13)
                         .addComponent(jCheckBox14)
                         .addComponent(jCheckBox15)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1861,7 +1602,11 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addGap(2, 2, 2)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel11))
                 .addContainerGap())
         );
 
@@ -1870,16 +1615,16 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addContainerGap(129, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(126, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reports", jPanel3);
@@ -1915,22 +1660,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField14MouseClicked
-
-    }//GEN-LAST:event_jTextField14MouseClicked
-
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
-
-    }//GEN-LAST:event_jTextField14ActionPerformed
-
-    private void jTextField17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField17MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17MouseClicked
-
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dlg_patient();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1946,10 +1675,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
         init_time_schedules();
     }//GEN-LAST:event_jTextField22ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
 
     private void jTextField23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField23ActionPerformed
         init_opd_type();
@@ -2002,10 +1727,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private void jTextField35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField35ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField35ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jTextField36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField36ActionPerformed
         // TODO add your handling code here:
@@ -2127,10 +1848,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_opd_type();
     }//GEN-LAST:event_jTextField23MouseClicked
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
 
     }//GEN-LAST:event_jPanel5MouseClicked
@@ -2152,8 +1869,16 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField47ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        ret_opd();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void tbl_out_patient_departmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_out_patient_departmentsMouseClicked
+        select_opd();
+    }//GEN-LAST:event_tbl_out_patient_departmentsMouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2172,43 +1897,28 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
     private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel144;
-    private javax.swing.JLabel jLabel146;
-    private javax.swing.JLabel jLabel148;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -2245,8 +1955,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2272,16 +1980,12 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField22;
@@ -2292,7 +1996,6 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
@@ -2312,13 +2015,9 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField45;
     private javax.swing.JTextField jTextField46;
     private javax.swing.JTextField jTextField47;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTable tbl_out_patient_department_prescriptions;
     private javax.swing.JTable tbl_out_patient_department_receipt_items;
+    private javax.swing.JTable tbl_out_patient_departments;
     private javax.swing.JTextField tf_search_patient;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
@@ -2326,6 +2025,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_date_schedule();
         init_tbl_out_patient_department_prescriptions(tbl_out_patient_department_prescriptions);
         init_tbl_out_patient_department_receipt_items(tbl_out_patient_department_receipt_items);
+        init_tbl_out_patient_departments(tbl_out_patient_departments);
+        ret_opd();
         init_receipt_item_inventory_charge();
     }
 
@@ -2352,7 +2053,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     // </editor-fold>
 
     private void save_opd() {
-        int row = jTable3.getSelectedRow();
+        int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
             Field.Input cl = (Field.Input) jTextField2;
             Field.Combo doc = (Field.Combo) jTextField24;
@@ -2447,7 +2148,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_opd_save_and_pay.OutputData data) {
                     closeDialog.ok();
-                    Out_patient_departments.add_data(opd, prescriptions, charges, receipt,data.is_payed);
+                    Out_patient_departments.add_data(opd, prescriptions, charges, receipt, data.is_payed);
                     new_opd();
                     Alert.set(1, "");
                 }
@@ -2469,18 +2170,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         cl.setId("");
         pa.setText("");
         pa.setId("");
-        jTextField5.setText("");
-        jTextField3.setText("");
-        jTextField9.setText("");
-        jTextField6.setText("");
-        jTextField7.setText("");
-        jTextField8.setText("");
-        jTextField10.setText("");
-        jTextField14.setText("");
-        jTextField17.setText("");
-        jCheckBox2.setSelected(true);
-        jCheckBox5.setSelected(true);
-        jCheckBox8.setSelected(true);
 
         jTextField22.setText("");
         jTextField23.setText("New");
@@ -2510,7 +2199,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_receipt_item_inventory_charge();
         compute_receipt_item_charges();
         compute_change();
-        jTable3.clearSelection();
+        tbl_out_patient_departments.clearSelection();
         jTextField44.setText("");
         jTextField45.setText("");
         jTextField39.setText("");
@@ -2548,43 +2237,9 @@ public class Dlg_opd extends javax.swing.JDialog {
                 cl.setText(to.clinic);
                 cl.setId(to.clinic_id);
 
-                pa.setText(to.fname);
+                pa.setText(to.fname + " " + to.mi + " " + to.lname + " " + to.sname);
                 pa.setId("" + to.id);
-                jTextField5.setText(to.mi);
-                jTextField3.setText(to.lname);
-                jTextField6.setText(DateType.convert_slash_datetime2(to.bday));
-                if (to.gender == 0) {
-                    jTextField7.setText("Female");
-                } else {
-                    jTextField7.setText("Male");
-                }
-                jTextField8.setText(to.blood_type);
-                String address = to.address + "," + to.barangay + ", " + to.city + ", " + to.province + ", " + to.country;
-                jTextField10.setText(address);
-                jTextField14.setText(to.allergy_medicine);
-                jTextField17.setText(to.allergy_others);
-                if (to.is_smoking == 0) {
-                    jCheckBox2.setSelected(true);
-                } else if (to.is_smoking == 1) {
-                    jCheckBox1.setSelected(true);
-                } else {
-                    jCheckBox3.setSelected(true);
-                }
 
-                if (to.is_alcohol == 0) {
-                    jCheckBox5.setSelected(true);
-                } else if (to.is_alcohol == 1) {
-                    jCheckBox4.setSelected(true);
-                } else {
-                    jCheckBox6.setSelected(true);
-                }
-                if (to.is_drug_abuse == 0) {
-                    jCheckBox8.setSelected(true);
-                } else if (to.is_drug_abuse == 1) {
-                    jCheckBox7.setSelected(true);
-                } else {
-                    jCheckBox9.setSelected(true);
-                }
             }
         });
     }
@@ -2742,30 +2397,6 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
     }
 
-    private void init_gender() {
-        List<String> types = new ArrayList();
-        types.add("Male");
-        types.add("Female");
-        Object[][] obj = new Object[types.size()][1];
-        int i = 0;
-        for (String to : types) {
-            obj[i][0] = " " + to;
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {jTextField7.getWidth()};
-        String[] col_names = {""};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(jTextField7, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                String time = (String) types.get(data.selected_row);
-                jTextField7.setText(time);
-            }
-        });
-    }
-
     private void dlg_inventory() {
         Window p = (Window) this;
         Dlg_inventory nd = Dlg_inventory.create(p, true);
@@ -2782,7 +2413,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc=" out_patient_department_prescriptions "> 
     public static ArrayListModel tbl_out_patient_department_prescriptions_ALM;
     public static Tblout_patient_department_prescriptionsModel tbl_out_patient_department_prescriptions_M;
@@ -3477,6 +3108,199 @@ public class Dlg_opd extends javax.swing.JDialog {
         double tender = FitIn.toDouble(jTextField41.getText());
         double change = tender - net_due;
         jTextField42.setText(FitIn.fmt_wc_0(change));
+    }
+//</editor-fold> 
+
+    //<editor-fold defaultstate="collapsed" desc=" out_patient_departments "> 
+    public static ArrayListModel tbl_out_patient_departments_ALM;
+    public static Tblout_patient_departmentsModel tbl_out_patient_departments_M;
+
+    public static void init_tbl_out_patient_departments(JTable tbl_out_patient_departments) {
+        tbl_out_patient_departments_ALM = new ArrayListModel();
+        tbl_out_patient_departments_M = new Tblout_patient_departmentsModel(tbl_out_patient_departments_ALM);
+        tbl_out_patient_departments.setModel(tbl_out_patient_departments_M);
+        tbl_out_patient_departments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_out_patient_departments.setRowHeight(25);
+        int[] tbl_widths_out_patient_departments = {100, 70, 70, 100, 180, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_out_patient_departments.length; i < n; i++) {
+            if (i == 3) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_out_patient_departments, i, tbl_widths_out_patient_departments[i]);
+        }
+        Dimension d = tbl_out_patient_departments.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_out_patient_departments.getTableHeader().setPreferredSize(d);
+        tbl_out_patient_departments.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_out_patient_departments.setRowHeight(25);
+        tbl_out_patient_departments.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_out_patient_departments.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+        tbl_out_patient_departments.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
+    }
+
+    public static void loadData_out_patient_departments(List<to_out_patient_departments> acc) {
+        tbl_out_patient_departments_ALM.clear();
+        tbl_out_patient_departments_ALM.addAll(acc);
+    }
+
+    public static class Tblout_patient_departmentsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "OPD No.", "Date", "Time", "Patient", "Doctor", "Type", "", "", "opd_date", "opd_time", "opd_type", "patient_height", "patient_weight", "patient_bmi", "patient_pressure", "patient_pulse", "patient_temperature", "patient_respiratory", "patient_waist", "patient_hip", "patient_spo2", "complaints", "past_personal_family_history", "investigation", "findings", "provisional_diagnosis", "remarks", "followup_days", "followup_date", "referred_to", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
+        };
+
+        public Tblout_patient_departmentsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_out_patient_departments tt = (to_out_patient_departments) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.opd_no;
+                case 1:
+                    return " " + DateType.convert_slash_datetime2(tt.opd_date);
+                case 2:
+                    return " " + tt.opd_time;
+                case 3:
+                    return " " + tt.patient;
+                case 4:
+                    return " " + tt.doctor;
+                case 5:
+                    return " " + tt.opd_type;
+                case 6:
+                    return "/cms/icons/new-file.png";
+                case 7:
+                    return "/cms/icons/remove11.png";
+                case 8:
+                    return tt.opd_date;
+                case 9:
+                    return tt.opd_time;
+
+                default:
+                    return tt.is_uploaded;
+            }
+        }
+    }
+
+    private void ret_opd() {
+        String where = "";
+        List<to_out_patient_departments> datas = Out_patient_departments.ret_data(where);
+        loadData_out_patient_departments(datas);
+        jLabel11.setText("" + datas.size());
+    }
+
+    private void select_opd() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        int col = tbl_out_patient_departments.getSelectedColumn();
+        if (col == 6) {
+            Field.Input cl = (Field.Input) jTextField2;
+            cl.setText(to.clinic);
+            cl.setId(to.clinic_id);
+            Field.Input pa = (Field.Input) jTextField4;
+            pa.setText(to.patient);
+            pa.setId(to.patient_id);
+
+            Field.Combo doc = (Field.Combo) jTextField24;
+            doc.setText(to.doctor);
+            doc.setId(to.doctor_id);
+            try {
+                Date visit_date = DateType.sf.parse(to.opd_date);
+                jDateChooser1.setDate(visit_date);
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_opd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            jTextField22.setText(to.opd_time);
+            jTextField23.setText(to.opd_type);
+
+            jTextField25.setText(FitIn.fmt_woc(to.patient_height));
+            jTextField26.setText(FitIn.fmt_woc(to.patient_weight));
+
+            jTextField28.setText(to.patient_pressure);
+            jTextField29.setText(FitIn.fmt_woc(to.patient_pulse));
+            jTextField30.setText(FitIn.fmt_woc(to.patient_temperature));
+            jTextField31.setText(FitIn.fmt_woc(to.patient_respiratory));
+            jTextField32.setText(FitIn.fmt_woc(to.patient_waist));
+            jTextField33.setText(FitIn.fmt_woc(to.patient_hip));
+            jTextField34.setText(FitIn.fmt_woc(to.patient_spo2));
+            jTextArea1.setText(to.complaints);
+            jTextArea3.setText(to.past_personal_family_history);
+            jTextArea5.setText(to.investigation);
+            jTextArea2.setText(to.findings);
+            jTextArea4.setText(to.provisional_diagnosis);
+            jTextArea6.setText(to.remarks);
+
+            jTextField35.setText("" + to.followup_days);
+            jTextField36.setText(to.referred_to);
+            if (to.followup_date != null) {
+                try {
+                    Date f_date = DateType.sf.parse(to.followup_date);
+                    jDateChooser2.setDate(f_date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Dlg_opd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            String where = "where opd_no='" + to.opd_no + "' and clinic_id='" + to.clinic_id + "' ";
+            List<Out_patient_department_prescriptions.to_out_patient_department_prescriptions> prescriptions = Out_patient_department_prescriptions.ret_data(where);
+            loadData_out_patient_department_prescriptions(prescriptions);
+            jLabel2.setText("" + prescriptions.size());
+
+            List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> charges = Out_patient_department_receipt_items.ret_data(where);
+            loadData_out_patient_department_receipt_items(charges);
+            jLabel7.setText("" + charges.size());
+
+            List<Out_patient_department_receipts.to_out_patient_department_receipts> receipts = Out_patient_department_receipts.ret_data(where);
+            Out_patient_department_receipts.to_out_patient_department_receipts receipt = receipts.get(0);
+
+            jTextField44.setText(receipt.receipt_no);
+            jTextField45.setText(receipt.reference_no);
+
+            jTextField38.setText(FitIn.fmt_wc_0(receipt.amount_due));
+            jTextField39.setText(FitIn.fmt_wc_0(receipt.discount));
+            jTextField41.setText(FitIn.fmt_wc_0(receipt.cash));
+            jTextField42.setText(FitIn.fmt_wc_0(receipt.cash-(receipt.amount_due-receipt.discount)));
+            jTabbedPane1.setSelectedIndex(0);
+            
+        }
+        if (col == 7) {
+            Window p = (Window) this;
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+            nd.setTitle("");
+            
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
+                
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                    closeDialog.ok();
+                    
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
     }
 //</editor-fold> 
 
