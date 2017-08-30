@@ -15,6 +15,12 @@ import cms.inventory.Inventory_prescriptions;
 import cms.opd.Out_patient_department_prescriptions.to_out_patient_department_prescriptions;
 import cms.opd.Out_patient_department_receipt_items.to_out_patient_department_receipt_items;
 import cms.opd.Out_patient_departments.to_out_patient_departments;
+import cms.options.Dlg_option_complaints;
+import cms.options.Dlg_option_diagnosis;
+import cms.options.Dlg_option_findings;
+import cms.options.Dlg_option_history;
+import cms.options.Dlg_option_investigation;
+import cms.options.Dlg_option_remarks;
 import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.receipts.Dlg_receipt_particulars;
@@ -22,6 +28,7 @@ import cms.receipts.Receipt_particulars;
 import cms.users.MyUser;
 import cms.util.Alert;
 import cms.util.DateType;
+import cms.util.Dlg_confirm_action;
 import cms.util.Dlg_confirm_delete;
 import cms.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -30,6 +37,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -41,6 +49,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -788,6 +797,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1733,7 +1743,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField36ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        new_opd();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2049,6 +2059,61 @@ public class Dlg_opd extends javax.swing.JDialog {
                 disposed();
             }
         });
+        jTextArea1.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_complaints();
+                }
+            }
+
+        });
+        jTextArea3.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_history();
+                }
+            }
+
+        });
+        jTextArea5.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_investigation();
+                }
+            }
+
+        });
+        jTextArea2.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_findings();
+                }
+            }
+
+        });
+        jTextArea4.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_diagnosis();
+                }
+            }
+
+        });
+        jTextArea6.addKeyListener(new KeyAdapter() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_option_remarks();
+                }
+            }
+
+        });
+
     }
     // </editor-fold>
 
@@ -2156,6 +2221,87 @@ public class Dlg_opd extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         } else {
+            Out_patient_departments.to_out_patient_departments to = (Out_patient_departments.to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+            Field.Input cl = (Field.Input) jTextField2;
+            Field.Combo doc = (Field.Combo) jTextField24;
+            Field.Input pat = (Field.Input) jTextField4;
+            int id = to.id;
+            String opd_no = "";
+            String clinic = MyUser.getClinic();
+            String clinic_id = MyUser.getClinic_id();
+
+            String patient = pat.getText();
+            String patient_id = pat.getId();
+            if (patient_id == null || patient_id.isEmpty()) {
+                Alert.set(0, "Select patient from the list");
+                tf_search_patient.grabFocus();
+                return;
+            }
+            String doctor = doc.getText();
+            String doctor_id = doc.getId();
+            if (doctor_id == null || doctor_id.isEmpty()) {
+                Alert.set(0, "Select doctor from the list");
+                jTextField24.grabFocus();
+                return;
+            }
+            String opd_date = DateType.sf.format(jDateChooser1.getDate());
+            String opd_time = jTextField22.getText();
+            if (opd_time == null || opd_time.isEmpty()) {
+                Alert.set(0, "Select time schedule from the list");
+                jTextField22.grabFocus();
+                return;
+            }
+            String opd_type = jTextField23.getText();
+            double patient_height = FitIn.toDouble(jTextField25.getText());
+            double patient_weight = FitIn.toDouble(jTextField26.getText());
+            double patient_bmi = FitIn.toDouble(jTextField27.getText());
+            String patient_pressure = jTextField28.getText();
+            double patient_pulse = FitIn.toDouble(jTextField29.getText());
+            double patient_temperature = FitIn.toDouble(jTextField30.getText());
+            double patient_respiratory = FitIn.toDouble(jTextField31.getText());
+            double patient_waist = FitIn.toDouble(jTextField32.getText());
+            double patient_hip = FitIn.toDouble(jTextField33.getText());
+            double patient_spo2 = FitIn.toDouble(jTextField34.getText());
+            String complaints = jTextArea1.getText();
+            String past_personal_family_history = jTextArea3.getText();
+            String investigation = jTextArea5.getText();
+            String findings = jTextArea2.getText();
+            String provisional_diagnosis = jTextArea4.getText();
+            String remarks = jTextArea6.getText();
+            int followup_days = FitIn.toInt(jTextField35.getText());
+            String followup_date = null;
+            try {
+                followup_date = DateType.sf.format(jDateChooser2.getDate());
+            } catch (Exception e) {
+                followup_date = null;
+            }
+            String referred_to = jTextField36.getText();
+            String created_by = to.created_by;
+            String updated_by = MyUser.getUser_id();
+            String created_at = to.created_at;
+            String updated_at = DateType.now();
+            int status = to.status;
+            int is_uploaded = to.is_uploaded;
+
+            Out_patient_departments.to_out_patient_departments opd = new to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.do_pass("Are you sure you want to update this record?");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    Out_patient_departments.update_data(opd);
+                    ret_opd();
+                    tbl_out_patient_departments.setRowSelectionInterval(row, row);
+                    select_opd();
+                    Alert.set(2, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
 
         }
     }
@@ -2205,6 +2351,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField39.setText("");
         jTextField41.setText("");
         jTabbedPane2.setSelectedIndex(0);
+        jButton3.setText("Save");
         tf_search_patient.grabFocus();
         //</editor-fold>
     }
@@ -3281,27 +3428,161 @@ public class Dlg_opd extends javax.swing.JDialog {
             jTextField38.setText(FitIn.fmt_wc_0(receipt.amount_due));
             jTextField39.setText(FitIn.fmt_wc_0(receipt.discount));
             jTextField41.setText(FitIn.fmt_wc_0(receipt.cash));
-            jTextField42.setText(FitIn.fmt_wc_0(receipt.cash-(receipt.amount_due-receipt.discount)));
+            jTextField42.setText(FitIn.fmt_wc_0(receipt.cash - (receipt.amount_due - receipt.discount)));
+            jButton3.setText("Update");
             jTabbedPane1.setSelectedIndex(0);
-            
+
         }
         if (col == 7) {
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-            
+
             nd.setCallback(new Dlg_confirm_delete.Callback() {
-                
+
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
-                    
+
                 }
             });
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
     }
-//</editor-fold> 
 
+//</editor-fold> 
+    //<editor-fold defaultstate="collapsed" desc=" dlg options ">
+    private String remove_empty_line(JTextArea ta) {
+        String[] stmt = ta.getText().split("\n");
+        String new_string = "";
+        for (String s : stmt) {
+            if (!s.isEmpty()) {
+                new_string = new_string + "\n" + s;
+            }
+        }
+        return new_string;
+    }
+
+    private void dlg_option_complaints() {
+        Window p = (Window) this;
+        Dlg_option_complaints nd = Dlg_option_complaints.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_complaints.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_complaints.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea1.getText();
+                if (text.isEmpty()) {
+                    jTextArea1.setText(data.complaint);
+                } else {
+                    jTextArea1.setText(text + "\n" + data.complaint);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_option_history() {
+        Window p = (Window) this;
+        Dlg_option_history nd = Dlg_option_history.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_history.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_history.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea3.getText();
+                if (text.isEmpty()) {
+                    jTextArea3.setText(data.stmt);
+                } else {
+                    jTextArea3.setText(text + "\n" + data.stmt);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_option_investigation() {
+        Window p = (Window) this;
+        Dlg_option_investigation nd = Dlg_option_investigation.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_investigation.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_investigation.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea5.getText();
+                if (text.isEmpty()) {
+                    jTextArea5.setText(data.stmt);
+                } else {
+                    jTextArea5.setText(text + "\n" + data.stmt);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_option_findings() {
+        Window p = (Window) this;
+        Dlg_option_findings nd = Dlg_option_findings.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_findings.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_findings.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea2.getText();
+                if (text.isEmpty()) {
+                    jTextArea2.setText(data.stmt);
+                } else {
+                    jTextArea2.setText(text + "\n" + data.stmt);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_option_diagnosis() {
+        Window p = (Window) this;
+        Dlg_option_diagnosis nd = Dlg_option_diagnosis.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_diagnosis.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_diagnosis.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea4.getText();
+                if (text.isEmpty()) {
+                    jTextArea4.setText(data.stmt);
+                } else {
+                    jTextArea4.setText(text + "\n" + data.stmt);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_option_remarks() {
+        Window p = (Window) this;
+        Dlg_option_remarks nd = Dlg_option_remarks.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_option_remarks.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_option_remarks.OutputData data) {
+                closeDialog.ok();
+                String text = jTextArea6.getText();
+                if (text.isEmpty()) {
+                    jTextArea6.setText(data.stmt);
+                } else {
+                    jTextArea6.setText(text + "\n" + data.stmt);
+                }
+                
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    //</editor-fold>
 }

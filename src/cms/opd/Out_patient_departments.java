@@ -106,7 +106,7 @@ public class Out_patient_departments {
             List<Out_patient_department_prescriptions.to_out_patient_department_prescriptions> prescriptions,
             List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> charges,
             Out_patient_department_receipts.to_out_patient_department_receipts receipt,
-             int is_payed) {
+            int is_payed) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
@@ -558,9 +558,11 @@ public class Out_patient_departments {
     public static void update_data(to_out_patient_departments to_out_patient_departments) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            //<editor-fold defaultstate="collapsed" desc=" opd ">
             String s0 = "update out_patient_departments set "
-                    + "opd_no= :opd_no "
-                    + ",clinic= :clinic "
+                    + " clinic= :clinic "
                     + ",clinic_id= :clinic_id "
                     + ",doctor= :doctor "
                     + ",doctor_id= :doctor_id "
@@ -588,17 +590,13 @@ public class Out_patient_departments {
                     + ",followup_days= :followup_days "
                     + ",followup_date= :followup_date "
                     + ",referred_to= :referred_to "
-                    + ",created_by= :created_by "
                     + ",updated_by= :updated_by "
-                    + ",created_at= :created_at "
                     + ",updated_at= :updated_at "
-                    + ",status= :status "
                     + ",is_uploaded= :is_uploaded "
                     + " where id='" + to_out_patient_departments.id + "' "
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("opd_no", to_out_patient_departments.opd_no)
                     .setString("clinic", to_out_patient_departments.clinic)
                     .setString("clinic_id", to_out_patient_departments.clinic_id)
                     .setString("doctor", to_out_patient_departments.doctor)
@@ -627,16 +625,117 @@ public class Out_patient_departments {
                     .setNumber("followup_days", to_out_patient_departments.followup_days)
                     .setString("followup_date", to_out_patient_departments.followup_date)
                     .setString("referred_to", to_out_patient_departments.referred_to)
-                    .setString("created_by", to_out_patient_departments.created_by)
                     .setString("updated_by", to_out_patient_departments.updated_by)
-                    .setString("created_at", to_out_patient_departments.created_at)
                     .setString("updated_at", to_out_patient_departments.updated_at)
-                    .setNumber("status", to_out_patient_departments.status)
                     .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+            //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc=" prescriptions ">
+            String s2 = "update out_patient_department_prescriptions set "
+                    + " clinic= :clinic "
+                    + ",clinic_id= :clinic_id "
+                    + ",doctor= :doctor "
+                    + ",doctor_id= :doctor_id "
+                    + ",patient= :patient "
+                    + ",patient_id= :patient_id "
+                    + ",opd_date= :opd_date "
+                    + ",opd_time= :opd_time "
+                    + ",opd_type= :opd_type "
+                    + ",updated_by= :updated_by "
+                    + ",updated_at= :updated_at "
+                    + ",is_uploaded= :is_uploaded "
+                    + " where opd_no='" + to_out_patient_departments.opd_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setString("clinic", to_out_patient_departments.clinic)
+                    .setString("clinic_id", to_out_patient_departments.clinic_id)
+                    .setString("doctor", to_out_patient_departments.doctor)
+                    .setString("doctor_id", to_out_patient_departments.doctor_id)
+                    .setString("patient", to_out_patient_departments.patient)
+                    .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("opd_date", to_out_patient_departments.opd_date)
+                    .setString("opd_time", to_out_patient_departments.opd_time)
+                    .setString("opd_type", to_out_patient_departments.opd_type)
+                    .setString("updated_by", to_out_patient_departments.updated_by)
+                    .setString("updated_at", to_out_patient_departments.updated_at)
+                    .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                    .ok();
+            stmt.addBatch(s2);
+            //</editor-fold>
+             //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            String s3 = "update out_patient_department_receipts set "
+                    + " clinic= :clinic "
+                    + ",clinic_id= :clinic_id "
+                    + ",doctor= :doctor "
+                    + ",doctor_id= :doctor_id "
+                    + ",patient= :patient "
+                    + ",patient_id= :patient_id "
+                    + ",opd_date= :opd_date "
+                    + ",opd_time= :opd_time "
+                    + ",opd_type= :opd_type "
+                    + ",updated_by= :updated_by "
+                    + ",updated_at= :updated_at "
+                    + ",is_uploaded= :is_uploaded "
+                    + " where opd_no='" + to_out_patient_departments.opd_no + "' "
+                    + " ";
+
+            s3 = SqlStringUtil.parse(s3)
+                    .setString("clinic", to_out_patient_departments.clinic)
+                    .setString("clinic_id", to_out_patient_departments.clinic_id)
+                    .setString("doctor", to_out_patient_departments.doctor)
+                    .setString("doctor_id", to_out_patient_departments.doctor_id)
+                    .setString("patient", to_out_patient_departments.patient)
+                    .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("opd_date", to_out_patient_departments.opd_date)
+                    .setString("opd_time", to_out_patient_departments.opd_time)
+                    .setString("opd_type", to_out_patient_departments.opd_type)
+                    .setString("updated_by", to_out_patient_departments.updated_by)
+                    .setString("updated_at", to_out_patient_departments.updated_at)
+                    .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                    .ok();
+            stmt.addBatch(s3);
+            //</editor-fold>
+                        //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            String s4 = "update out_patient_department_receipt_items set "
+                    + " clinic= :clinic "
+                    + ",clinic_id= :clinic_id "
+                    + ",doctor= :doctor "
+                    + ",doctor_id= :doctor_id "
+                    + ",patient= :patient "
+                    + ",patient_id= :patient_id "
+                    + ",opd_date= :opd_date "
+                    + ",opd_time= :opd_time "
+                    + ",opd_type= :opd_type "
+                    + ",updated_by= :updated_by "
+                    + ",updated_at= :updated_at "
+                    + ",is_uploaded= :is_uploaded "
+                    + " where opd_no='" + to_out_patient_departments.opd_no + "' "
+                    + " ";
+
+            s4 = SqlStringUtil.parse(s4)
+                    .setString("clinic", to_out_patient_departments.clinic)
+                    .setString("clinic_id", to_out_patient_departments.clinic_id)
+                    .setString("doctor", to_out_patient_departments.doctor)
+                    .setString("doctor_id", to_out_patient_departments.doctor_id)
+                    .setString("patient", to_out_patient_departments.patient)
+                    .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("opd_date", to_out_patient_departments.opd_date)
+                    .setString("opd_time", to_out_patient_departments.opd_time)
+                    .setString("opd_type", to_out_patient_departments.opd_type)
+                    .setString("updated_by", to_out_patient_departments.updated_by)
+                    .setString("updated_at", to_out_patient_departments.updated_at)
+                    .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
+                    .ok();
+            stmt.addBatch(s4);
+            //</editor-fold>
+            
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Out_patient_departments.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);

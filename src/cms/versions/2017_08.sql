@@ -581,3 +581,224 @@ id int auto_increment primary key
 ,status int
 ,is_uploaded int
 );
+
+drop table if exists option_complaints;
+create table option_complaints(
+id int auto_increment primary key
+,complaint varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_history_categories;
+create table option_history_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_history_classifications;
+create table option_history_classifications(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_history_sub_classifications;
+create table option_history_sub_classifications(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,classification_id varchar(255)
+,sub_classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_investigation_categories;
+create table option_investigation_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_investigation_details;
+create table option_investigation_details(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,details varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_findings_categories;
+create table option_findings_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_findings_classifications;
+create table option_findings_classifications(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_findings_details;
+create table option_findings_details(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,classification_id varchar(255)
+,details varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_diagnosis_categories;
+create table option_diagnosis_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_diagnosis_classifications;
+create table option_diagnosis_classifications(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_diagnosis_details;
+create table option_diagnosis_details(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,classification varchar(255)
+,classification_id varchar(255)
+,details varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+drop table if exists option_remarks_categories;
+create table option_remarks_categories(
+id int auto_increment primary key
+,category varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+
+drop table if exists option_remarks_details;
+create table option_remarks_details(
+id int auto_increment primary key
+,category varchar(255)
+,category_id varchar(255)
+,details varchar(255)
+,clinic varchar(255)
+,clinic_id varchar(255)
+,created_by varchar(255)
+,updated_by varchar(255)
+,created_at datetime
+,updated_at datetime
+,status int
+,is_uploaded int
+);
+
+
