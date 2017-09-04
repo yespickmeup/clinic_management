@@ -1287,8 +1287,8 @@ public class Dlg_option_diagnosis extends javax.swing.JDialog {
         }
         Option_diagnosis_details.to_option_diagnosis_details sub = (Option_diagnosis_details.to_option_diagnosis_details) tbl_option_history_sub_classification_ALM.get(row);
         String stmt = sub.category + ""
-                + "\n   " + sub.classification + ""
-                + "\n       " + sub.details;
+                + " - " + sub.classification + ""
+                + " - " + sub.details;
         String text = jTextArea1.getText();
         if (text.isEmpty()) {
             jTextArea1.setText(stmt);

@@ -25,6 +25,12 @@ import cms.patients.Dlg_patients;
 import cms.patients.Patients;
 import cms.receipts.Dlg_receipt_particulars;
 import cms.receipts.Receipt_particulars;
+import cms.reports.Dlg_report_case_report;
+import cms.reports.Dlg_report_fitness_certificate;
+import cms.reports.Dlg_report_investigation_report;
+import cms.reports.Dlg_report_prescription;
+import cms.reports.Dlg_report_referral_letter;
+import cms.reports.Dlg_report_sickness_certificate;
 import cms.users.MyUser;
 import cms.util.Alert;
 import cms.util.DateType;
@@ -39,6 +45,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.ParseException;
@@ -235,6 +242,17 @@ public class Dlg_opd extends javax.swing.JDialog {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        buttonGroup7 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -246,6 +264,31 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         tf_search_patient = new Field.Search();
         jButton1 = new Button.Default();
+        jLabel8 = new javax.swing.JLabel();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField7 = new Field.Combo();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField8 = new Field.Combo();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField6 = new Field.Combo();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField14 = new Field.Combo();
+        jTextField17 = new Field.Combo();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel144 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jLabel146 = new javax.swing.JLabel();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jLabel148 = new javax.swing.JLabel();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jTextField20 = new Field.Input();
@@ -366,6 +409,58 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
+        jMenuItem1.setText("Case Report");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Investigation Report");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Prescription Report");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem4);
+
+        jMenu1.setText("Certificates");
+
+        jMenuItem5.setText("Fitness Certificate");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Sickness Certificate");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem7.setText("Referring Letter");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
+        jPopupMenu1.add(jMenu1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -426,33 +521,185 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Birth Date:");
+
+        jDateChooser5.setDate(new Date());
+        jDateChooser5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Gender:");
+
+        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Blood Type:");
+
+        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Address:");
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel20.setText("Allergies:");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setText("[Medicine]");
+
+        jTextField14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField14MouseClicked(evt);
+            }
+        });
+        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField14ActionPerformed(evt);
+            }
+        });
+
+        jTextField17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField17MouseClicked(evt);
+            }
+        });
+        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField17ActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("[Others]");
+
+        jLabel144.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel144.setText("Smoking:");
+
+        buttonGroup5.add(jCheckBox1);
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setText("Yes");
+
+        buttonGroup5.add(jCheckBox2);
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setSelected(true);
+        jCheckBox2.setText("No");
+
+        buttonGroup5.add(jCheckBox3);
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setText("Quit");
+
+        jLabel146.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel146.setText("Alcohol:");
+
+        buttonGroup6.add(jCheckBox4);
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("Yes");
+
+        buttonGroup6.add(jCheckBox5);
+        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setSelected(true);
+        jCheckBox5.setText("No");
+
+        buttonGroup6.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setText("Quit");
+
+        buttonGroup7.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("Yes");
+
+        jLabel148.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel148.setText("Elicit drugs:");
+
+        buttonGroup7.add(jCheckBox8);
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setSelected(true);
+        jCheckBox8.setText("No");
+
+        buttonGroup7.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("Quit");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel144, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel146, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox6)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel148, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField14)
+                            .addComponent(jTextField17)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(tf_search_patient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField6)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2)))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
@@ -466,7 +713,44 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addComponent(jLabel144, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox3))
+                    .addComponent(jLabel146, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel148, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox9, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1))
         );
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -580,7 +864,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,7 +883,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
         );
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -866,19 +1150,19 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                     .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane6))
                 .addContainerGap())
@@ -886,12 +1170,12 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -905,16 +1189,16 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
+                .addGap(5, 5, 5))
         );
 
         jTabbedPane2.addTab("Visit", jPanel7);
@@ -972,7 +1256,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -996,7 +1280,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -1259,7 +1543,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel54)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1283,7 +1567,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -1399,7 +1683,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1419,14 +1703,15 @@ public class Dlg_opd extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(1, 1, 1)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jTabbedPane2)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         jTabbedPane1.addTab("OPD", jPanel2);
@@ -1450,6 +1735,12 @@ public class Dlg_opd extends javax.swing.JDialog {
         tbl_out_patient_departments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_out_patient_departmentsMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_out_patient_departmentsMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbl_out_patient_departmentsMouseReleased(evt);
             }
         });
         jScrollPane9.setViewportView(tbl_out_patient_departments);
@@ -1625,16 +1916,16 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
+                .addContainerGap(134, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
+                .addContainerGap(184, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reports", jPanel3);
@@ -1651,9 +1942,9 @@ public class Dlg_opd extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(1, 1, 1)
                 .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(100, 100, 100))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1883,12 +2174,60 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void tbl_out_patient_departmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_out_patient_departmentsMouseClicked
-        select_opd();
+        select_opd(evt);
     }//GEN-LAST:event_tbl_out_patient_departmentsMouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tbl_out_patient_departmentsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_out_patient_departmentsMousePressed
+        select_opd(evt);
+    }//GEN-LAST:event_tbl_out_patient_departmentsMousePressed
+
+    private void tbl_out_patient_departmentsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_out_patient_departmentsMouseReleased
+        select_opd(evt);
+    }//GEN-LAST:event_tbl_out_patient_departmentsMouseReleased
+
+    private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField14MouseClicked
+
+    }//GEN-LAST:event_jTextField14MouseClicked
+
+    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+
+    }//GEN-LAST:event_jTextField14ActionPerformed
+
+    private void jTextField17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField17MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField17MouseClicked
+
+    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField17ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        dlg_case_report();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        dlg_investigation_report();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+      dlg_prescription_report();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       dlg_fitness_certificate();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       dlg_sickness_certificate();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       dlg_referral_certificate();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1899,6 +2238,9 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1908,20 +2250,38 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
     private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel144;
+    private javax.swing.JLabel jLabel146;
+    private javax.swing.JLabel jLabel148;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1965,6 +2325,15 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1978,6 +2347,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1996,6 +2366,8 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField22;
@@ -2025,6 +2397,9 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField45;
     private javax.swing.JTextField jTextField46;
     private javax.swing.JTextField jTextField47;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JTable tbl_out_patient_department_prescriptions;
     private javax.swing.JTable tbl_out_patient_department_receipt_items;
     private javax.swing.JTable tbl_out_patient_departments;
@@ -2125,8 +2500,8 @@ public class Dlg_opd extends javax.swing.JDialog {
             Field.Input pat = (Field.Input) jTextField4;
             int id = 0;
             String opd_no = "";
-            String clinic = MyUser.getClinic();
-            String clinic_id = MyUser.getClinic_id();
+            String clinic ="";
+            String clinic_id ="";
 
             String patient = pat.getText();
             String patient_id = pat.getId();
@@ -2141,6 +2516,44 @@ public class Dlg_opd extends javax.swing.JDialog {
                 Alert.set(0, "Select doctor from the list");
                 jTextField24.grabFocus();
                 return;
+            }
+            List<Doctors.to_doctors> docs=Doctors.ret_data("where id='"+doctor_id+"' ");
+            if(!docs.isEmpty()){
+                Doctors.to_doctors doc1=(Doctors.to_doctors)docs.get(0);
+                clinic=doc1.clinic;
+                clinic_id=doc1.clinic_id;
+            }
+            String bday = DateType.sf.format(jDateChooser1.getDate());
+            int gender = 0;
+            if (jTextField7.getText().equalsIgnoreCase("male")) {
+                gender = 1;
+            }
+            String blood_type = jTextField8.getText();
+
+            String address = jTextField6.getText();
+
+            String allergy_medicine = jTextField14.getText();
+            String allergy_others = jTextField17.getText();
+            int is_smoking = 0;
+            if (jCheckBox1.isSelected()) {
+                is_smoking = 1;
+            }
+            if (jCheckBox3.isSelected()) {
+                is_smoking = 2;
+            }
+            int is_alcohol = 0;
+            if (jCheckBox4.isSelected()) {
+                is_alcohol = 1;
+            }
+            if (jCheckBox6.isSelected()) {
+                is_alcohol = 2;
+            }
+            int is_drug_abuse = 0;
+            if (jCheckBox7.isSelected()) {
+                is_drug_abuse = 1;
+            }
+            if (jCheckBox9.isSelected()) {
+                is_drug_abuse = 2;
             }
             String opd_date = DateType.sf.format(jDateChooser1.getDate());
             String opd_time = jTextField22.getText();
@@ -2180,7 +2593,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             String updated_at = DateType.now();
             int status = 0;
             int is_uploaded = 0;
-            Out_patient_departments.to_out_patient_departments opd = new Out_patient_departments.to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+            Out_patient_departments.to_out_patient_departments opd = new Out_patient_departments.to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, bday, gender, blood_type, address, allergy_medicine, allergy_others, is_smoking, is_alcohol, is_drug_abuse, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
             List<Out_patient_department_prescriptions.to_out_patient_department_prescriptions> prescriptions = tbl_out_patient_department_prescriptions_ALM;
             List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> charges = tbl_out_patient_department_receipt_items_ALM;
             //<editor-fold defaultstate="collapsed" desc=" receipt ">
@@ -2244,6 +2657,38 @@ public class Dlg_opd extends javax.swing.JDialog {
                 jTextField24.grabFocus();
                 return;
             }
+            String bday = DateType.sf.format(jDateChooser1.getDate());
+            int gender = 0;
+            if (jTextField7.getText().equalsIgnoreCase("male")) {
+                gender = 1;
+            }
+            String blood_type = jTextField8.getText();
+
+            String address = jTextField6.getText();
+
+            String allergy_medicine = jTextField14.getText();
+            String allergy_others = jTextField17.getText();
+            int is_smoking = 0;
+            if (jCheckBox1.isSelected()) {
+                is_smoking = 1;
+            }
+            if (jCheckBox3.isSelected()) {
+                is_smoking = 2;
+            }
+            int is_alcohol = 0;
+            if (jCheckBox4.isSelected()) {
+                is_alcohol = 1;
+            }
+            if (jCheckBox6.isSelected()) {
+                is_alcohol = 2;
+            }
+            int is_drug_abuse = 0;
+            if (jCheckBox7.isSelected()) {
+                is_drug_abuse = 1;
+            }
+            if (jCheckBox9.isSelected()) {
+                is_drug_abuse = 2;
+            }
             String opd_date = DateType.sf.format(jDateChooser1.getDate());
             String opd_time = jTextField22.getText();
             if (opd_time == null || opd_time.isEmpty()) {
@@ -2283,7 +2728,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             int status = to.status;
             int is_uploaded = to.is_uploaded;
 
-            Out_patient_departments.to_out_patient_departments opd = new to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+            Out_patient_departments.to_out_patient_departments opd = new Out_patient_departments.to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, bday, gender, blood_type, address, allergy_medicine, allergy_others, is_smoking, is_alcohol, is_drug_abuse, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -2296,7 +2741,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                     Out_patient_departments.update_data(opd);
                     ret_opd();
                     tbl_out_patient_departments.setRowSelectionInterval(row, row);
-                    select_opd();
+                    select_opd(null);
                     Alert.set(2, "");
                 }
             });
@@ -2386,6 +2831,54 @@ public class Dlg_opd extends javax.swing.JDialog {
 
                 pa.setText(to.fname + " " + to.mi + " " + to.lname + " " + to.sname);
                 pa.setId("" + to.id);
+
+                try {
+                    Date d = DateType.sf.parse(to.bday);
+                    jDateChooser1.setDate(d);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Dlg_patients.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (to.gender == 0) {
+                    jTextField7.setText("Female");
+                } else {
+                    jTextField7.setText("Male");
+                }
+                jTextField8.setText(to.blood_type);
+
+                jTextField6.setText(to.address + " ," + to.barangay + " ," + to.city + " ," + to.province + " ," + to.country);
+
+                jTextField14.setText(to.allergy_medicine);
+                jTextField17.setText(to.allergy_others);
+
+                if (to.is_smoking == 0) {
+                    jCheckBox2.setSelected(true);
+                }
+                if (to.is_smoking == 1) {
+                    jCheckBox1.setSelected(true);
+                }
+                if (to.is_smoking == 2) {
+                    jCheckBox3.setSelected(true);
+                }
+
+                if (to.is_alcohol == 0) {
+                    jCheckBox5.setSelected(true);
+                }
+                if (to.is_alcohol == 1) {
+                    jCheckBox4.setSelected(true);
+                }
+                if (to.is_alcohol == 2) {
+                    jCheckBox6.setSelected(true);
+                }
+
+                if (to.is_drug_abuse == 0) {
+                    jCheckBox8.setSelected(true);
+                }
+                if (to.is_drug_abuse == 1) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (to.is_drug_abuse == 2) {
+                    jCheckBox9.setSelected(true);
+                }
 
             }
         });
@@ -3268,7 +3761,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         tbl_out_patient_departments.setModel(tbl_out_patient_departments_M);
         tbl_out_patient_departments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_out_patient_departments.setRowHeight(25);
-        int[] tbl_widths_out_patient_departments = {100, 70, 70, 100, 180, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_out_patient_departments = {100, 70, 70, 100, 180, 80, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_out_patient_departments.length; i < n; i++) {
             if (i == 3) {
                 continue;
@@ -3283,6 +3776,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         tbl_out_patient_departments.setFont(new java.awt.Font("Arial", 0, 12));
         tbl_out_patient_departments.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
         tbl_out_patient_departments.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
+        tbl_out_patient_departments.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_out_patient_departments(List<to_out_patient_departments> acc) {
@@ -3293,7 +3787,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     public static class Tblout_patient_departmentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "OPD No.", "Date", "Time", "Patient", "Doctor", "Type", "", "", "opd_date", "opd_time", "opd_type", "patient_height", "patient_weight", "patient_bmi", "patient_pressure", "patient_pulse", "patient_temperature", "patient_respiratory", "patient_waist", "patient_hip", "patient_spo2", "complaints", "past_personal_family_history", "investigation", "findings", "provisional_diagnosis", "remarks", "followup_days", "followup_date", "referred_to", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
+            "OPD No.", "Date", "Time", "Patient", "Doctor", "Type", "", "", "", "opd_time", "opd_type", "patient_height", "patient_weight", "patient_bmi", "patient_pressure", "patient_pulse", "patient_temperature", "patient_respiratory", "patient_waist", "patient_hip", "patient_spo2", "complaints", "past_personal_family_history", "investigation", "findings", "provisional_diagnosis", "remarks", "followup_days", "followup_date", "referred_to", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
         };
 
         public Tblout_patient_departmentsModel(ListModel listmodel) {
@@ -3337,7 +3831,7 @@ public class Dlg_opd extends javax.swing.JDialog {
                 case 7:
                     return "/cms/icons/remove11.png";
                 case 8:
-                    return tt.opd_date;
+                    return "/cms/icons/report.png";
                 case 9:
                     return tt.opd_time;
 
@@ -3354,7 +3848,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jLabel11.setText("" + datas.size());
     }
 
-    private void select_opd() {
+    private void select_opd(java.awt.event.MouseEvent evt) {
         int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
             return;
@@ -3372,6 +3866,55 @@ public class Dlg_opd extends javax.swing.JDialog {
             Field.Combo doc = (Field.Combo) jTextField24;
             doc.setText(to.doctor);
             doc.setId(to.doctor_id);
+
+            try {
+                Date d = DateType.sf.parse(to.patient_bday);
+                jDateChooser1.setDate(d);
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_patients.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (to.patient_gender == 0) {
+                jTextField7.setText("Female");
+            } else {
+                jTextField7.setText("Male");
+            }
+            jTextField8.setText(to.patient_blood_type);
+
+            jTextField6.setText(to.patient_address);
+
+            jTextField14.setText(to.patient_allergy_medicine);
+            jTextField17.setText(to.patient_allergy_others);
+
+            if (to.patient_is_smoking == 0) {
+                jCheckBox2.setSelected(true);
+            }
+            if (to.patient_is_smoking == 1) {
+                jCheckBox1.setSelected(true);
+            }
+            if (to.patient_is_smoking == 2) {
+                jCheckBox3.setSelected(true);
+            }
+
+            if (to.patient_is_alcohol == 0) {
+                jCheckBox5.setSelected(true);
+            }
+            if (to.patient_is_alcohol == 1) {
+                jCheckBox4.setSelected(true);
+            }
+            if (to.patient_is_alcohol == 2) {
+                jCheckBox6.setSelected(true);
+            }
+
+            if (to.patient_is_drug_abuse == 0) {
+                jCheckBox8.setSelected(true);
+            }
+            if (to.patient_is_drug_abuse == 1) {
+                jCheckBox7.setSelected(true);
+            }
+            if (to.patient_is_drug_abuse == 2) {
+                jCheckBox9.setSelected(true);
+            }
+
             try {
                 Date visit_date = DateType.sf.parse(to.opd_date);
                 jDateChooser1.setDate(visit_date);
@@ -3448,6 +3991,15 @@ public class Dlg_opd extends javax.swing.JDialog {
             });
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
+        }
+        if (col == 8) {
+            show_pop_print(evt);
+        }
+    }
+
+    private void show_pop_print(MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
+            jPopupMenu1.show(jScrollPane9, evt.getX(), evt.getY());
         }
     }
 
@@ -3578,9 +4130,143 @@ public class Dlg_opd extends javax.swing.JDialog {
                 } else {
                     jTextArea6.setText(text + "\n" + data.stmt);
                 }
-                
+
             }
         });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" reports ">
+    private void dlg_case_report() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_case_report nd = Dlg_report_case_report.create(p, true);
+
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_case_report.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_case_report.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_investigation_report() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_investigation_report nd = Dlg_report_investigation_report.create(p, true);
+
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_investigation_report.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_investigation_report.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    private void dlg_prescription_report() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_prescription nd = Dlg_report_prescription.create(p, true);
+
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_prescription.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_prescription.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+     private void dlg_fitness_certificate() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_fitness_certificate nd = Dlg_report_fitness_certificate.create(p, true);
+
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_fitness_certificate.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_fitness_certificate.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+      private void dlg_sickness_certificate() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_sickness_certificate nd = Dlg_report_sickness_certificate.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_sickness_certificate.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_sickness_certificate.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+       private void dlg_referral_certificate() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_referral_letter nd = Dlg_report_referral_letter.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_referral_letter.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_referral_letter.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }

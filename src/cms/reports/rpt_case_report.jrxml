@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="6d532475-517d-4d85-b9ab-08e8b7cf527f">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="513"/>
+    <parameter name="clinic_name" class="java.lang.String"/>
+    <parameter name="clinic_address" class="java.lang.String"/>
+    <parameter name="clinic_contact_no" class="java.lang.String"/>
+    <parameter name="patient_id" class="java.lang.String"/>
+    <parameter name="patient_name" class="java.lang.String"/>
+    <parameter name="bday" class="java.lang.String"/>
+    <parameter name="age" class="java.lang.String"/>
+    <parameter name="gender" class="java.lang.String"/>
+    <parameter name="allergy_drug" class="java.lang.String"/>
+    <parameter name="allergy_others" class="java.lang.String"/>
+    <parameter name="blood_group" class="java.lang.String"/>
+    <parameter name="height" class="java.lang.String"/>
+    <parameter name="weight" class="java.lang.String"/>
+    <parameter name="temperature" class="java.lang.String"/>
+    <parameter name="bp" class="java.lang.String"/>
+    <parameter name="pulse" class="java.lang.String"/>
+    <parameter name="respiratory" class="java.lang.String"/>
+    <parameter name="spo2" class="java.lang.String"/>
+    <parameter name="is_smoking" class="java.lang.String"/>
+    <parameter name="is_alcohol" class="java.lang.String"/>
+    <parameter name="is_drugs" class="java.lang.String"/>
+    <parameter name="complaints" class="java.lang.String"/>
+    <parameter name="history" class="java.lang.String"/>
+    <parameter name="investigation" class="java.lang.String"/>
+    <field name="qty" class="java.lang.Double"/>
+    <field name="item_code" class="java.lang.String"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="dosage" class="java.lang.String"/>
+    <field name="days" class="java.lang.Double"/>
+    <field name="total" class="java.lang.Double"/>
+    <field name="dosage_remarks" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="486" splitType="Stretch">
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="24" width="555" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="14" isBold="true"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{clinic_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="43" width="555" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{clinic_address}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="57" width="555" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{clinic_contact_no}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="83" width="555" height="20"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="Tahoma" size="14" isBold="true"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Case Report]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="118" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Patient Id:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="118" width="190" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{patient_id}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="132" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Patient Name:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="132" width="190" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{patient_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="164" width="95" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{bday}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="164" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Birth Date:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="235" y="164" width="34" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Age:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="269" y="164" width="108" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{age}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="401" y="164" width="46" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Gender:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="447" y="164" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{gender}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="179" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Allergy [Drug]:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="179" width="447" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{allergy_drug}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="212" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Allergy [Others]:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="212" width="447" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{allergy_others}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="242" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Blood Group:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="242" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{blood_group}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="217" y="242" width="67" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{height}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="164" y="242" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Height:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="284" y="242" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Weight:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="337" y="242" width="67" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{weight}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="480" y="242" width="64" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{temperature}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="404" y="242" width="76" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Temperature:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="337" y="257" width="67" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{spo2}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="257" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{bp}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="480" y="257" width="64" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{respiratory}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="404" y="257" width="76" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Respiratory:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="284" y="257" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[sPo2:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="164" y="257" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Pulse:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="217" y="257" width="67" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{pulse}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="257" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[BP:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="284" y="272" width="75" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Drug Abuse:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="272" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Smoking:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="164" y="272" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Alcohol:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="359" y="272" width="45" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{is_drugs}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="217" y="272" width="67" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{is_alcohol}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="97" y="272" width="53" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{is_smoking}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="17" y="316" width="527" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{complaints}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="301" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Complaints:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="361" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[History:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="17" y="376" width="527" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{history}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="17" y="440" width="527" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{investigation}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="425" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Investigation:]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="37" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="2f0d48ea-0afd-4b6a-9200-adf58000abc5" x="0" y="22" width="29" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Qty]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="3dc7cef9-a80d-4e9b-9fbf-f11b81832729" x="28" y="22" width="50" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Item Code]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="a59f0933-ed04-4c66-8c57-bc3b36b1635d" x="78" y="22" width="311" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Description]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="b6f88dd3-1b68-43b7-a631-de0947e2c6f7" x="389" y="22" width="73" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Dosage]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="a0b01546-a542-46d2-98ab-05fabcd2384f" x="462" y="22" width="40" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Days]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="9763a8ab-00e4-4821-8e67-ae6867d79aaf" x="502" y="22" width="53" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="0" width="97" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="false"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Prescriptions:]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="24" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="3826f4a5-40ee-4773-a0bb-f6185a870354" x="0" y="0" width="29" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="9b67bb9f-4d7d-4c51-ba64-da841cc2c844" x="28" y="0" width="50" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="01738480-1d1e-4aa1-9ea0-242bb7e24761" x="78" y="0" width="311" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="f3574704-c3c6-4a53-87ff-581aa421a669" x="389" y="0" width="73" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dosage}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="a68e49df-a1e6-4ad4-a6c9-218ef1770380" x="462" y="0" width="41" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{days}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="4734d250-b8b6-471d-afa5-ad2d008f7124" x="502" y="0" width="53" height="12" isRemoveLineWhenBlank="true"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="51d14cf3-6ee1-46f3-a3b4-db3efa8c7eb4" x="0" y="12" width="555" height="12" isRemoveLineWhenBlank="true"/>
+                <box>
+                    <bottomPen lineWidth="0.2"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="9"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dosage_remarks}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>

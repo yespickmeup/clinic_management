@@ -4,9 +4,14 @@
  */
 package cms.pnl;
 
+import cms.appointments.Dlg_appointments;
+import cms.opd.Dlg_opd;
+import cms.users.Dlg_users;
 import cms.users.MyUser;
+import cms.users.User_priveleges;
 import cms.users.Users;
 import cms.util.Alert;
+import cms.util.MyFrame;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -15,6 +20,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.*;
 import mijzcx.synapse.desk.utils.Application;
@@ -587,7 +593,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void check_credentials() {
         String user_name = tf_username.getText();
-       
+
         String password = tf_password.getText();
         String where = " where user_name = '" + user_name + "' and password='" + password + "' ";
         final Users.to_users to = Users.ret_data_autho(where);
@@ -597,7 +603,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             tf_username.grabFocus();
             Alert.set(0, "Wrong Username/Password!!");
         } else {
-            
+
             tf_username.setText("");
             tf_password.setText("");
             MyUser.user_id = "" + to.id;
@@ -607,20 +613,20 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             jPanel1.updateUI();
             set_previleges();
             cardLayout.show(pnl_main_holder, "2");
-            
+
         }
     }
 
     //<editor-fold defaultstate="collapsed" desc=" privileges ">
     private void set_previleges() {
-//        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
-//        List<User_previleges.to_user_previleges> datas = User_previleges.ret_data(where);
-//        for (User_previleges.to_user_previleges to : datas) {
-//            if (to.previledge.equalsIgnoreCase("Sales")) {
-//            }
-//            //<editor-fold defaultstate="collapsed" desc=" menu icons ">
-//            //</editor-fold>
-//        }
+        String where = " where user_id='" + MyUser.getUser_id() + "' order by privelege asc";
+        List<User_priveleges.to_user_priveleges> datas = User_priveleges.ret_data(where);
+        for (User_priveleges.to_user_priveleges to : datas) {
+            if (to.privelege.equalsIgnoreCase("Sales")) {
+            }
+            //<editor-fold defaultstate="collapsed" desc=" menu icons ">
+            //</editor-fold>
+        }
     }
 
     //</editor-fold>
@@ -659,21 +665,23 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
 
                 //<editor-fold defaultstate="collapsed" desc=" transactions ">
-                if (data.stmt.equals("Services-Transaction")) {
-//                    t_services_transactions();
+                if (data.stmt.equals("Appointments")) {
+                    t_appointments();
                 }
-
+                if (data.stmt.equals("Out Patient Department")) {
+                    t_opd();
+                }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" maintenance ">
-//                if (data.stmt.equals("Service Departments")) {
-//                    m_departments();
-//                }
-//                if (data.stmt.equals("Service Department Members")) {
-//                    m_members();
-//                }
-//                if (data.stmt.equals("Service Transaction Type")) {
-//                    m_type();
-//                }
+                if (data.stmt.equals("Users")) {
+                    m_users();
+                }
+                if (data.stmt.equals("Service Department Members")) {
+
+                }
+                if (data.stmt.equals("Service Transaction Type")) {
+
+                }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">
 //                if (data.stmt.equals("Services Report")) {
@@ -684,10 +692,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //                }
                 //</editor-fold>
             }
+
             @Override
             public void standby(CloseDialog closeDialog, Dlg_menu.OutputData data) {
                 closeDialog.ok();
             }
+
             @Override
             public void logout(CloseDialog closeDialog, Dlg_menu.OutputData data) {
                 closeDialog.ok();
@@ -698,4 +708,20 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         nd.setVisible(true);
     }
 
+    //<editor-fold defaultstate="collapsed" desc=" dlgs ">
+    private void t_appointments() {
+        Dlg_appointments dtc = new Dlg_appointments();
+        MyFrame.set2(dtc.getSurface(), jPanel1, "Appointments", dtc.getWidth(), dtc.getHeight());
+    }
+
+    private void t_opd() {
+        Dlg_opd dtc = new Dlg_opd();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Out Patient Department");
+    }
+
+    private void m_users() {
+        Dlg_users dtc = new Dlg_users();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Users");
+    }
+    //</editor-fold>
 }

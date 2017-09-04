@@ -5,10 +5,13 @@
  */
 package cms.pnl;
 
+import cms.users.MyUser;
+import cms.users.User_priveleges;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -205,8 +208,8 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         jLabel7.setBackground(new java.awt.Color(234, 234, 234));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/hierarchical-structure.png"))); // NOI18N
-        jLabel7.setToolTipText("Departments");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/manager3.png"))); // NOI18N
+        jLabel7.setToolTipText("Users");
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -295,11 +298,11 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        ok("Service Departments", jLabel7);
+        ok("Users", jLabel7);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        label("Service Departments", jLabel7);
+        label("Users", jLabel7);
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
@@ -339,7 +342,6 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         hide2();
         set_previledge();
         hover();
-
     }
 
     private void hover() {
@@ -349,7 +351,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (l.isEnabled()) {
-                        l.setBackground(new java.awt.Color(23,140,203));
+                        l.setBackground(new java.awt.Color(23, 140, 203));
                     }
 
                 }
@@ -357,7 +359,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (l.isEnabled()) {
-                        l.setBackground(new java.awt.Color(157, 184, 46));
+                        l.setBackground(new java.awt.Color(234, 234, 234));
                     }
 
                 }
@@ -375,24 +377,16 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void set_previledge() {
-//        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
-//        List<User_previleges.to_user_previleges> datas = User_previleges.ret_data(where);
-//
-//        for (User_previleges.to_user_previleges to : datas) {
-//            if (to.previledge.equalsIgnoreCase("Service Departments")) {
-//                jLabel7.setEnabled(true);
-//                jLabel7.setBackground(new java.awt.Color(157, 184, 46));
-//            }
-//
-//            if (to.previledge.equalsIgnoreCase("Service Department Members")) {
-//                jLabel8.setEnabled(true);
-//                jLabel8.setBackground(new java.awt.Color(157, 184, 46));
-//            }
-//            if (to.previledge.equalsIgnoreCase("Service Transaction Type")) {
-//                jLabel9.setEnabled(true);
-//                jLabel9.setBackground(new java.awt.Color(157, 184, 46));
-//            }
-//        }
+        String where = " where user_id='" + MyUser.getUser_id() + "' order by privelege asc";
+        List<User_priveleges.to_user_priveleges> datas = User_priveleges.ret_data(where);
+
+        for (User_priveleges.to_user_priveleges to : datas) {
+            if (to.privelege.equalsIgnoreCase("Users - (View)")) {
+                jLabel7.setEnabled(true);
+                jLabel7.setBackground(new java.awt.Color(93,175,219));
+            }
+
+        }
     }
 
     public void do_pass() {

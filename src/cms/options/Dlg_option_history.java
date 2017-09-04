@@ -1287,8 +1287,8 @@ public class Dlg_option_history extends javax.swing.JDialog {
         }
         Option_history_sub_classifications.to_option_history_sub_classifications sub = (Option_history_sub_classifications.to_option_history_sub_classifications) tbl_option_history_sub_classification_ALM.get(row);
         String stmt = sub.category + ""
-                + "\n   " + sub.classification + ""
-                + "\n       " + sub.sub_classification;
+                + " - " + sub.classification + ""
+                + " - " + sub.sub_classification;
         String text = jTextArea1.getText();
         if (text.isEmpty()) {
             jTextArea1.setText(stmt);

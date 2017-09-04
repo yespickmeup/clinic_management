@@ -33,6 +33,15 @@ public class Out_patient_departments {
         public final String doctor_id;
         public final String patient;
         public final String patient_id;
+        public final String patient_bday;
+        public final int patient_gender;
+        public final String patient_blood_type;
+        public final String patient_address;
+        public final String patient_allergy_medicine;
+        public final String patient_allergy_others;
+        public final int patient_is_smoking;
+        public final int patient_is_alcohol;
+        public final int patient_is_drug_abuse;
         public final String opd_date;
         public final String opd_time;
         public final String opd_type;
@@ -62,7 +71,7 @@ public class Out_patient_departments {
         public final int status;
         public final int is_uploaded;
 
-        public to_out_patient_departments(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String opd_date, String opd_time, String opd_type, double patient_height, double patient_weight, double patient_bmi, String patient_pressure, double patient_pulse, double patient_temperature, double patient_respiratory, double patient_waist, double patient_hip, double patient_spo2, String complaints, String past_personal_family_history, String investigation, String findings, String provisional_diagnosis, String remarks, int followup_days, String followup_date, String referred_to, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
+        public to_out_patient_departments(int id, String opd_no, String clinic, String clinic_id, String doctor, String doctor_id, String patient, String patient_id, String patient_bday, int patient_gender, String patient_blood_type, String patient_address, String patient_allergy_medicine, String patient_allergy_others, int patient_is_smoking, int patient_is_alcohol, int patient_is_drug_abuse, String opd_date, String opd_time, String opd_type, double patient_height, double patient_weight, double patient_bmi, String patient_pressure, double patient_pulse, double patient_temperature, double patient_respiratory, double patient_waist, double patient_hip, double patient_spo2, String complaints, String past_personal_family_history, String investigation, String findings, String provisional_diagnosis, String remarks, int followup_days, String followup_date, String referred_to, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded) {
             this.id = id;
             this.opd_no = opd_no;
             this.clinic = clinic;
@@ -71,6 +80,15 @@ public class Out_patient_departments {
             this.doctor_id = doctor_id;
             this.patient = patient;
             this.patient_id = patient_id;
+            this.patient_bday = patient_bday;
+            this.patient_gender = patient_gender;
+            this.patient_blood_type = patient_blood_type;
+            this.patient_address = patient_address;
+            this.patient_allergy_medicine = patient_allergy_medicine;
+            this.patient_allergy_others = patient_allergy_others;
+            this.patient_is_smoking = patient_is_smoking;
+            this.patient_is_alcohol = patient_is_alcohol;
+            this.patient_is_drug_abuse = patient_is_drug_abuse;
             this.opd_date = opd_date;
             this.opd_time = opd_time;
             this.opd_type = opd_type;
@@ -121,6 +139,15 @@ public class Out_patient_departments {
                     + ",doctor_id"
                     + ",patient"
                     + ",patient_id"
+                    + ",patient_bday"
+                    + ",patient_gender"
+                    + ",patient_blood_type"
+                    + ",patient_address"
+                    + ",patient_allergy_medicine"
+                    + ",patient_allergy_others"
+                    + ",patient_is_smoking"
+                    + ",patient_is_alcohol"
+                    + ",patient_is_drug_abuse"
                     + ",opd_date"
                     + ",opd_time"
                     + ",opd_type"
@@ -157,6 +184,15 @@ public class Out_patient_departments {
                     + ",:doctor_id"
                     + ",:patient"
                     + ",:patient_id"
+                    + ",:patient_bday"
+                    + ",:patient_gender"
+                    + ",:patient_blood_type"
+                    + ",:patient_address"
+                    + ",:patient_allergy_medicine"
+                    + ",:patient_allergy_others"
+                    + ",:patient_is_smoking"
+                    + ",:patient_is_alcohol"
+                    + ",:patient_is_drug_abuse"
                     + ",:opd_date"
                     + ",:opd_time"
                     + ",:opd_type"
@@ -195,6 +231,15 @@ public class Out_patient_departments {
                     .setString("doctor_id", to_out_patient_departments.doctor_id)
                     .setString("patient", to_out_patient_departments.patient)
                     .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("patient_bday", to_out_patient_departments.patient_bday)
+                    .setNumber("patient_gender", to_out_patient_departments.patient_gender)
+                    .setString("patient_blood_type", to_out_patient_departments.patient_blood_type)
+                    .setString("patient_address", to_out_patient_departments.patient_address)
+                    .setString("patient_allergy_medicine", to_out_patient_departments.patient_allergy_medicine)
+                    .setString("patient_allergy_others", to_out_patient_departments.patient_allergy_others)
+                    .setNumber("patient_is_smoking", to_out_patient_departments.patient_is_smoking)
+                    .setNumber("patient_is_alcohol", to_out_patient_departments.patient_is_alcohol)
+                    .setNumber("patient_is_drug_abuse", to_out_patient_departments.patient_is_drug_abuse)
                     .setString("opd_date", to_out_patient_departments.opd_date)
                     .setString("opd_time", to_out_patient_departments.opd_time)
                     .setString("opd_type", to_out_patient_departments.opd_type)
@@ -562,12 +607,21 @@ public class Out_patient_departments {
 
             //<editor-fold defaultstate="collapsed" desc=" opd ">
             String s0 = "update out_patient_departments set "
-                    + " clinic= :clinic "
+                    + "clinic= :clinic "
                     + ",clinic_id= :clinic_id "
                     + ",doctor= :doctor "
                     + ",doctor_id= :doctor_id "
                     + ",patient= :patient "
                     + ",patient_id= :patient_id "
+                    + ",patient_bday= :patient_bday "
+                    + ",patient_gender= :patient_gender "
+                    + ",patient_blood_type= :patient_blood_type "
+                    + ",patient_address= :patient_address "
+                    + ",patient_allergy_medicine= :patient_allergy_medicine "
+                    + ",patient_allergy_others= :patient_allergy_others "
+                    + ",patient_is_smoking= :patient_is_smoking "
+                    + ",patient_is_alcohol= :patient_is_alcohol "
+                    + ",patient_is_drug_abuse= :patient_is_drug_abuse "
                     + ",opd_date= :opd_date "
                     + ",opd_time= :opd_time "
                     + ",opd_type= :opd_type "
@@ -590,8 +644,11 @@ public class Out_patient_departments {
                     + ",followup_days= :followup_days "
                     + ",followup_date= :followup_date "
                     + ",referred_to= :referred_to "
+                    + ",created_by= :created_by "
                     + ",updated_by= :updated_by "
+                    + ",created_at= :created_at "
                     + ",updated_at= :updated_at "
+                    + ",status= :status "
                     + ",is_uploaded= :is_uploaded "
                     + " where id='" + to_out_patient_departments.id + "' "
                     + " ";
@@ -603,6 +660,15 @@ public class Out_patient_departments {
                     .setString("doctor_id", to_out_patient_departments.doctor_id)
                     .setString("patient", to_out_patient_departments.patient)
                     .setString("patient_id", to_out_patient_departments.patient_id)
+                    .setString("patient_bday", to_out_patient_departments.patient_bday)
+                    .setNumber("patient_gender", to_out_patient_departments.patient_gender)
+                    .setString("patient_blood_type", to_out_patient_departments.patient_blood_type)
+                    .setString("patient_address", to_out_patient_departments.patient_address)
+                    .setString("patient_allergy_medicine", to_out_patient_departments.patient_allergy_medicine)
+                    .setString("patient_allergy_others", to_out_patient_departments.patient_allergy_others)
+                    .setNumber("patient_is_smoking", to_out_patient_departments.patient_is_smoking)
+                    .setNumber("patient_is_alcohol", to_out_patient_departments.patient_is_alcohol)
+                    .setNumber("patient_is_drug_abuse", to_out_patient_departments.patient_is_drug_abuse)
                     .setString("opd_date", to_out_patient_departments.opd_date)
                     .setString("opd_time", to_out_patient_departments.opd_time)
                     .setString("opd_type", to_out_patient_departments.opd_type)
@@ -625,8 +691,11 @@ public class Out_patient_departments {
                     .setNumber("followup_days", to_out_patient_departments.followup_days)
                     .setString("followup_date", to_out_patient_departments.followup_date)
                     .setString("referred_to", to_out_patient_departments.referred_to)
+                    .setString("created_by", to_out_patient_departments.created_by)
                     .setString("updated_by", to_out_patient_departments.updated_by)
+                    .setString("created_at", to_out_patient_departments.created_at)
                     .setString("updated_at", to_out_patient_departments.updated_at)
+                    .setNumber("status", to_out_patient_departments.status)
                     .setNumber("is_uploaded", to_out_patient_departments.is_uploaded)
                     .ok();
 
@@ -667,7 +736,7 @@ public class Out_patient_departments {
                     .ok();
             stmt.addBatch(s2);
             //</editor-fold>
-             //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            //<editor-fold defaultstate="collapsed" desc=" receipt ">
             String s3 = "update out_patient_department_receipts set "
                     + " clinic= :clinic "
                     + ",clinic_id= :clinic_id "
@@ -700,7 +769,7 @@ public class Out_patient_departments {
                     .ok();
             stmt.addBatch(s3);
             //</editor-fold>
-                        //<editor-fold defaultstate="collapsed" desc=" receipt ">
+            //<editor-fold defaultstate="collapsed" desc=" receipt ">
             String s4 = "update out_patient_department_receipt_items set "
                     + " clinic= :clinic "
                     + ",clinic_id= :clinic_id "
@@ -733,7 +802,7 @@ public class Out_patient_departments {
                     .ok();
             stmt.addBatch(s4);
             //</editor-fold>
-            
+
             stmt.executeBatch();
             conn.commit();
             Lg.s(Out_patient_departments.class, "Successfully Updated");
@@ -775,6 +844,15 @@ public class Out_patient_departments {
                     + ",doctor_id"
                     + ",patient"
                     + ",patient_id"
+                    + ",patient_bday"
+                    + ",patient_gender"
+                    + ",patient_blood_type"
+                    + ",patient_address"
+                    + ",patient_allergy_medicine"
+                    + ",patient_allergy_others"
+                    + ",patient_is_smoking"
+                    + ",patient_is_alcohol"
+                    + ",patient_is_drug_abuse"
                     + ",opd_date"
                     + ",opd_time"
                     + ",opd_type"
@@ -817,36 +895,45 @@ public class Out_patient_departments {
                 String doctor_id = rs.getString(6);
                 String patient = rs.getString(7);
                 String patient_id = rs.getString(8);
-                String opd_date = rs.getString(9);
-                String opd_time = rs.getString(10);
-                String opd_type = rs.getString(11);
-                double patient_height = rs.getDouble(12);
-                double patient_weight = rs.getDouble(13);
-                double patient_bmi = rs.getDouble(14);
-                String patient_pressure = rs.getString(15);
-                double patient_pulse = rs.getDouble(16);
-                double patient_temperature = rs.getDouble(17);
-                double patient_respiratory = rs.getDouble(18);
-                double patient_waist = rs.getDouble(19);
-                double patient_hip = rs.getDouble(20);
-                double patient_spo2 = rs.getDouble(21);
-                String complaints = rs.getString(22);
-                String past_personal_family_history = rs.getString(23);
-                String investigation = rs.getString(24);
-                String findings = rs.getString(25);
-                String provisional_diagnosis = rs.getString(26);
-                String remarks = rs.getString(27);
-                int followup_days = rs.getInt(28);
-                String followup_date = rs.getString(29);
-                String referred_to = rs.getString(30);
-                String created_by = rs.getString(31);
-                String updated_by = rs.getString(32);
-                String created_at = rs.getString(33);
-                String updated_at = rs.getString(34);
-                int status = rs.getInt(35);
-                int is_uploaded = rs.getInt(36);
+                String patient_bday = rs.getString(9);
+                int patient_gender = rs.getInt(10);
+                String patient_blood_type = rs.getString(11);
+                String patient_address = rs.getString(12);
+                String patient_allergy_medicine = rs.getString(13);
+                String patient_allergy_others = rs.getString(14);
+                int patient_is_smoking = rs.getInt(15);
+                int patient_is_alcohol = rs.getInt(16);
+                int patient_is_drug_abuse = rs.getInt(17);
+                String opd_date = rs.getString(18);
+                String opd_time = rs.getString(19);
+                String opd_type = rs.getString(20);
+                double patient_height = rs.getDouble(21);
+                double patient_weight = rs.getDouble(22);
+                double patient_bmi = rs.getDouble(23);
+                String patient_pressure = rs.getString(24);
+                double patient_pulse = rs.getDouble(25);
+                double patient_temperature = rs.getDouble(26);
+                double patient_respiratory = rs.getDouble(27);
+                double patient_waist = rs.getDouble(28);
+                double patient_hip = rs.getDouble(29);
+                double patient_spo2 = rs.getDouble(30);
+                String complaints = rs.getString(31);
+                String past_personal_family_history = rs.getString(32);
+                String investigation = rs.getString(33);
+                String findings = rs.getString(34);
+                String provisional_diagnosis = rs.getString(35);
+                String remarks = rs.getString(36);
+                int followup_days = rs.getInt(37);
+                String followup_date = rs.getString(38);
+                String referred_to = rs.getString(39);
+                String created_by = rs.getString(40);
+                String updated_by = rs.getString(41);
+                String created_at = rs.getString(42);
+                String updated_at = rs.getString(43);
+                int status = rs.getInt(44);
+                int is_uploaded = rs.getInt(45);
 
-                to_out_patient_departments to = new to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                to_out_patient_departments to = new to_out_patient_departments(id, opd_no, clinic, clinic_id, doctor, doctor_id, patient, patient_id, patient_bday, patient_gender, patient_blood_type, patient_address, patient_allergy_medicine, patient_allergy_others, patient_is_smoking, patient_is_alcohol, patient_is_drug_abuse, opd_date, opd_time, opd_type, patient_height, patient_weight, patient_bmi, patient_pressure, patient_pulse, patient_temperature, patient_respiratory, patient_waist, patient_hip, patient_spo2, complaints, past_personal_family_history, investigation, findings, provisional_diagnosis, remarks, followup_days, followup_date, referred_to, created_by, updated_by, created_at, updated_at, status, is_uploaded);
                 datas.add(to);
             }
             return datas;

@@ -225,6 +225,15 @@ id int auto_increment primary key
 ,doctor_id varchar(255)
 ,patient varchar(255)
 ,patient_id varchar(255)
+,patient_bday date
+,patient_gender int
+,patient_blood_type varchar(255)
+,patient_address varchar(255)
+,patient_allergy_medicine varchar(255)
+,patient_allergy_others varchar(255)
+,patient_is_smoking int
+,patient_is_alcohol int
+,patient_is_drug_abuse int
 ,opd_date date
 ,opd_time varchar(255)
 ,opd_type varchar(255)
