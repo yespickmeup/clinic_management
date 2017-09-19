@@ -540,7 +540,11 @@ public class Dlg_report_sickness_certificate extends javax.swing.JDialog {
                 String doctor = to.doctor;
                 String doctor_id = to.doctor_id;
                 String date = DateType.month_date.format(jDateChooser4.getDate());
-                Srpt_sickness_certificate rpt = new Srpt_sickness_certificate(clinic_name, clinic_address, clinic_contact_no, patient_id, patient_name, sname, days, findings, doctor, doctor_id, date);
+                String stmt = "       This is to certify that " + sname + " " + patient_name + " is suffering from "
+                        + " " + findings + " \n\n"
+                        + "       He/She is adviced to take best rest " + days + " day/s, and also regular treatment and follow up.";
+
+                Srpt_sickness_certificate rpt = new Srpt_sickness_certificate(clinic_name, clinic_address, clinic_contact_no, patient_id, patient_name, sname, days, findings, doctor, doctor_id, date, stmt);
 
                 String jrxml = "rpt_sickness_certificate.jrxml";
                 report_sales_items(rpt, jrxml);

@@ -6,6 +6,7 @@ package cms.pnl;
 
 import cms.appointments.Dlg_appointments;
 import cms.opd.Dlg_opd;
+import cms.reports.Dlg_report_receipts;
 import cms.users.Dlg_users;
 import cms.users.MyUser;
 import cms.users.User_priveleges;
@@ -683,14 +684,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 }
                 //</editor-fold>
-                //<editor-fold defaultstate="collapsed" desc=" Reports ">
-//                if (data.stmt.equals("Services Report")) {
-//                    r_services();
-//                }
-//                if (data.stmt.equals("Barcodes")) {
-//                    r_barcode();
-//                }
-                //</editor-fold>
+                // <editor-fold defaultstate="collapsed" desc=" Reports ">
+                if (data.stmt.equals("Receipt Report")) {
+                    r_receipt();
+                }
+
+//                </editor-fold>
             }
 
             @Override
@@ -722,6 +721,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void m_users() {
         Dlg_users dtc = new Dlg_users();
         MyFrame.set(dtc.getSurface(), jPanel1, "Users");
+    }
+
+    private void r_receipt() {
+        Dlg_report_receipts dtc = new Dlg_report_receipts();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Receipt Details");
     }
     //</editor-fold>
 }

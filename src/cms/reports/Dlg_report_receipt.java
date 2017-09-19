@@ -6,12 +6,14 @@
 package cms.reports;
 
 import cms.clinics.Clinics;
+import cms.opd.Out_patient_department_receipt_items;
+import cms.opd.Out_patient_department_receipts;
 import cms.opd.Out_patient_departments;
+import cms.util.DateType;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,15 +31,13 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
-import synsoftech.fields.Field;
 import synsoftech.fields.Label;
-import synsoftech.util.DateType;
 
 /**
  *
  * @author Guinness
  */
-public class Dlg_report_referral_letter extends javax.swing.JDialog {
+public class Dlg_report_receipt extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_report_sales_summary
@@ -63,33 +63,33 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_report_referral_letter(java.awt.Frame parent, boolean modal) {
+    private Dlg_report_receipt(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_report_referral_letter(java.awt.Dialog parent, boolean modal) {
+    private Dlg_report_receipt(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_report_referral_letter() {
+    public Dlg_report_receipt() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_report_referral_letter myRef;
+    private Dlg_report_receipt myRef;
 
-    private void setThisRef(Dlg_report_referral_letter myRef) {
+    private void setThisRef(Dlg_report_receipt myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_report_referral_letter> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_report_receipt> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -97,7 +97,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_report_referral_letter create(java.awt.Window parent, boolean modal) {
+    public static Dlg_report_receipt create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -107,14 +107,14 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_report_referral_letter create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_report_receipt create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_report_referral_letter dialog = dialogContainer.get(parent);
+            Dlg_report_receipt dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_report_referral_letter((java.awt.Frame) parent, false);
+                dialog = new Dlg_report_receipt((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -128,10 +128,10 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_report_referral_letter dialog = dialogContainer.get(parent);
+            Dlg_report_receipt dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_report_referral_letter((java.awt.Dialog) parent, false);
+                dialog = new Dlg_report_receipt((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -158,7 +158,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_report_referral_letter dialog = Dlg_report_referral_letter.create(new javax.swing.JFrame(), true);
+        Dlg_report_receipt dialog = Dlg_report_receipt.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -202,18 +202,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
         jLabel45 = new Label.Separator();
         pnl_report = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField36 = new Field.Input();
-        jLabel42 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jButton3 = new Button.Search();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jTextField38 = new Field.Input();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -273,37 +262,6 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
 
         jPanel5.setOpaque(false);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Ms.", "Mrs." }));
-
-        jTextField36.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField36.setFocusable(false);
-        jTextField36.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField36ActionPerformed(evt);
-            }
-        });
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel42.setText("is suffering with");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel46.setText("Kindly examine him/her and do the needful.");
-
-        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel47.setText("Date:");
-
-        jDateChooser4.setDate(new Date());
-        jDateChooser4.setFocusable(false);
-        jDateChooser4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/magnifying-glass.png"))); // NOI18N
         jButton3.setText("Generate");
         jButton3.setToolTipText("Search");
@@ -315,78 +273,20 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
             }
         });
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel49.setText("I will appreciate your feedback.");
-
-        jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel43.setText("Dear:");
-
-        jTextField38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField38.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField38ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel47)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel43)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1)
-                    .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -435,14 +335,6 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
         print();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField36ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField36ActionPerformed
-
-    private void jTextField38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField38ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField38ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -450,21 +342,10 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField38;
     private javax.swing.JPanel pnl_report;
     // End of variables declaration//GEN-END:variables
 
@@ -476,11 +357,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
 
     public void do_pass(Out_patient_departments.to_out_patient_departments t) {
         to = t;
-        jTextField36.setText(to.patient);
-        jTextField38.setText(to.referred_to);
-        String findings = to.findings;
-        findings = findings.replaceAll("\n", ", ");
-        jTextArea1.setText(findings);
+
         init_report();
     }
 
@@ -510,43 +387,41 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
             @Override
             public void run() {
                 List<Clinics.to_clinics> clinics = Clinics.ret_data("where id='" + to.clinic_id + "'");
-
-                String clinic_name = "";
-                String clinic_address = "";
-                String clinic_contact_no = "";
-                if (!clinics.isEmpty()) {
-                    Clinics.to_clinics clinic = (Clinics.to_clinics) clinics.get(0);
-                    clinic_name = clinic.clinic;
-                    clinic_address = clinic.address;
-                    clinic_contact_no = clinic.contact_no;
-                }
-                String patient_id = to.patient_id;
-                String patient_name = to.patient;
-
-                String sname = jComboBox1.getSelectedItem().toString();
-                String refer_to = jTextField38.getText();
-                String findings = jTextArea1.getText();
-
+                Clinics.to_clinics cl = (Clinics.to_clinics) clinics.get(0);
+                List<Out_patient_department_receipts.to_out_patient_department_receipts> receipts = Out_patient_department_receipts.ret_data(" where opd_no='" + to.opd_no + "' and clinic_id='" + cl.id + "' ");
+                Out_patient_department_receipts.to_out_patient_department_receipts receipt = (Out_patient_department_receipts.to_out_patient_department_receipts) receipts.get(0);
+                List<Out_patient_department_receipt_items.to_out_patient_department_receipt_items> items = Out_patient_department_receipt_items.ret_data(" where opd_no='" + to.opd_no + "' and clinic_id='" + cl.id + "'");
+                String clinic = cl.clinic;
+                String clinic_id = "" + cl.id;
+                String clinic_address = cl.address;
+                String clinic_contact_no = cl.contact_no;
                 String doctor = to.doctor;
-                String doctor_id = to.doctor_id;
-                String date = DateType.month_date.format(jDateChooser4.getDate());
-                String stmt = "       " + sname + " " + patient_name + " is suffering with " + findings + " "
-                        + ". Kindly examine him/her and do the needful.\n\n"
-                        + " I will appreciate your feedback."
-                        + "";
-                Srpt_referring_certificate rpt = new Srpt_referring_certificate(clinic_name, clinic_address, clinic_contact_no, patient_id, patient_name, sname, refer_to, findings, doctor, doctor_id, date, stmt);
+                String patient = to.patient;
+                String opd_no = to.opd_no;
+                String opd_date = to.opd_date;
+                String opd_time = to.opd_time;
+                String opd_type = to.opd_type;
+                String receipt_no = receipt.receipt_no;
+                String receipt_date = DateType.convert_slash_datetime2(receipt.receipt_date);
+                String reference_no = receipt.reference_no;
+                double amount_due = receipt.amount_due;
+                double discount_amount = receipt.discount;
+                double ne_due = amount_due - discount_amount;
+                String where = " where receipt_no='" + receipt_no + "' and clinic_id='" + clinic_id + "'";
+                List<Srpt_receipt.field> fields = Srpt_receipt.ret_data(where);
 
-                String jrxml = "rpt_referral_certificate.jrxml";
+                Srpt_receipt rpt = new Srpt_receipt(clinic, clinic_id, clinic_address, clinic_contact_no, doctor, patient, opd_no, opd_date, opd_time, opd_type, receipt_no, receipt_date, reference_no, amount_due, discount_amount, ne_due);
+                rpt.fields.addAll(fields);
+                String jrxml = "rpt_receipt.jrxml";
                 report_sales_items(rpt, jrxml);
-
-                InputStream is = Srpt_referring_certificate.class.getResourceAsStream(jrxml);
+                InputStream is = Srpt_receipt.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
                             setParameter(rpt), JasperUtil.emptyDatasource());
 
                 } catch (JRException ex) {
-                    Logger.getLogger(Dlg_report_referral_letter.class.getName()).
+                    Logger.getLogger(Dlg_report_receipt.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 Button.Search search = (Button.Search) jButton3;
@@ -557,7 +432,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
 
     }
 
-    private void report_sales_items(final Srpt_referring_certificate to, String jrxml_name) {
+    private void report_sales_items(final Srpt_receipt to, String jrxml_name) {
         pnl_report.removeAll();
         pnl_report.setLayout(new BorderLayout());
         try {
@@ -574,12 +449,12 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
         }
     }
 
-    public static JRViewer get_viewer_expenses(Srpt_referring_certificate to, String rpt_name) {
+    public static JRViewer get_viewer_expenses(Srpt_receipt to, String rpt_name) {
         try {
             return JasperUtil.getJasperViewer(
                     compileJasper(rpt_name),
                     JasperUtil.setParameter(to),
-                    JasperUtil.emptyDatasource());
+                    JasperUtil.makeDatasource(to.fields));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -590,7 +465,7 @@ public class Dlg_report_referral_letter extends javax.swing.JDialog {
     public static JasperReport compileJasper(String rpt_name) {
         try {
             String jrxml = rpt_name;
-            InputStream is = Srpt_referring_certificate.class.getResourceAsStream(jrxml);
+            InputStream is = Srpt_receipt.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
             return jasper;
         } catch (JRException e) {

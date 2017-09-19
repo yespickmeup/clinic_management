@@ -38,8 +38,9 @@ public class User_default_priveleges {
         public final boolean edit;
         public final boolean delete;
         public final boolean finalize;
+        public final boolean report;
 
-        public to_user_default_priveleges(int id, String account, String name, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded, boolean view, boolean add, boolean edit, boolean delete, boolean finalize) {
+        public to_user_default_priveleges(int id, String account, String name, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded, boolean view, boolean add, boolean edit, boolean delete, boolean finalize, boolean report) {
             this.id = id;
             this.account = account;
             this.name = name;
@@ -54,6 +55,7 @@ public class User_default_priveleges {
             this.edit = edit;
             this.delete = delete;
             this.finalize = finalize;
+            this.report = report;
         }
     }
 
@@ -211,7 +213,7 @@ public class User_default_priveleges {
                 boolean edit = false;
                 boolean delete = false;
                 boolean finalize = false;
-
+                boolean report = false;
                 for (User_priveleges.to_user_priveleges priv : priveleges) {
                     if (priv.privelege.equalsIgnoreCase(name + " - (View)")) {
                         view = true;
@@ -228,9 +230,12 @@ public class User_default_priveleges {
                     if (priv.privelege.equalsIgnoreCase(name + " - (Finalize)")) {
                         finalize = true;
                     }
+                    if (priv.privelege.equalsIgnoreCase(name + " - (Report)")) {
+                        report = true;
+                    }
                 }
                 to_user_default_priveleges to = new to_user_default_priveleges(id, account, name, created_by, updated_by, created_at, updated_at, status, is_uploaded,
-                        view, add, edit, delete, finalize);
+                        view, add, edit, delete, finalize,report);
                 datas.add(to);
             }
             return datas;

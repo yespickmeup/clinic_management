@@ -550,7 +550,13 @@ public class Dlg_report_fitness_certificate extends javax.swing.JDialog {
                 String doctor = to.doctor;
                 String doctor_id = to.doctor_id;
 
-                Srpt_fitness_certificate rpt = new Srpt_fitness_certificate(clinic_name, clinic_address, clinic_contact_no, patient_id, patient_name, sname, t_date_from, t_date_tom, findings, rec_date, doctor, doctor_id);
+                String stmt="       This to certify that "+sname+" "+patient_name+" was under my treatment from "
+                        + ""+t_date_from+ " to "+t_date_tom + ". After clinical examination as he/she was "
+                        + "suffering from "+findings+". He/She was adviced to take rest till he/she"
+                        + " recovers. "
+                        + "\n\n"
+                        + "       From date: "+rec_date+ " he/she is fit to resume to his/her duties.";
+                Srpt_fitness_certificate rpt = new Srpt_fitness_certificate(clinic_name, clinic_address, clinic_contact_no, patient_id, patient_name, sname, t_date_from, t_date_tom, findings, rec_date, doctor, doctor_id,stmt);
 
                 String jrxml = "rpt_fitness_certificate.jrxml";
                 report_sales_items(rpt, jrxml);

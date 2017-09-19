@@ -13,6 +13,7 @@ import cms.users.MyUser;
 import cms.util.Alert;
 import cms.util.DateType;
 import cms.util.Dlg_confirm_action;
+import cms.util.Dlg_confirm_delete;
 import cms.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -41,6 +42,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -811,7 +813,7 @@ public class Dlg_appointments extends javax.swing.JDialog {
         tbl_degrees.setModel(tbl_degrees_M);
         tbl_degrees.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_degrees.setRowHeight(25);
-        int[] tbl_widths_degrees = {100, 0};
+        int[] tbl_widths_degrees = {100, 0, 30};
         for (int i = 0, n = tbl_widths_degrees.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -825,7 +827,7 @@ public class Dlg_appointments extends javax.swing.JDialog {
         tbl_degrees.setRowHeight(25);
         tbl_degrees.setFont(new java.awt.Font("Arial", 0, 12));
         tbl_degrees.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
-
+        tbl_degrees.getColumnModel().getColumn(2).setCellRenderer(new ImageRenderer());
     }
 
     static class CustomRenderer extends DefaultTableCellRenderer {
@@ -852,7 +854,7 @@ public class Dlg_appointments extends javax.swing.JDialog {
     public static class TbldegreesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Time", ""
+            "Time", "", ""
         };
 
         public TbldegreesModel(ListModel listmodel) {
@@ -881,9 +883,10 @@ public class Dlg_appointments extends javax.swing.JDialog {
             switch (col) {
                 case 0:
                     return " " + tt.time;
-
-                default:
+                case 1:
                     return tt.status;
+                default:
+                    return "/cms/icons/remove11.png";
             }
         }
     }
@@ -921,50 +924,105 @@ public class Dlg_appointments extends javax.swing.JDialog {
             return;
         }
         time_schedule to = (time_schedule) tbl_degrees_ALM.get(row);
-        Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
-        nd.setTitle("");
-        nd.do_pass("Proceed adding appointment!");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
 
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
-                closeDialog.ok();
-                int id = 0;
-                Field.Input cl = (Field.Input) jTextField2;
-                Field.Combo doc = (Field.Combo) jTextField24;
-                Field.Input pa = (Field.Input) jTextField4;
-                String clinic = cl.getText();
-                String clinic_id = cl.getId();
-                String doctor = doc.getText();
-                String doctor_id = doc.getId();
-                String patient_id = pa.getId();
-                String patient_fname = pa.getText();
-                String patient_mi = jTextField5.getText();
-                String patient_lname = jTextField3.getText();
-                String patient_sname = jTextField9.getText();
-                String patient_bday = DateType.convert_slash_datetime_sf(jTextField6.getText());
-                String patient_gender = jTextField7.getText();
-                String patient_blood_type = jTextField8.getText();
-                String appointment_date = DateType.sf.format(jDateChooser1.getDate());
-                String appointment_time = to.time;
-                String created_by = MyUser.getUser_id();
-                String updated_by = MyUser.getUser_id();
-                String created_at = DateType.now();
-                String updated_at = DateType.now();
-                int status = 0;
-                int is_uploaded = 0;
-                Appointments.to_appointments appoint = new Appointments.to_appointments(id, clinic, clinic_id, doctor, doctor_id, patient_id, patient_fname, patient_mi, patient_lname, patient_sname, patient_bday, patient_gender, patient_blood_type, appointment_date, appointment_time, created_by, updated_by, created_at, updated_at, status, is_uploaded);
-                Appointments.add_data(appoint);
-                ret_time_schedules();
-                Alert.set(1, "");
+        if (to.status == 0) {
+            Field.Input cl = (Field.Input) jTextField2;
+            Field.Combo doc = (Field.Combo) jTextField24;
+            Field.Input pa = (Field.Input) jTextField4;
+            if (doc.getId() == null || doc.getId().isEmpty()) {
+                Alert.set(0, "Select doctor!");
+                jTextField24.grabFocus();
+                return;
+            }
+            if (pa.getId() == null || pa.getId().isEmpty()) {
+                Alert.set(0, "Select patient!");
+                jTextField4.grabFocus();
+                return;
+            }
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.do_pass("Proceed adding appointment!");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    int id = 0;
+
+                    String clinic = cl.getText();
+                    String clinic_id = cl.getId();
+                    String doctor = doc.getText();
+                    String doctor_id = doc.getId();
+                    String patient_id = pa.getId();
+                    String patient_fname = pa.getText();
+                    String patient_mi = jTextField5.getText();
+                    String patient_lname = jTextField3.getText();
+                    String patient_sname = jTextField9.getText();
+                    String patient_bday = DateType.convert_slash_datetime_sf(jTextField6.getText());
+                    String patient_gender = jTextField7.getText();
+                    String patient_blood_type = jTextField8.getText();
+                    String appointment_date = DateType.sf.format(jDateChooser1.getDate());
+                    String appointment_time = to.time;
+                    String created_by = MyUser.getUser_id();
+                    String updated_by = MyUser.getUser_id();
+                    String created_at = DateType.now();
+                    String updated_at = DateType.now();
+                    int status = 0;
+                    int is_uploaded = 0;
+                    Appointments.to_appointments appoint = new Appointments.to_appointments(id, clinic, clinic_id, doctor, doctor_id, patient_id, patient_fname, patient_mi, patient_lname, patient_sname, patient_bday, patient_gender, patient_blood_type, appointment_date, appointment_time, created_by, updated_by, created_at, updated_at, status, is_uploaded);
+                    Appointments.add_data(appoint);
+                    ret_time_schedules();
+                    Alert.set(1, "");
+                }
+            }
+            );
+            nd.setLocationRelativeTo(
+                    this);
+            nd.setVisible(
+                    true);
+        }
+        if (to.status == 1) {
+            int col = tbl_degrees.getSelectedColumn();
+            if (col == 2) {
+                Window p = (Window) this;
+                Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+                nd.setTitle("");
+
+                nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                        closeDialog.ok();
+
+                        Appointments.delete_data(to.id);
+                        ret_time_schedules();
+                        Alert.set(3, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+            if (col == 0) {
+                String where=" where id = '"+to.id+"' ";
+                List<Appointments.to_appointments> datas=Appointments.ret_data(where);
+                Appointments.to_appointments app=(Appointments.to_appointments) datas.get(0);
+                Window p = (Window) this;
+                Dlg_appointment_details nd = Dlg_appointment_details.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(app);
+                nd.setCallback(new Dlg_appointment_details.Callback() {
+                    
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_appointment_details.OutputData data) {
+                        closeDialog.ok();
+                        
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
             }
         }
-        );
-        nd.setLocationRelativeTo(
-                this);
-        nd.setVisible(
-                true);
     }
 
     private void init_date_schedule() {

@@ -23,8 +23,8 @@ public class Srpt_fitness_certificate {
     public final String rec_date;
     public final String doctor;
     public final String doctor_id;
-
-    public Srpt_fitness_certificate(String clinic_name, String clinic_address, String clinic_contact_no, String patient_id, String patient_name, String sname, String t_date_from, String t_date_to, String findings, String rec_date, String doctor, String doctor_id) {
+    public final String stmt;
+    public Srpt_fitness_certificate(String clinic_name, String clinic_address, String clinic_contact_no, String patient_id, String patient_name, String sname, String t_date_from, String t_date_to, String findings, String rec_date, String doctor, String doctor_id,String stmt) {
         this.clinic_name = clinic_name;
         this.clinic_address = clinic_address;
         this.clinic_contact_no = clinic_contact_no;
@@ -37,6 +37,7 @@ public class Srpt_fitness_certificate {
         this.rec_date = rec_date;
         this.doctor = doctor;
         this.doctor_id = doctor_id;
+        this.stmt=stmt;
     }
     
 }

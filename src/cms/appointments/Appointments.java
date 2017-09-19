@@ -211,11 +211,11 @@ public class Appointments {
         }
     }
 
-    public static void delete_data(to_appointments to_appointments) {
+    public static void delete_data(int id) {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "delete from appointments  "
-                    + " where id='" + to_appointments.id + "' "
+                    + " where id='" + id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);

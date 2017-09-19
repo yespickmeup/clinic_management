@@ -27,6 +27,7 @@
     <parameter name="complaints" class="java.lang.String"/>
     <parameter name="history" class="java.lang.String"/>
     <parameter name="investigation" class="java.lang.String"/>
+    <parameter name="stmt" class="java.lang.String"/>
     <background>
         <band splitType="Stretch"/>
     </background>
@@ -64,110 +65,14 @@
                 </textElement>
                 <text><![CDATA[Fitness Certificate]]></text>
             </staticText>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="47" y="139" width="121" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[This is to certify that]]></text>
-            </staticText>
             <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="168" y="139" width="25" height="15"/>
-                <textElement verticalAlignment="Middle">
+                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="139" width="555" height="85"/>
+                <textElement verticalAlignment="Top">
                     <font fontName="Tahoma" size="12"/>
                     <paragraph leftIndent="2"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$P{sname}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{stmt}]]></textFieldExpression>
             </textField>
-            <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="193" y="139" width="190" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{patient_name}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="383" y="139" width="172" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[was under my treatment from]]></text>
-            </staticText>
-            <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="154" width="62" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{t_date_from}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="62" y="154" width="16" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[to]]></text>
-            </staticText>
-            <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="78" y="154" width="62" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{t_date_to}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="140" y="154" width="415" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[. After Clinical examination  as he/she was suffering from]]></text>
-            </staticText>
-            <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="0" y="169" width="555" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isUnderline="true"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{findings}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="0" y="184" width="555" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[. He/She was adviced to take rest till he/she recovers.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="47" y="209" width="65" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[From date: ]]></text>
-            </staticText>
-            <textField>
-                <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="106" y="209" width="62" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{rec_date}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="ed861867-1bca-428b-addc-5f433fda68ea" x="168" y="209" width="387" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[he/she is fit to resume his/her duties.]]></text>
-            </staticText>
             <textField>
                 <reportElement uuid="b7585967-bf32-4e89-83a8-393181d577a6" x="319" y="258" width="236" height="15"/>
                 <box>

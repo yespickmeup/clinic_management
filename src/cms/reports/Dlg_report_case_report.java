@@ -9,6 +9,8 @@ import cms.clinics.Clinics;
 import cms.opd.Out_patient_department_prescriptions;
 import cms.opd.Out_patient_departments;
 import cms.reports.Srpt_case_report.field;
+import cms.util.DateType;
+import cms.util.DateUtils1;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -32,6 +35,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Label;
+
 
 /**
  *
@@ -398,19 +402,24 @@ public class Dlg_report_case_report extends javax.swing.JDialog {
                 }
                 String patient_id = to.patient_id;
                 String patient_name = to.patient;
-                String bday = to.patient_bday;
-                String age = "";
+                String bday = DateType.convert_jan_1_2013_sf(to.patient_bday);
+                String age = DateUtils1.getAge(to.patient_bday);
                 String gender = "" + to.patient_gender;
+                if(gender.equals("1")){
+                    gender="Male";
+                }else{
+                    gender="Female";
+                }
                 String allergy_drug = "" + to.patient_allergy_medicine;
                 String allergy_others = "" + to.patient_allergy_others;
                 String blood_group = to.patient_blood_type;
-                String height = "" + to.patient_height;
-                String weight = "" + to.patient_weight;
-                String temperature = "" + to.patient_temperature;
+                String height = "" + FitIn.fmt_woc(to.patient_height);
+                String weight = "" + FitIn.fmt_woc(to.patient_weight);
+                String temperature = "" + FitIn.fmt_woc(to.patient_temperature);
                 String bp = "" + to.patient_pressure;
-                String pulse = "" + to.patient_pulse;
-                String respiratory = "" + to.patient_respiratory;
-                String spo2 = "" + to.patient_spo2;
+                String pulse = "" + FitIn.fmt_woc(to.patient_pulse);
+                String respiratory = "" + FitIn.fmt_woc(to.patient_respiratory);
+                String spo2 = "" + FitIn.fmt_woc(to.patient_spo2);
                 String is_smoking = "" + to.patient_is_smoking;
                 String is_alcohol = "" + to.patient_is_alcohol;
                 String is_drugs = "" + to.patient_is_drug_abuse;

@@ -21,7 +21,7 @@ public class DateUtils1 {
         System.out.println(ar_aging(d1, 30));
     }
 
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         try {
             Date from = DateType.sf.parse("2015-01-29");
             Date to = new Date();
@@ -52,7 +52,7 @@ public class DateUtils1 {
         date_added.setDate(date_added.getDate() + days);
         return date_added;
     }
-    
+
     public static int count_days(Date date_from, Date date_to) {
         int count = 0;
         int d1_year = Integer.parseInt(DateType.y.format(date_from));
@@ -75,5 +75,34 @@ public class DateUtils1 {
         int noofdays = (int) (diff / (1000 * 24 * 60 * 60));
         count = noofdays;
         return count;
+    }
+
+    public static void main(String[] args) {
+//        System.out.println("Age: "+getAge(1991,2,29));
+    }
+
+    public static String getAge(String sf) {
+        String ages = "";
+        try {
+            Date d = DateType.sf.parse(sf);
+            int year = Integer.parseInt(DateType.y.format(d));
+            int month = Integer.parseInt(DateType.m1.format(d));
+            int day = Integer.parseInt(DateType.d.format(d));
+           
+            Calendar dob = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+
+            dob.set(year, month, day);
+            int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                age--;
+            }
+          
+            ages = ""+age;
+
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return ages;
     }
 }

@@ -6,6 +6,7 @@
 package cms.opd;
 
 import cms.appointments.Dlg_appointments;
+import cms.clinics.Clinics;
 import cms.doctors.Dlg_doctors;
 import cms.doctors.Doctor_daily_schedules;
 import cms.doctors.Doctors;
@@ -29,6 +30,7 @@ import cms.reports.Dlg_report_case_report;
 import cms.reports.Dlg_report_fitness_certificate;
 import cms.reports.Dlg_report_investigation_report;
 import cms.reports.Dlg_report_prescription;
+import cms.reports.Dlg_report_receipt;
 import cms.reports.Dlg_report_referral_letter;
 import cms.reports.Dlg_report_sickness_certificate;
 import cms.users.MyUser;
@@ -246,6 +248,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -408,7 +411,11 @@ public class Dlg_opd extends javax.swing.JDialog {
         jButton8 = new Button.Default();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jCheckBox16 = new javax.swing.JCheckBox();
+        jTextField48 = new Field.Combo();
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/documents.png"))); // NOI18N
         jMenuItem1.setText("Case Report");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,6 +424,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
         jPopupMenu1.add(jMenuItem1);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/search.png"))); // NOI18N
         jMenuItem3.setText("Investigation Report");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,6 +433,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
         jPopupMenu1.add(jMenuItem3);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/tasks.png"))); // NOI18N
         jMenuItem4.setText("Prescription Report");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,8 +442,19 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
         jPopupMenu1.add(jMenuItem4);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/invoice.png"))); // NOI18N
+        jMenuItem8.setText("Receipt");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem8);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/contract.png"))); // NOI18N
         jMenu1.setText("Certificates");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/contract (2).png"))); // NOI18N
         jMenuItem5.setText("Fitness Certificate");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,6 +463,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
         jMenu1.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/contract (2).png"))); // NOI18N
         jMenuItem6.setText("Sickness Certificate");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -451,6 +472,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         });
         jMenu1.add(jMenuItem6);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/contract (2).png"))); // NOI18N
         jMenuItem7.setText("Referring Letter");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1823,6 +1845,25 @@ public class Dlg_opd extends javax.swing.JDialog {
 
         jLabel11.setText("0");
 
+        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel62.setText("Clinic:");
+
+        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox16.setSelected(true);
+        jCheckBox16.setText("All");
+
+        jTextField48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField48.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField48MouseClicked(evt);
+            }
+        });
+        jTextField48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField48ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1832,21 +1873,26 @@ public class Dlg_opd extends javax.swing.JDialog {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane9)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel13Layout.createSequentialGroup()
+                                    .addComponent(jLabel57)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox10))
+                                .addGroup(jPanel13Layout.createSequentialGroup()
+                                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox11))
+                                .addGroup(jPanel13Layout.createSequentialGroup()
+                                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox12)))
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jLabel57)
+                                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox10))
-                            .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox11))
-                            .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox12)))
+                                .addComponent(jCheckBox16)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField46)
                             .addComponent(jTextField47)
                             .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1862,8 +1908,9 @@ public class Dlg_opd extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox15)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addComponent(jCheckBox15))
+                            .addComponent(jTextField48, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(33, 33, 33)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -1888,6 +1935,12 @@ public class Dlg_opd extends javax.swing.JDialog {
                         .addComponent(jCheckBox13)
                         .addComponent(jCheckBox14)
                         .addComponent(jCheckBox15)))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField48, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox16))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1902,8 +1955,8 @@ public class Dlg_opd extends javax.swing.JDialog {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -2214,20 +2267,32 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-      dlg_prescription_report();
+        dlg_prescription_report();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       dlg_fitness_certificate();
+        dlg_fitness_certificate();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       dlg_sickness_certificate();
+        dlg_sickness_certificate();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       dlg_referral_certificate();
+        dlg_referral_certificate();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        dlg_receipt();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jTextField48MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField48MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField48MouseClicked
+
+    private void jTextField48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField48ActionPerformed
+        init_clinic() ;
+    }//GEN-LAST:event_jTextField48ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2257,6 +2322,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
     private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -2324,6 +2390,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2334,6 +2401,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2397,6 +2465,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField45;
     private javax.swing.JTextField jTextField46;
     private javax.swing.JTextField jTextField47;
+    private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
@@ -2408,11 +2477,24 @@ public class Dlg_opd extends javax.swing.JDialog {
     private void myInit() {
         init_key();
         init_date_schedule();
+        init_clinics();
         init_tbl_out_patient_department_prescriptions(tbl_out_patient_department_prescriptions);
         init_tbl_out_patient_department_receipt_items(tbl_out_patient_department_receipt_items);
         init_tbl_out_patient_departments(tbl_out_patient_departments);
         ret_opd();
         init_receipt_item_inventory_charge();
+    }
+
+    private void init_clinics() {
+        String where = " order by clinic asc";
+        clinic_list = Clinics.ret_data(where);
+
+        if (!clinic_list.isEmpty()) {
+            Clinics.to_clinics clinic = (Clinics.to_clinics) clinic_list.get(0);
+            Field.Combo cl = (Field.Combo) jTextField48;
+            cl.setText(clinic.clinic);
+            cl.setId("" + clinic.id);
+        }
     }
 
     public void do_pass() {
@@ -2500,8 +2582,8 @@ public class Dlg_opd extends javax.swing.JDialog {
             Field.Input pat = (Field.Input) jTextField4;
             int id = 0;
             String opd_no = "";
-            String clinic ="";
-            String clinic_id ="";
+            String clinic = "";
+            String clinic_id = "";
 
             String patient = pat.getText();
             String patient_id = pat.getId();
@@ -2517,11 +2599,11 @@ public class Dlg_opd extends javax.swing.JDialog {
                 jTextField24.grabFocus();
                 return;
             }
-            List<Doctors.to_doctors> docs=Doctors.ret_data("where id='"+doctor_id+"' ");
-            if(!docs.isEmpty()){
-                Doctors.to_doctors doc1=(Doctors.to_doctors)docs.get(0);
-                clinic=doc1.clinic;
-                clinic_id=doc1.clinic_id;
+            List<Doctors.to_doctors> docs = Doctors.ret_data("where id='" + doctor_id + "' ");
+            if (!docs.isEmpty()) {
+                Doctors.to_doctors doc1 = (Doctors.to_doctors) docs.get(0);
+                clinic = doc1.clinic;
+                clinic_id = doc1.clinic_id;
             }
             String bday = DateType.sf.format(jDateChooser1.getDate());
             int gender = 0;
@@ -4184,6 +4266,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+
     private void dlg_prescription_report() {
         int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
@@ -4206,7 +4289,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-     private void dlg_fitness_certificate() {
+
+    private void dlg_fitness_certificate() {
         int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
             return;
@@ -4228,7 +4312,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-      private void dlg_sickness_certificate() {
+
+    private void dlg_sickness_certificate() {
         int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
             return;
@@ -4249,7 +4334,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-       private void dlg_referral_certificate() {
+
+    private void dlg_referral_certificate() {
         int row = tbl_out_patient_departments.getSelectedRow();
         if (row < 0) {
             return;
@@ -4270,5 +4356,55 @@ public class Dlg_opd extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+
+    private void dlg_receipt() {
+        int row = tbl_out_patient_departments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_report_receipt nd = Dlg_report_receipt.create(p, true);
+
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_report_receipt.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_receipt.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
     //</editor-fold>
+
+    List<Clinics.to_clinics> clinic_list = new ArrayList();
+
+    private void init_clinic() {
+
+        Object[][] obj = new Object[clinic_list.size()][1];
+        int i = 0;
+        for (Clinics.to_clinics to : clinic_list) {
+            obj[i][0] = " " + to.clinic;
+            i++;
+        }
+        
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {jTextField48.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(jTextField48, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Clinics.to_clinics clinic = (Clinics.to_clinics) clinic_list.get(data.selected_row);
+                Field.Combo cl = (Field.Combo) jTextField48;
+                cl.setText(clinic.clinic);
+                cl.setId("" + clinic.id);
+            }
+        });
+    }
 }

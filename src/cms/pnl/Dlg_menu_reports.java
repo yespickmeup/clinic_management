@@ -5,10 +5,13 @@
  */
 package cms.pnl;
 
+import cms.users.MyUser;
+import cms.users.User_priveleges;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -188,7 +191,6 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -212,7 +214,7 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
         jLabel7.setBackground(new java.awt.Color(234, 234, 234));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/repairing-service.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/invoice (1).png"))); // NOI18N
         jLabel7.setToolTipText("Services Report");
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,21 +226,6 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setBackground(new java.awt.Color(234, 234, 234));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cms/icons/barcode (1).png"))); // NOI18N
-        jLabel8.setToolTipText("Barcodes");
-        jLabel8.setOpaque(true);
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel8MouseEntered(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -246,16 +233,12 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
             .addComponent(jXLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -281,20 +264,12 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        ok("Services Report", jLabel7);
+        ok("Receipt Report", jLabel7);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        label("Services Report", jLabel7);
+        label("Receipt Report", jLabel7);
     }//GEN-LAST:event_jLabel7MouseEntered
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        ok("Barcodes", jLabel8);
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
-        label("Barcodes", jLabel8);
-    }//GEN-LAST:event_jLabel8MouseEntered
 
     /**
      * @param args the command line arguments
@@ -302,7 +277,6 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXLabel jXLabel1;
     // End of variables declaration//GEN-END:variables
@@ -316,13 +290,13 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
 
     private void hover() {
 
-        JLabel[] lbl = {jLabel7, jLabel8};
+        JLabel[] lbl = {jLabel7};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (l.isEnabled()) {
-                        l.setBackground(new java.awt.Color(23,140,203));
+                        l.setBackground(new java.awt.Color(23, 140, 203));
                     }
 
                 }
@@ -330,7 +304,7 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (l.isEnabled()) {
-                          l.setBackground(new java.awt.Color(157, 184, 46));
+                        l.setBackground(new java.awt.Color(234, 234, 234));
                     }
 
                 }
@@ -347,17 +321,18 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
     }
 
     private void set_previledge() {
-//        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
-//        List<User_previleges.to_user_previleges> datas = User_previleges.ret_data(where);
-//
-//        for (User_previleges.to_user_previleges to : datas) {
-//
-//            if (to.previledge.equalsIgnoreCase("Services Report")) {
-//                jLabel7.setEnabled(true);
-//                jLabel7.setBackground(new java.awt.Color(157, 184, 46));
-//            }
-//
-//        }
+        String where = " where user_id='" + MyUser.getUser_id() + "' order by privelege asc";
+        List<User_priveleges.to_user_priveleges> datas = User_priveleges.ret_data(where);
+
+        for (User_priveleges.to_user_priveleges to : datas) {
+          
+            if (to.privelege.equalsIgnoreCase("Receipts - (Report)")) {
+
+                jLabel7.setEnabled(true);
+                jLabel7.setBackground(new java.awt.Color(93, 175, 219));
+            }
+
+        }
     }
 
     public void do_pass() {

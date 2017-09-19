@@ -529,7 +529,7 @@ public class Dlg_users extends javax.swing.JDialog {
         init_tbl_users(tbl_users);
         ret_users();
         init_tbl_user_default_priveleges(tbl_user_default_priveleges);
-        
+
     }
 
     public void do_pass() {
@@ -754,7 +754,7 @@ public class Dlg_users extends javax.swing.JDialog {
         tbl_user_default_priveleges.setModel(tbl_user_default_priveleges_M);
         tbl_user_default_priveleges.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_user_default_priveleges.setRowHeight(25);
-        int[] tbl_widths_user_default_priveleges = {100, 100, 60, 60, 60, 60, 60, 0, 0};
+        int[] tbl_widths_user_default_priveleges = {100, 100, 60, 60, 60, 60, 60, 60, 0, 0};
         for (int i = 0, n = tbl_widths_user_default_priveleges.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -767,7 +767,7 @@ public class Dlg_users extends javax.swing.JDialog {
         tbl_user_default_priveleges.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_user_default_priveleges.setRowHeight(25);
         tbl_user_default_priveleges.setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_user_default_priveleges.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
+        tbl_user_default_priveleges.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_user_default_priveleges(List<to_user_default_priveleges> acc) {
@@ -778,7 +778,7 @@ public class Dlg_users extends javax.swing.JDialog {
     public static class Tbluser_default_privelegesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Privelege", "Type", "  View", "  Add", " Edit", " Delete", "Finalize", "", ""
+            "Privelege", "Type", "  View", "  Add", " Edit", " Delete", "Finalize", "Report", "", ""
         };
 
         public Tbluser_default_privelegesModel(ListModel listmodel) {
@@ -795,7 +795,7 @@ public class Dlg_users extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int column) {
-            if (column == 2 || column == 3 || column == 4 || column == 5 || column == 6) {
+            if (column == 2 || column == 3 || column == 4 || column == 5 || column == 6|| column == 7) {
                 return Boolean.class;
             }
             return Object.class;
@@ -820,7 +820,10 @@ public class Dlg_users extends javax.swing.JDialog {
                 case 6:
                     return tt.finalize;
                 case 7:
+                    return tt.report;
+                case 8:
                     return "/cms/icons/remove11.png";
+
                 default:
                     return tt.is_uploaded;
             }
@@ -964,6 +967,23 @@ public class Dlg_users extends javax.swing.JDialog {
                 ret_priveleges();
             } else {
                 String where = " where user_id='" + user.id + "' and privelege='" + privelege.name + " - (Finalize)" + "'";
+                User_priveleges.delete_data(where);
+                ret_priveleges();
+            }
+        }
+        if (col == 7) {
+            if (privelege.report == false) {
+                int id = 0;
+                String account = privelege.account;
+                String priv = privelege.name + " - (Report)";
+                String user_id = "" + user.id;
+                String user_name = user.user_name;
+                User_priveleges.to_user_priveleges up = new User_priveleges.to_user_priveleges(id, account, priv, user_id, user_name);
+                User_priveleges.add_data(up);
+
+                ret_priveleges();
+            } else {
+                String where = " where user_id='" + user.id + "' and privelege='" + privelege.name + " - (Report)" + "'";
                 User_priveleges.delete_data(where);
                 ret_priveleges();
             }
