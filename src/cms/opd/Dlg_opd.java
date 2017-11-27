@@ -1421,7 +1421,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             }
         });
 
-        jButton9.setText("Save");
+        jButton9.setText("Update");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -2291,7 +2291,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField48MouseClicked
 
     private void jTextField48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField48ActionPerformed
-        init_clinic() ;
+        init_clinic();
     }//GEN-LAST:event_jTextField48ActionPerformed
 
     /**
@@ -2483,6 +2483,8 @@ public class Dlg_opd extends javax.swing.JDialog {
         init_tbl_out_patient_departments(tbl_out_patient_departments);
         ret_opd();
         init_receipt_item_inventory_charge();
+
+        jButton9.setVisible(false);
     }
 
     private void init_clinics() {
@@ -2879,6 +2881,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         jTextField41.setText("");
         jTabbedPane2.setSelectedIndex(0);
         jButton3.setText("Save");
+        jButton9.setVisible(false);
         tf_search_patient.grabFocus();
         //</editor-fold>
     }
@@ -3843,9 +3846,9 @@ public class Dlg_opd extends javax.swing.JDialog {
         tbl_out_patient_departments.setModel(tbl_out_patient_departments_M);
         tbl_out_patient_departments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_out_patient_departments.setRowHeight(25);
-        int[] tbl_widths_out_patient_departments = {100, 70, 70, 100, 180, 80, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_out_patient_departments = {100, 70, 100, 70, 100, 180, 80, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_out_patient_departments.length; i < n; i++) {
-            if (i == 3) {
+            if (i == 4) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_out_patient_departments, i, tbl_widths_out_patient_departments[i]);
@@ -3856,9 +3859,9 @@ public class Dlg_opd extends javax.swing.JDialog {
         tbl_out_patient_departments.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_out_patient_departments.setRowHeight(25);
         tbl_out_patient_departments.setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_out_patient_departments.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
         tbl_out_patient_departments.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
         tbl_out_patient_departments.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
+        tbl_out_patient_departments.getColumnModel().getColumn(9).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_out_patient_departments(List<to_out_patient_departments> acc) {
@@ -3869,7 +3872,7 @@ public class Dlg_opd extends javax.swing.JDialog {
     public static class Tblout_patient_departmentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "OPD No.", "Date", "Time", "Patient", "Doctor", "Type", "", "", "", "opd_time", "opd_type", "patient_height", "patient_weight", "patient_bmi", "patient_pressure", "patient_pulse", "patient_temperature", "patient_respiratory", "patient_waist", "patient_hip", "patient_spo2", "complaints", "past_personal_family_history", "investigation", "findings", "provisional_diagnosis", "remarks", "followup_days", "followup_date", "referred_to", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
+            "OPD No.", "Date", "Clinic", "Time", "Patient", "Doctor", "Type", "", "", "", "opd_type", "patient_height", "patient_weight", "patient_bmi", "patient_pressure", "patient_pulse", "patient_temperature", "patient_respiratory", "patient_waist", "patient_hip", "patient_spo2", "complaints", "past_personal_family_history", "investigation", "findings", "provisional_diagnosis", "remarks", "followup_days", "followup_date", "referred_to", "created_by", "updated_by", "created_at", "updated_at", "status", "is_uploaded"
         };
 
         public Tblout_patient_departmentsModel(ListModel listmodel) {
@@ -3901,21 +3904,21 @@ public class Dlg_opd extends javax.swing.JDialog {
                 case 1:
                     return " " + DateType.convert_slash_datetime2(tt.opd_date);
                 case 2:
-                    return " " + tt.opd_time;
+                    return " " + tt.clinic;
                 case 3:
-                    return " " + tt.patient;
+                    return " " + tt.opd_time;
                 case 4:
-                    return " " + tt.doctor;
+                    return " " + tt.patient;
                 case 5:
-                    return " " + tt.opd_type;
+                    return " " + tt.doctor;
                 case 6:
-                    return "/cms/icons/new-file.png";
+                    return " " + tt.opd_type;
                 case 7:
-                    return "/cms/icons/remove11.png";
+                    return "/cms/icons/new-file.png";
                 case 8:
-                    return "/cms/icons/report.png";
+                    return "/cms/icons/remove11.png";
                 case 9:
-                    return tt.opd_time;
+                    return "/cms/icons/report.png";
 
                 default:
                     return tt.is_uploaded;
@@ -3937,7 +3940,7 @@ public class Dlg_opd extends javax.swing.JDialog {
         }
         to_out_patient_departments to = (to_out_patient_departments) tbl_out_patient_departments_ALM.get(row);
         int col = tbl_out_patient_departments.getSelectedColumn();
-        if (col == 6) {
+        if (col == 7) {
             Field.Input cl = (Field.Input) jTextField2;
             cl.setText(to.clinic);
             cl.setId(to.clinic_id);
@@ -4047,7 +4050,9 @@ public class Dlg_opd extends javax.swing.JDialog {
             List<Out_patient_department_receipts.to_out_patient_department_receipts> receipts = Out_patient_department_receipts.ret_data(where);
             Out_patient_department_receipts.to_out_patient_department_receipts receipt = receipts.get(0);
 
-            jTextField44.setText(receipt.receipt_no);
+            Field.Input tr=(Field.Input) jTextField44;
+            tr.setId(""+receipt.id);
+            tr.setText(receipt.receipt_no);
             jTextField45.setText(receipt.reference_no);
 
             jTextField38.setText(FitIn.fmt_wc_0(receipt.amount_due));
@@ -4055,10 +4060,11 @@ public class Dlg_opd extends javax.swing.JDialog {
             jTextField41.setText(FitIn.fmt_wc_0(receipt.cash));
             jTextField42.setText(FitIn.fmt_wc_0(receipt.cash - (receipt.amount_due - receipt.discount)));
             jButton3.setText("Update");
+            jButton9.setVisible(true);
             jTabbedPane1.setSelectedIndex(0);
 
         }
-        if (col == 7) {
+        if (col == 8) {
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
@@ -4074,7 +4080,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
-        if (col == 8) {
+        if (col == 9) {
             show_pop_print(evt);
         }
     }
@@ -4391,7 +4397,7 @@ public class Dlg_opd extends javax.swing.JDialog {
             obj[i][0] = " " + to.clinic;
             i++;
         }
-        
+
         JLabel[] labels = {};
         int[] tbl_widths_customers = {jTextField48.getWidth()};
         String[] col_names = {""};
